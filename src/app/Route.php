@@ -1,5 +1,5 @@
 <?php 
-    namespace App;
+    namespace App\Base;
     class Route 
     {
         public function getController($url)
