@@ -1,0 +1,12 @@
+{
+    "name": "ffx0q/forum",
+    "description": "Forum Engine",
+    "type": "project",
+    "authors": [
+        {
+            "name": "FFx0q",
+            "email": "dominikszamburski99@gmail.com"
+        }
+    ],
+    "require": {}
+}
