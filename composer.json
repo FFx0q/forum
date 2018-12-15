@@ -9,7 +9,9 @@
         }
     ],
     "require": {
-        "twig/twig": "^2.0"
+        "twig/twig": "^2.0",
+        "monolog/monolog": "^1.24",
+        "doctrine/orm": "^2.6"
     },
     "autoload": {
         "psr-4": {
