@@ -9,8 +9,6 @@
         public function __construct() 
         {
             $this->rootDir = $_SERVER['DOCUMENT_ROOT'];
-            $this->templateDir = $this->rootDir.'/templates';
-            $this->cacheDir = $this->rootDir.'/cache';
         }
 
         public function getRootDir()
@@ -20,11 +18,11 @@
 
         public function getTemplateDir()
         {
-            return $this->templateDir;
+            return $this->getRootDir().'/templates';
         }
 
         public function getCacheDir()
         {
-            return $this->cacheDir;
+            return $this->getRootDir().'/cache';
         }
     }
