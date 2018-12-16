@@ -13,8 +13,8 @@
         public function getAction($url)
         {
             $action = explode('/', ltrim($url, '/'));
-            if(!empty($action[0]))
-                return $action[0];
+            if(!empty($action[1]))
+                return $action[1];
             else 
                 return 'index';
         }
