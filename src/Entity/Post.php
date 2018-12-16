@@ -41,8 +41,18 @@
             return $this->post();
         }
 
+        public function setPost($post)
+        {
+            $this->post = $post;
+        }
+
         public function getCreated()
         {
             return $this->created;
+        }
+
+        public function setCreated($created)
+        {
+            $this->created = $created;
         }
     }
