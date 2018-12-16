@@ -4,10 +4,18 @@
     {
         public function getController($url)
         {
-            return ucwords(explode('/', ltrim($url, '/'))[0]).'Controller';
+            $controller = explode('/', ltrim($url, '/'));
+            if(!empty($controller[0]))
+                return ucwords($controller[0]).'Controller';
+            else 
+                return 'IndexController';
         }
         public function getAction($url)
         {
-            return explode('/', ltrim($url, '/'))[1];
+            $action = explode('/', ltrim($url, '/'));
+            if(!empty($action[0]))
+                return $action[0];
+            else 
+                return 'index';
         }
     }
