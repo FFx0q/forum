@@ -7,14 +7,26 @@
 
         {% block steelsheets %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <link rel="stylesheet" href="/public/css/core.css" />
         {% endblock %}
 
-        <title>{% block title %}Gunxpmod{% endblock %}</title>
+        <title>{% block title %}FFx0q - Core{% endblock %}</title>
     </head>
     <body>
+        <div class="container">
+        <!-- Header -->
+        {% include 'layout/header.twig' %}
+
+        <!-- Content -->
         <main class="container">
+            <div class="row">
             {% block content %}{% endblock %}
+            </div>
         <main>
+
+        <!-- Footer -->
+        {% include 'layout/footer.twig' %}
+        </div>
         {% block javascripts %}
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
