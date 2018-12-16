@@ -27,7 +27,7 @@
         protected $post;
 
         /**
-         *  @Columnt(type="datatime")
+         *  @Columnt(type="datetime")
          */
         protected $created;
 
