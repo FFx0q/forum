@@ -4,3 +4,8 @@
     bottom: 0;
     margin-bottom: 1%;
 }
+
+body > main.container
+{
+    margin-top: 35px;
+}
