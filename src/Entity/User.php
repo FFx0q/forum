@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Entity @Table(name="users")
+     * @Entity
      */
     class User
     {
@@ -22,7 +22,7 @@
         protected $password;
 
         /**
-         *  @Columnt(type="datetime")
+         *  @Column(type="datetime")
          */
         protected $join_date;
 

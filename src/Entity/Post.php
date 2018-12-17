@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Entity @Table(name="posts")
+     * @Entity
      **/
     class Post 
     {
@@ -27,13 +27,13 @@
         protected $post;
 
         /**
-         *  @Columnt(type="datetime")
+         *  @Column(type="datetime")
          */
         protected $created;
 
         public function getId()
         {
-            return $this->id;
+            return $this->pid;
         }
 
         public function getPost()

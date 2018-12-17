@@ -1,6 +1,6 @@
 <?php
     /**
-     * @Entity @Table(name="category")
+     * @Entity
      */
     class Category 
     {
@@ -16,6 +16,10 @@
          */
         protected $title;
 
+        public function getId()
+        {
+            return $this->cid;
+        }
         public function getTitle()
         {
             return $this->title;
