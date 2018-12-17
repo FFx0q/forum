@@ -9,6 +9,14 @@
 
     class Controller extends Core
     {
+        private $database = [ 
+            'driver' => 'pdo_mysql', 
+            'host' => 'localhost', 
+            'dbname' => 'testowa', 
+            'user' => 'root', 
+            'password' => 'bP75meku' 
+        ]; 
+
         public function render($template, $param = [])
         {
             $loader = new Twig_Loader_Filesystem($this->getTemplateDir());
@@ -20,17 +28,13 @@
             return $twig->render($template, $param);
         }
 
+        public function config()
+        {
+            return Setup::createAnnotationMetadataConfiguration(["./src/Entity"], true, null, null, true);    
+        }
+
         public function getManager()
         {
-            $config = Setup::createAnnotationMetadataConfiguration(["./src/Entity"], true); 
-            
-            $conn = array(
-                'driver'   => 'pdo_mysql',
-                'user'     => 'root',
-                'password' => 'bP75meku',
-                'dbname'   => 'testowa',
-            );
-
-            return EntityManager::create($conn, $config);
+            return EntityManager::create($this->conn, $this->config());
         }
     }
