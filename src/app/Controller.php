@@ -35,6 +35,6 @@
 
         public function getManager()
         {
-            return EntityManager::create($this->conn, $this->config());
+            return EntityManager::create($this->database, $this->config());
         }
     }
