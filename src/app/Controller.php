@@ -16,15 +16,23 @@
             'user' => 'root', 
             'password' => 'bP75meku' 
         ]; 
-
-        public function render($template, $param = [])
+        public function loader()
         {
-            $loader = new Twig_Loader_Filesystem($this->getTemplateDir());
-            $twig = new Twig_Environment($loader, [
+            return new Twig_Loader_Filesystem($this->getTemplateDir());
+        }
+
+        public function environment()
+        {
+            return new Twig_Environment($this->loader(), [
                 'cache' => $this->getCacheDir(),
                 'auto_reload' => true
             ]);
-
+        }
+        public function render($template, $param = [])
+        {
+            $this->loader();
+            $twig = $this->environment();
+            $twig->addGlobal('session', $_SESSION);
             return $twig->render($template, $param);
         }
 
@@ -36,5 +44,5 @@
         public function getManager()
         {
             return EntityManager::create($this->database, $this->config());
-        }
+        }  
     }

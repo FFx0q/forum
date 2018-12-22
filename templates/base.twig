@@ -15,8 +15,14 @@
     <body>
         <div class="container">
         <!-- Header -->
-        {% include 'layout/header.twig' %}
+    
 
+        {% if session.login is null %}
+            {% include 'layout/header_guest.twig' %}
+        {% else %}
+            {% include 'layout/header_user.twig' %}
+        {% endif %}
+    
         <!-- Content -->
         <main class="container">
             <div class="row">

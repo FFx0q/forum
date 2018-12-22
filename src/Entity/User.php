@@ -21,9 +21,13 @@
          * @Column(type="string") 
          */
         protected $password;
+        /**
+         * @Column(type="string")
+         */
+        protected $email;
 
         /**
-         *  @Column(type="datetime")
+         *  @Column(type="string")
          */
         protected $join_date;
 
@@ -47,13 +51,23 @@
         {
             $this->password = $password;
         }
+        
+        public function getEmail()
+        {
+            return $this->email;
+        }
+
+        public function setEmail($email)
+        {
+            $this->email = $email;
+        }
 
         public function getJoinDate()
         {
             return $this->join_date;
         }
 
-        public function setJoinDate()
+        public function setJoinDate($date)
         {
             $this->join_date = $date;
         }

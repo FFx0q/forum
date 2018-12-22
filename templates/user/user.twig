@@ -2,6 +2,8 @@
 {% block content %}
     <section class="userList">
         <h3>Member List</h3>
-        
+        {% for user in users %}
+           {{ user.name }}
+        {% endfor %}
     </section>
 {% endblock %}
