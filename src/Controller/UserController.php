@@ -32,13 +32,7 @@
 
         public function usernameExists($username)
         {
-            $query = $this->getManager()->createQuery("SELECT u.name FROM App\Entity\User as u WHERE u.name = :uname");
-            $query->setParameters([
-				'uname'     => $username
-            ]);
-            @$user = $query->getResult()[0];
-
-            if(!empty($user))
+            if($this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]))
             {
                 Route::redirect('user/register');
                 return true;
@@ -48,7 +42,6 @@
 
         public function userExists($username, $password)
         {
-    
             $query = $this->getManager()->createQuery('SELECT u.name, u.password FROM App\Entity\User as u WHERE u.name=:username');
             $query->setParameters([
                 'username'     => $username
