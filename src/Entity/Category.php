@@ -1,19 +1,22 @@
 <?php
     namespace App\Entity;
+
+    use Doctrine\ORM\Mapping as ORM;
+
     /**
-     * @Entity
+     * @ORM\Entity
      */
     class Category 
     {
         /** 
-         * @Id 
-         * @Column(type="integer") 
-         * @GeneratedValue 
+         * @ORM\Id 
+         * @ORM\Column(type="integer") 
+         * @ORM\GeneratedValue 
          */
         protected $cid;
 
         /** 
-         * @Column(type="string") 
+         * @ORM\Column(type="string") 
          */
         protected $title;
 

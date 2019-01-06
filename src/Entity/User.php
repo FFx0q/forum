@@ -1,33 +1,36 @@
 <?php
     namespace App\Entity;
+    
+    use Doctrine\ORM\Mapping as ORM;
+
     /**
-     * @Entity
+     * @ORM\Entity
      */
     class User
     {
         /** 
-         * @Id 
-         * @Column(type="integer") 
-         * @GeneratedValue 
+         * @ORM\Id 
+         * @ORM\Column(type="integer") 
+         * @ORM\GeneratedValue 
          */
         protected $pid;
 
         /** 
-         * @Column(type="string") 
+         * @ORM\Column(type="string") 
          */
         protected $name;
 
         /** 
-         * @Column(type="string") 
+         * @ORM\Column(type="string") 
          */
         protected $password;
         /**
-         * @Column(type="string")
+         * @ORM\Column(type="string")
          */
         protected $email;
 
         /**
-         *  @Column(type="string")
+         *  @ORM\Column(type="string")
          */
         protected $join_date;
 

@@ -1,34 +1,37 @@
 <?php
     namespace App\Entity;
+
+    use Doctrine\ORM\Mapping as ORM;
+
     /**
-     * @Entity
+     * @ORM\Entity
      **/
     class Post 
     {
         /** 
-         * @Id 
-         * @Column(type="integer") 
-         * @GeneratedValue 
+         * @ORM\Id 
+         * @ORM\Column(type="integer") 
+         * @ORM\GeneratedValue 
          */
         protected $pid;
 
         /** 
-         * @Column(type="integer") 
+         * @ORM\Column(type="integer") 
          */
         protected $tid;
 
         /** 
-         * @Column(type="integer") 
+         * @ORM\Column(type="integer") 
          */
         protected $author_id;
 
          /** 
-          * @Column(type="string") 
+          * @ORM\Column(type="string") 
           */
         protected $post;
 
         /**
-         *  @Column(type="datetime")
+         *  @ORM\Column(type="datetime")
          */
         protected $created;
 

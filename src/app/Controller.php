@@ -38,7 +38,7 @@
 
         public function config()
         {
-            return Setup::createAnnotationMetadataConfiguration(["./src/Entity"], true, null, null, true);    
+            return Setup::createAnnotationMetadataConfiguration(["./src/Entity"], true, null, null, false);    
         }
 
         public function getManager()
