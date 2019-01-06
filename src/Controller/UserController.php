@@ -88,4 +88,8 @@
             unset($_SESSION["login"]);
             Route::redirect("/index/index");
         }
+        public function profile()
+        {
+            return $this->render('user/profile.twig');
+        }
     }
