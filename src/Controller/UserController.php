@@ -41,16 +41,10 @@
         }
 
         public function userExists($username, $password)
-        {
-            $query = $this->getManager()->createQuery('SELECT u.name, u.password FROM App\Entity\User as u WHERE u.name=:username');
-            $query->setParameters([
-                'username'     => $username
-            ]);
+        { 
+            $user = $this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]);
 
-            $user = $query->getResult();
-            $hash = $user[0];
-
-            if(password_verify($password, $hash['password']))
+            if($user && password_verify($password, $user->getPassword()))
                 return true;
             else 
                 return false;
