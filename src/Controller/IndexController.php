@@ -2,11 +2,26 @@
     namespace App\Controller;
 
     use App\Base\Controller;
+    use App\Entity\Category;
+    use App\Entity\Subcategory;
     
     class IndexController extends Controller
     {
         public function index() 
         {
-            return $this->render('index/index.twig');
+            $count = $this->getManager()->createQuery("SELECT count(c.id) FROM App\Entity\Subcategory c")->getResult()[0];
+            for($i = 1; $i <= $count[1]; $i++)
+            {
+                $category[] = $this->getManager()->getRepository(Subcategory::class)->findBy(['id'=>$i]);
+            }
+            
+            for($i = 0; $i < $count[1]; $i++)
+            {
+                $data[$category[$i][0]->getCategory()->getTitle()][] = $category[$i][0]->getTitle();
+            }
+
+            return $this->render('index/index.twig',[
+                'data' => $data
+            ]);
         }
     }

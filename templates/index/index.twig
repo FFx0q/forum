@@ -1,2 +1,23 @@
 {% extends 'base.twig' %}
-{% block content %}{{session.login}}{% endblock %}
+{% block content %}
+    <section class="col-sm">
+        <ol class="List_reset">
+            {% for category, subs in data %}
+                <li>
+                    <div class="thead">
+                        <span class="forumTitle">{{category}}</span>
+                    </div>
+                    <ol class="List_reset">
+                        {% for sub in subs %}
+                            <li class="trow1">
+                                <div class="forumContent">
+                                    <h3 class="forumTitle">{{ sub }}</h1>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </li>
+            {% endfor %}
+        </ol>
+    </section>
+{% endblock %}
