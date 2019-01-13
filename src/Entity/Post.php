@@ -13,27 +13,27 @@
          * @ORM\Column(type="integer") 
          * @ORM\GeneratedValue 
          */
-        protected $pid;
+        private $id;
 
-        /** 
-         * @ORM\Column(type="integer") 
+        /**
+         * @ORM\OneToOne(targetEntity="User")
          */
-        protected $tid;
-
-        /** 
-         * @ORM\Column(type="integer") 
+        
+        private $author;
+        /**
+         * @ORM\OneToOne(targetEntity="Topic")
          */
-        protected $author_id;
+        private $topic;
 
          /** 
           * @ORM\Column(type="string") 
           */
-        protected $post;
+        private $post;
 
         /**
-         *  @ORM\Column(type="datetime")
+         *  @ORM\Column(type="string")
          */
-        protected $created;
+        private $post_date;
 
         public function getId()
         {

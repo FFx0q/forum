@@ -3,9 +3,9 @@
     <section class="col-sm">
         <ol class="List_reset">
             {% for category, subs in data %}
-                <li>
+                <li id="category-{{loop.index0}}">
                     <div class="thead">
-                        <span class="forumTitle">{{category}}</span>
+                        <span class="forumTitle"><a href="/category/forum/{{category}}">{{category|split('-')[1]}}</a></span>
                     </div>
                     <ol class="List_reset">
                         {% for sub in subs %}

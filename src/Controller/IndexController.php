@@ -14,10 +14,10 @@
             {
                 $category[] = $this->getManager()->getRepository(Subcategory::class)->findBy(['id'=>$i]);
             }
-            
             for($i = 0; $i < $count[1]; $i++)
             {
-                $data[$category[$i][0]->getCategory()->getTitle()][] = $category[$i][0]->getTitle();
+                $id = $category[$i][0]->getCategory()->getId().'-'.$category[$i][0]->getCategory()->getTitle();
+                $data[$id][] = $category[$i][0]->getTitle();
             }
 
             return $this->render('index/index.twig',[

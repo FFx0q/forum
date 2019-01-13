@@ -13,26 +13,26 @@
          * @ORM\Column(type="integer") 
          * @ORM\GeneratedValue 
          */
-        protected $pid;
+        private $id;
 
         /** 
          * @ORM\Column(type="string") 
          */
-        protected $name;
+        private $name;
 
         /** 
          * @ORM\Column(type="string") 
          */
-        protected $password;
+        private $member_password_hash;
         /**
          * @ORM\Column(type="string")
          */
-        protected $email;
+        private $email;
 
         /**
          *  @ORM\Column(type="string")
          */
-        protected $join_date;
+        private $join_date;
 
 
         public function getName()

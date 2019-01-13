@@ -23,4 +23,12 @@
             else 
                 return 'index';
         }
+        public function getParam($url)
+        {
+            $param = explode('/', ltrim($url, '/'));
+            if(!empty($param[2]))
+                return $param[2];
+            else 
+                return 'null';
+        }
     }

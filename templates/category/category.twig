@@ -1,0 +1,8 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <ol class="List_reset">
+        {% for topic in topics %}
+            <li><a href="/topic/show/{{topic}}">{{topic|split('-')[1]}}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}
