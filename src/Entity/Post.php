@@ -16,12 +16,12 @@
         private $id;
 
         /**
-         * @ORM\OneToOne(targetEntity="User")
+         * @ORM\ManyToOne(targetEntity="User")
          */
         
         private $author;
         /**
-         * @ORM\OneToOne(targetEntity="Topic")
+         * @ORM\ManyToOne(targetEntity="Topic")
          */
         private $topic;
 
@@ -42,7 +42,7 @@
 
         public function getPost()
         {
-            return $this->post();
+            return $this->post;
         }
 
         public function setPost($post)

@@ -3,6 +3,8 @@
     <ol class="List_reset">
         {% for category in categories %}
             <li><a href="/category/category/{{category|split('-')[0]}}-forum">{{category|split('-')[1]}}</a></li>
+            {% else %}
+                <li>No subforum found</li>
         {% endfor %}
     </ol>
 {% endblock %}

@@ -1,2 +1,7 @@
 {% extends "base.twig" %}
-
+{% block content %}
+{% for post in posts %}
+    <div>{{post}}</div>
+    <br >
+{% endfor %}
+{% endblock %}

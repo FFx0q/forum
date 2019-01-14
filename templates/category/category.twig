@@ -3,6 +3,8 @@
     <ol class="List_reset">
         {% for topic in topics %}
             <li><a href="/topic/show/{{topic}}">{{topic|split('-')[1]}}</a></li>
+            {% else %}
+                <li>No topic found</li>
         {% endfor %}
     </ol>
 {% endblock %}

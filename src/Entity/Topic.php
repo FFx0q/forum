@@ -18,12 +18,12 @@
         private $id;
 
         /**
-         * @ORM\OneToOne(targetEntity="User")
+         * @ORM\ManyToOne(targetEntity="User")
          */
         
         private $author;
         /**
-         * @ORM\OneToOne(targetEntity="Subcategory")
+         * @ORM\ManyToOne(targetEntity="Subcategory")
          */
         private $subcategory;
 
