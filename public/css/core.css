@@ -8,42 +8,86 @@
 body > main.container
 {
     margin-top: 35px;
+} 
+
+.categoryTitle 
+{
+    background-color: #4575B4;
+    font-size: 15px;
+    padding: 25px 25px 0;
+    box-sizing: border-box;
+    line-height: 28px;
+    height: 73px;
 }
 
-.thead 
+.categoryTitle a, .categoryTitle p
 {
-    color: #DDD;
-    background-color: rgb(19, 19, 19);
-    height: 40px;
-    line-height: 40px;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
-    padding: 0 10px;
-    font-family: Roboto Condensed,sans-serif;
-    font-size: 14.5px;
-    font-style: normal;
-    font-weight: bold;
+    color: #FFF;
+    text-decoration: none;
     text-transform: uppercase;
-    text-align: center;
-    border-radius: 12px 12px 0px 0px;
+    font-weight: 700;
 }
-.trow1
+.cForums 
 {
-    background: #F9F5EE;
-    border-bottom: 1px solid #EDE3D4;
-}
-.forumContent
-{
-    padding: 10px 0 0 10px;
-}
-h3.forumTitle
-{
-    font-size: 17px;
-    margin: 5px 0 5px 0;
-    font-weight: 400;
-}
-.List_reset
-{
+    background-color: #FAFAFA;
+    display: block;
+    list-style-type: none;
     margin: 0;
-    padding: 0;
+}
+.cForumList
+{
+    width: 100%;
+    display: table;
+    table-layout: auto;
+    position: relative;
+    border-collapse: separate;
+    border-spacing: 0;
     list-style: none;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.cForumMain, .cForumStats, .cForumIcon, .cForumRow
+{
+    padding: 12px 0;
+    display: flex;
+}
+
+.cForumIcon
+{
+    padding: 0 !important;
+    margin: 15px;
+    min-width: inherit;
+    width: 45px;
+}
+.cForumTitle, .cForumTitle:hover, .cForumTitle:visited
+{
+    color: #555555;
+    text-decoration: none;
+}
+.cForumTitle 
+{
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+}
+.cForumMain
+{
+    width: 45%;
+}
+.cForumStats
+{
+    width: 15%;
+    min-width: 150px;
+    text-align: center;
+    list-style: none;
+}
+.cForumStats dt, .cForumStats dd 
+{
+    margin-left: 0;
+}
+.cForumStats dl>dt, .cForumStats dl>dd
+{
+    display: inline;
 }

@@ -17,7 +17,7 @@
             for($i = 0; $i < $count[1]; $i++)
             {
                 $id = $category[$i][0]->getCategory()->getId().'-'.$category[$i][0]->getCategory()->getTitle();
-                $data[$id][] = $category[$i][0]->getTitle();
+                $data[$id][] = $category[$i][0]->getId().'-'.$category[$i][0]->getTitle();
             }
 
             return $this->render('index/index.twig',[

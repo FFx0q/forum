@@ -1,10 +1,26 @@
 {% extends 'base.twig' %}
 {% block content %}
-    <ol class="List_reset">
-        {% for category in categories %}
-            <li><a href="/category/category/{{category|split('-')[0]}}-forum">{{category|split('-')[1]}}</a></li>
-            {% else %}
-                <li>No subforum found</li>
-        {% endfor %}
-    </ol>
+    <section class="col-sm">
+        <h2 class="categoryTitle"><p>Forums</p></h2>
+        <ul class="cForums">
+            {% for category in categories %}
+                <li class="cForumRow"> 
+                    <div class="cForumIcon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="cForumMain">
+                        <a class="cForumTitle" href="/category/category/{{category|split('-')[0]}}-forum">{{category|split('-')[1]}}</a>
+                    </div>
+                    <div class="cForumStats">
+                        <dl>
+                            <dt>8</dt>
+                            <dd>Posts</dd>
+                        </dl>
+                    </div>             
+                </li>
+                {% else %}
+                    <li class="cForumRow">No subforum found</li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}
