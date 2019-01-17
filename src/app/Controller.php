@@ -6,6 +6,7 @@
     use App\Core;
     use Doctrine\ORM\Tools\Setup;
     use Doctrine\ORM\EntityManager;
+    use DI\ContainerBuilder;
 
     class Controller extends Core
     {
@@ -45,4 +46,12 @@
         {
             return EntityManager::create($this->database, $this->config());
         }  
+
+        public function configureContainer(ContainerBuilder $containerBuilder)
+        {
+            $containerBuilder->addDefinitions($this->getConfigDir().'/config.php');
+            $container = $containerBuilder->build();
+
+            return $container;
+        }
     }

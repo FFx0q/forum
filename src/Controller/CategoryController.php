@@ -13,9 +13,10 @@
     {
         public function forum()
         {
-            $param = new Route();
             $request = new Request();
-            $id = explode('-', ltrim($param->getParam($request->getUrl()), '-'));
+            $route = new Route($request);
+
+            $id = explode('-', ltrim($route->getParam(), '-'));
             $data = $this->getManager()->getRepository(Subcategory::class)->findBy(['category' => $id[0]]);
 
             foreach ($data as $key => $value) 
@@ -30,9 +31,10 @@
         }
         public function category()
         {
-            $param = new Route();
             $request = new Request();
-            $id = explode('-', ltrim($param->getParam($request->getUrl()), '-'));
+            $route = new Route($request);
+
+            $id = explode('-', ltrim($route->getParam(), '-'));
             $data = $this->getManager()->getRepository(Topic::class)->findBy(['subcategory'=> $id[0]]);
 
             foreach ($data as $key => $value) 

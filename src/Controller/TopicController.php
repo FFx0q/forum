@@ -11,9 +11,10 @@
     {
         public function show()
         {
-            $param = new Route();
             $request = new Request();
-            $id = explode('-', ltrim($param->getParam($request->getUrl()), '-'));
+            $route = new Route($request);
+
+            $id = explode('-', ltrim($route->getParam(), '-'));
             $data = $this->getManager()->getRepository(Post::class)->findBy(['topic' => $id[0]]);
             for($i = 0; $i < count($data); $i++)
             {

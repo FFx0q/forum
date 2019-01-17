@@ -3,8 +3,6 @@
     class Core 
     {
         private $rootDir;
-        private $templateDir;
-        private $cacheDir;
 
         public function __construct() 
         {
@@ -24,5 +22,10 @@
         public function getCacheDir()
         {
             return $this->getRootDir().'/cache';
+        }
+
+        public function getConfigDir()
+        {
+            return $this->getRootDir().'/config';
         }
     }
