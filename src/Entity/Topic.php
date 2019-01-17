@@ -23,9 +23,9 @@
         
         private $author;
         /**
-         * @ORM\ManyToOne(targetEntity="Subcategory")
+         * @ORM\ManyToOne(targetEntity="Forum")
          */
-        private $subcategory;
+        private $forum;
 
         /**
          * @ORM\Column(type="string")
@@ -68,9 +68,9 @@
         /**
          * Get the value of subcategory
          */ 
-        public function getSubcategory()
+        public function getForum()
         {
-                return $this->subcategory;
+                return $this->forum;
         }
 
         /**

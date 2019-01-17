@@ -24,13 +24,13 @@
         private $title;
 
         /*
-         * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category")
+         * @ORM\OneToMany(targetEntity="App\Entity\Forum", mappedBy="category")
          */
-        private $subcategories;
+        private $forums;
 
         public function __construct()
         {
-            $this->subcategories = new ArrayCollection();
+            $this->forums = new ArrayCollection();
         }
 
         public function getId()
@@ -47,8 +47,8 @@
         {
             return $this->title;
         }
-        public function getSubcategories(): Collection
+        public function getForums(): Collection
         {
-            return $this->subcategories;
+            return $this->forums;
         }
     }

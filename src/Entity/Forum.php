@@ -6,7 +6,7 @@
     /**
      * @ORM\Entity
      */
-    class Subcategory 
+    class Forum 
     {
         /** 
          * @ORM\Id 
