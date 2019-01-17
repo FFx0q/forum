@@ -18,13 +18,14 @@
             $id = explode('-', ltrim($param->getParam($request->getUrl()), '-'));
             $data = $this->getManager()->getRepository(Subcategory::class)->findBy(['category' => $id[0]]);
 
-            for($i = 0; $i < count($data); $i++)
+            foreach ($data as $key => $value) 
             {
-                $categories[] = $data[$i]->getId().'-'.$data[$i]->getTitle();
+                $forum[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
             }
+
             return $this->render("category/forum.twig", 
             [
-                'categories' => $categories
+                'forums' => $forum
             ]);
         }
         public function category()
@@ -33,10 +34,12 @@
             $request = new Request();
             $id = explode('-', ltrim($param->getParam($request->getUrl()), '-'));
             $data = $this->getManager()->getRepository(Topic::class)->findBy(['subcategory'=> $id[0]]);
-            for($i = 0; $i < count($data); $i++)
+
+            foreach ($data as $key => $value) 
             {
-                $topic[] = $data[$i]->getId().'-'.$data[$i]->getTitle();
+                $topic[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
             }
+
             return $this->render("category/category.twig", 
             [
                 'topics' => $topic
