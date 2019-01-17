@@ -47,11 +47,10 @@
             return EntityManager::create($this->database, $this->config());
         }  
 
-        public function configureContainer(ContainerBuilder $containerBuilder)
+        public function containerBuild()
         {
-            $containerBuilder->addDefinitions($this->getConfigDir().'/config.php');
-            $container = $containerBuilder->build();
-
-            return $container;
+            $container = new ContainerBuilder();
+            $container->addDefinitions($this->getConfigDir().'/config.php');
+            return $container->build();
         }
     }

@@ -2,9 +2,6 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-    use App\Base\Route;
-    use App\Base\Request;
-
 
     use App\Entity\Subcategory;
     use App\Entity\Topic;
@@ -13,8 +10,7 @@
     {
         public function forum()
         {
-            $request = new Request();
-            $route = new Route($request);
+            $route = $this->containerBuild()->get('App\Base\Route');
 
             $id = explode('-', ltrim($route->getParam(), '-'));
             $data = $this->getManager()->getRepository(Subcategory::class)->findBy(['category' => $id[0]]);
@@ -31,9 +27,8 @@
         }
         public function category()
         {
-            $request = new Request();
-            $route = new Route($request);
-
+            $route = $this->containerBuild()->get('App\Base\Route');
+    
             $id = explode('-', ltrim($route->getParam(), '-'));
             $data = $this->getManager()->getRepository(Topic::class)->findBy(['subcategory'=> $id[0]]);
 

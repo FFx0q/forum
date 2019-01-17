@@ -2,8 +2,8 @@
     require_once(__DIR__.'/vendor/autoload.php');
     session_start();
     $app = new App\Core();
-    $request = new App\Base\Request();
-    $route = new App\Base\Route($request);
+    $b = new App\Base\Controller;
+    $route = $b->containerBuild()->get('App\Base\Route');
 
     $c = ('\\App\\Controller\\'.$route->getController());
     $controller = new $c();
