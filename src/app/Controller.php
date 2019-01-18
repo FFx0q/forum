@@ -7,16 +7,10 @@
     use Doctrine\ORM\Tools\Setup;
     use Doctrine\ORM\EntityManager;
     use DI\ContainerBuilder;
+    use App\Base\Config;
 
     class Controller extends Core
     {
-        private $database = [ 
-            'driver' => 'pdo_mysql', 
-            'host' => 'localhost', 
-            'dbname' => 'testowa', 
-            'user' => 'root', 
-            'password' => 'bP75meku' 
-        ]; 
         public function loader()
         {
             return new Twig_Loader_Filesystem($this->getTemplateDir());
@@ -44,7 +38,13 @@
 
         public function getManager()
         {
-            return EntityManager::create($this->database, $this->config());
+            return EntityManager::create([
+                'driver' => Config::get('database/driver'),
+                'host' =>Config::get('database/dbhost'),
+                'dbname' => Config::get('database/dbname'),
+                'user' => Config::get('database/dbuser'),
+                'password'=> Config::get('database/dbpass'),
+            ], $this->config());
         }  
 
         public function containerBuild()

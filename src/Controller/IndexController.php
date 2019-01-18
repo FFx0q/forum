@@ -2,6 +2,8 @@
     namespace App\Controller;
 
     use App\Base\Controller;
+    use App\Base\Config;
+
     use App\Entity\Category;
     use App\Entity\Forum;
     

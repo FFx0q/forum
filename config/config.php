@@ -4,5 +4,5 @@
 
     return [
         \App\Base\Request::class => create(),
-        \App\Base\Route::class => create()->constructor(get(\App\Base\Request::class))
+        \App\Base\Route::class => create()->constructor(get(\App\Base\Request::class)),
     ];
