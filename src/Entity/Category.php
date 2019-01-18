@@ -33,22 +33,39 @@
             $this->forums = new ArrayCollection();
         }
 
+        /**
+         * Get the value of id
+         */ 
         public function getId()
         {
-            return $this->id;
+                return $this->id;
         }
 
-        public function setTitle($title)
-        {
-            $this->title = $title;
-        }
-
+        /**
+         * Get the value of title
+         */ 
         public function getTitle()
         {
-            return $this->title;
+                return $this->title;
         }
-        public function getForums(): Collection
+
+        /**
+         * Set the value of title
+         *
+         * @return  self
+         */ 
+        public function setTitle($title)
         {
-            return $this->forums;
+                $this->title = $title;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of Forums /*
+         */ 
+        public function getForums() : Collection
+        {
+                return $this->forums;
         }
     }
