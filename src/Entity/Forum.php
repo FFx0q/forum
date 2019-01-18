@@ -26,29 +26,52 @@
          */
         private $title;
 
+
+        /**
+         * Get the value of id
+         */ 
         public function getId()
         {
-            return $this->id;
+                return $this->id;
         }
+
+        /**
+         * Get the value of category
+         */ 
         public function getCategory()
         {
-            return $this->category;
+                return $this->category;
         }
-        
+
+        /**
+         * Set the value of category
+         *
+         * @return  self
+         */ 
         public function setCategory(Category $category = null)
         {
-            $this->category = $category;
+                $this->category = $category;
 
-            return $this;
+                return $this;
         }
 
+        /**
+         * Get the value of title
+         */ 
         public function getTitle()
         {
-            return $this->title;
+                return $this->title;
         }
 
+        /**
+         * Set the value of title
+         *
+         * @return  self
+         */ 
         public function setTitle($title)
         {
-            $this->title = $title;
+                $this->title = $title;
+
+                return $this;
         }
     }
