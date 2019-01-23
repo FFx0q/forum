@@ -19,8 +19,8 @@
                 $posts[] = $data[$i]->getPost();
             }
             return $this->render('topic/post.twig', 
-        [
-            'posts' => $posts
-        ]);
+            [
+                'posts' => isset($posts) ? $posts : " "
+            ]);
         }
     }

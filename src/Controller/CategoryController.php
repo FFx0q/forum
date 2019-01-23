@@ -16,13 +16,11 @@
             $data = $this->getManager()->getRepository(Forum::class)->findBy(['category' => $id[0]]);
 
             foreach ($data as $key => $value) 
-            {
-                $forum[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
-            }
-
+                $forums[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
+    
             return $this->render("category/forum.twig", 
             [
-                'forums' => $forum
+                'forums' => isset($forums) ? $forums : " "
             ]);
         }
         public function category()
@@ -33,13 +31,11 @@
             $data = $this->getManager()->getRepository(Topic::class)->findBy(['forum'=> $id[0]]);
 
             foreach ($data as $key => $value) 
-            {
-                $topic[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
-            }
+                $topics[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
 
             return $this->render("category/category.twig", 
             [
-                'topics' => $topic
+                'topics' => isset($topics) ? $topics : " "
             ]);
 
         }

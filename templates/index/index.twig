@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 {% block content %}
     <section class="col-sm">
-        {% for category, forums in data %}
+        {% for category, forums in category %}
             <div class="cForumList" id="category-{{loop.index}}">
                 <h2 class="categoryTitle"> <a href="/category/forum/{{category|split('-')[0]}}-category">{{category|split('-')[1]}}</a></h2>
                 <ul class="cForums">
@@ -24,6 +24,8 @@
                         <li class="cForumRow">No subforum found</li>
                 {% endfor %}
             </div>
+            {% else %}
+                no category found 
         {% endfor %}
     </section>
 {% endblock %}

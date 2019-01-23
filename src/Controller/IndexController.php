@@ -21,7 +21,7 @@
             }
       
             return $this->render('index/index.twig',[
-                'data' => $data
+                'category' => isset($data) ? $data : " "
             ]);
         }
     }
