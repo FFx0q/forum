@@ -1,11 +1,11 @@
 body {
     background-color: #111318;
 }
-.footer 
-{
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 1%;
+.footer {
+    position: relative;
+    height: 30%;
+    clear: both;
+    padding-top: 30px;
 }
 
 body > main.container
