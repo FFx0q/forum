@@ -106,7 +106,7 @@
         /**
          * Get the value of post_date
          */ 
-        public function getPost_date()
+        public function getPostDate()
         {
                 return $this->post_date;
         }
@@ -116,10 +116,11 @@
          *
          * @return  self
          */ 
-        public function setPost_date($post_date)
+        public function setPostDate($post_date)
         {
                 $this->post_date = $post_date;
 
                 return $this;
         }
+
     }

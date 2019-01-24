@@ -9,7 +9,8 @@
     {
         public function user() 
         {
-            $users = $this->getManager()->createQuery("SELECT u.name, u.pid FROM App\Entity\User AS u")->getResult();
+            $users = $this->getManager()->getRepository(User::class)->findAll();
+            
             return $this->render('user/user.twig', 
             [
                 'users'=>$users
@@ -52,7 +53,10 @@
 
         public function logged($username)
         {
-            $_SESSION['login'] = $username;
+            $id = $this->getManager()->getRepository(User::class)->findBy(['name'=> $username])[0]->getId();
+
+            $_SESSION['login'] = $id.'-'.$username;
+
             Route::redirect('index/index');
         }
 

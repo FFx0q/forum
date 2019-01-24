@@ -8,6 +8,7 @@
     use Doctrine\ORM\EntityManager;
     use DI\ContainerBuilder;
     use App\Base\Config;
+    require_once('config/app.php');
 
     class Controller extends Core
     {

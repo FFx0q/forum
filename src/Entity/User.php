@@ -34,6 +34,10 @@
          */
         private $join_date;
 
+        /**
+         *  @ORM\Column(type="string")
+         */
+        private $avatar_url;
 
 
         /**
@@ -120,6 +124,26 @@
         public function setJoinDate($join_date)
         {
                 $this->join_date = $join_date;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of avatar_url
+         */ 
+        public function getAvatar_url()
+        {
+                return $this->avatar_url;
+        }
+
+        /**
+         * Set the value of avatar_url
+         *
+         * @return  self
+         */ 
+        public function setAvatar_url($avatar_url)
+        {
+                $this->avatar_url = $avatar_url;
 
                 return $this;
         }

@@ -1,3 +1,6 @@
+body {
+    background-color: #111318;
+}
 .footer 
 {
     position: absolute;
@@ -90,4 +93,90 @@ body > main.container
 .cForumStats dl>dt, .cForumStats dl>dd
 {
     display: inline;
+}
+
+.post {
+    margin-top: 5%;
+    background-color: #0d0f13;
+    color: #fff;
+    overflow: hidden;
+}
+.post.classic {
+    padding-top: 15px;
+}
+.post.classic .post_author
+{
+    float: left;
+    width:20%;
+    margin: 0 1% 15px 0;
+    border-left: 0;
+    padding: 5px 1%;
+    
+}
+
+.post.classic .post_content {
+    float: left;
+    width: 79%;
+    padding: 0 1% 5px 1%;
+}
+.post .post_head {
+    font-size: 11px;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+.post .post_head span.post_date {
+    color: #666;
+}
+.post_body {
+    font-family: tahoma, helvetica, arial, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 12px 0;
+    color: #fff;
+}
+.largetext {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+.post.classic .post_author div.author_statistics {
+    margin: 6px 0 0 0;
+    padding: 6px 6px 3px 6px;
+    float: none;
+    font-size: 10px;
+    font-weight: bold;
+    color: #666;
+}
+.userinfo {
+    padding: 2px;
+    line-height: 26px;
+    font-size: 12px;
+}
+.author_avatar img
+{
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+}
+.post.classic .post_author div.author_information {
+    float: none;
+    padding: 0;
+    text-align: center;
+}
+.post_reply 
+{
+    width:100%;
+    margin-top: 15px;
+    background: #1a1d24;
+}
+.post_reply textarea
+{
+    width: 95%;
+    min-height: 200px;
+    background: #15181e;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 0;
+    border-color: rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 10px;
 }
