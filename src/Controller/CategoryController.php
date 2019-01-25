@@ -32,9 +32,12 @@
             $builder = $this->getManager()->createQueryBuilder();
 
             $topics = $builder
-                ->select('t.id, t.title, count(p.topic) as replies')
+                ->select('t.id, t.title')
+                ->addSelect('(SELECT count(p.id) 
+                    FROM App\Entity\Post p
+                    WHERE p.topic = t.id) as replies
+                ')
                 ->from('App\Entity\Topic', 't')
-                ->join('App\Entity\Post', 'p')
                 ->join('App\Entity\Forum', 'f')
                 ->where('f.id = t.forum')
                 ->andWhere('t.forum = ?1')
@@ -42,8 +45,6 @@
                 ->setParameter(1, $id)
                 ->getQuery()
                 ->execute();
-
-                var_dump($topics);
 
             return $this->render("category/category.twig", 
             [
