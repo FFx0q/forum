@@ -27,11 +27,23 @@
         {
             $route = $this->containerBuild()->get('App\Base\Route');
     
-            $id = explode('-', ltrim($route->getParam(), '-'));
+            $id = explode('-', ltrim($route->getParam(), '-'))[0];
             $data = $this->getManager()->getRepository(Topic::class)->findBy(['forum'=> $id[0]]);
+            $builder = $this->getManager()->createQueryBuilder();
 
-            foreach ($data as $key => $value) 
-                $topics[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
+            $topics = $builder
+                ->select('t.id, t.title, count(p.topic) as replies')
+                ->from('App\Entity\Topic', 't')
+                ->join('App\Entity\Post', 'p')
+                ->join('App\Entity\Forum', 'f')
+                ->where('f.id = t.forum')
+                ->andWhere('t.forum = ?1')
+                ->groupBy('t.title')
+                ->setParameter(1, $id)
+                ->getQuery()
+                ->execute();
+
+                var_dump($topics);
 
             return $this->render("category/category.twig", 
             [

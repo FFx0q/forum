@@ -1,5 +1,6 @@
 {% extends "base.twig" %}
 {% block content %}
+    <div><h1 class="topic_title">{{posts.0.title}}</h1></div>
     {% for post in posts %}
         <article id="post-{{post.id}}" class="post classic">
             <aside class="post_author col-sm-4">
@@ -49,6 +50,5 @@
             <textarea name="post" from="postform" class="float-right" required></textarea>
             <input type="submit" class="btn btn-primary float-right" value="Reply" required/>
         </form>
-        
     </section>
 {% endblock %}

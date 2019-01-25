@@ -9,11 +9,11 @@
                         <i class="fas fa-comments"></i>
                     </div>
                     <div class="cForumMain">
-                        <a class="cForumTitle" href="/topic/show/{{topic|split('-')[0]}}-topic">{{topic|split('-')[1]}}</a>
+                        <a class="cForumTitle" href="/topic/show/{{topic.id}}-topic">{{topic.title}}</a>
                     </div>
                     <div class="cForumStats">
                         <dl>
-                            <dt>8</dt>
+                            <dt>{{topic.replies}}</dt>
                             <dd>Replies</dd>
                         </dl>
                     </div>             

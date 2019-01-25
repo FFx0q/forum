@@ -16,7 +16,7 @@
             $builder = $this->getManager()->createQueryBuilder();
             
             $posts = $builder
-            ->select('p.id, p.post, p.post_date, u.name, IDENTITY(p.topic) topic_id')
+            ->select('p.id, p.post, p.post_date, u.name, IDENTITY(p.topic) topic_id, t.title')
             ->addSelect('(SELECT count(a.author) 
                     FROM App\Entity\Post a 
                     WHERE a.author = p.author) as posts
@@ -27,7 +27,9 @@
             ')
             ->from('App\Entity\Post', 'p')
             ->join('App\Entity\User', 'u')
+            ->join('App\Entity\Topic', 't')
             ->where('u.id = p.author')
+            ->andWhere('p.topic = t.id')
             ->andWhere("p.topic = ?1")
             ->orderBy('p.id', 'ASC')
             ->setParameter(1, $id)

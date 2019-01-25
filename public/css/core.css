@@ -15,12 +15,17 @@ body > main.container
 
 .categoryTitle 
 {
-    background-color: #4575B4;
-    font-size: 15px;
-    padding: 25px 25px 0;
-    box-sizing: border-box;
-    line-height: 28px;
-    height: 73px;
+    font-size: 14px;
+    padding: 0;
+    background: #046092;
+    margin-bottom: 0px;
+    transition: margin-bottom .3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 0px 0px;
 }
 
 .categoryTitle a, .categoryTitle p
@@ -94,7 +99,13 @@ body > main.container
 {
     display: inline;
 }
-
+.topic_title
+{
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.2;
+    color:#fff;
+}
 .post {
     margin-top: 5%;
     background-color: #0d0f13;
