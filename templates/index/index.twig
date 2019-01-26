@@ -1,9 +1,9 @@
 {% extends "base.twig" %}
 {% block content %}
     <section class="col-sm">
-        {% for category, forums in category %}
+        {% for category, forums, keys in category %}
             <div class="cForumList" id="category-{{loop.index}}">
-                <h2 class="categoryTitle"> <a href="/category/forum/{{category|split('-')[0]}}-category">{{category|split('-')[1]}}</a></h2>
+                <h2 class="categoryTitle"> <a href="/category/forum/{{category|split('-')[0]}}-category">{{category|split('-')[1] }}</a></h2>
                 <ul class="cForums">
                 {% for forum in forums %}
                     <li class="cForumRow"> 
@@ -11,12 +11,12 @@
                             <i class="fas fa-comments"></i>
                           </div>
                           <div class="cForumMain">
-                            <a class="cForumTitle" href="/category/category/{{forum|split('-')[0]}}-forum">{{forum|split('-')[1]}}</a>
+                            <a class="cForumTitle" href="/category/category/{{forum.0}}-forum">{{forum.1}}</a>
                         </div>
                         <div class="cForumStats">
                             <dl>
-                                <dt>8</dt>
-                                 <dd>Posts</dd>
+                                <dt>{{forum.2}}</dt>
+                                <dd>Posts</dd>
                             </dl>
                         </div>             
                     </li>

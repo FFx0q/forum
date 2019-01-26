@@ -11,17 +11,27 @@
     {
         public function index() 
         {
-            $category = $this->getManager()->getRepository(Forum::class)->findAll();
+            $builder = $this->getManager()->createQueryBuilder();
 
-            foreach($category as $key)
-            {
-                $category = $this->getManager()->getRepository(Forum::class)->findBy(['id'=>$key]);
-                $id = $category[0]->getCategory()->getId().'-'.$category[0]->getCategory()->getTitle();
-                $data[$id][] = $category[0]->getId().'-'.$category[0]->getTitle();
-            }
-      
+            $data = $builder
+            ->select('c.id cid, c.title ctitle, f.id fid, f.title ftitle')
+            ->addSelect('(SELECT count(p.id) 
+                FROM App\Entity\Post p
+                WHERE p.topic = t.id) as posts
+            ')
+            ->from('App\Entity\Category','c')
+            ->join('App\Entity\Forum', 'f')
+            ->join('App\Entity\Topic', 't')
+            ->where('c.id = f.category')
+            ->andWhere('t.forum = f.id')
+            ->getQuery()
+            ->execute();
+            
+            foreach($data as $key)
+                $category[$key['cid'].'-'.$key['ctitle']][] = array($key['fid'], $key['ftitle'], $key['posts']);
+            
             return $this->render('index/index.twig',[
-                'category' => isset($data) ? $data : " "
+                'category' => isset($category) ? $category : " "
             ]);
         }
     }
