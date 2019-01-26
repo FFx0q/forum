@@ -24,24 +24,19 @@ body > main.container
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    margin-top: 20px;
     margin-bottom: 10px;
     border-radius: 5px 5px 0px 0px;
 }
 
-.categoryTitle a, .categoryTitle p
+.categoryTitle a, .categoryTitle
 {
     color: #FFF;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 700;
 }
-.cForums 
-{
-    background-color: #FAFAFA;
-    display: block;
-    list-style-type: none;
-    margin: 0;
-}
+
 .cForumList
 {
     width: 100%;
@@ -54,6 +49,15 @@ body > main.container
     padding: 0;
     margin: 0;
     
+}
+.cForumRow 
+{
+    color: #FFF;
+    background: #15181e;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 7px 0;
+    padding: 0 10px;
 }
 
 .cForumMain, .cForumStats, .cForumIcon, .cForumRow

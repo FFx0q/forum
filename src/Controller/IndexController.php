@@ -28,7 +28,7 @@
             ->execute();
             
             foreach($data as $key)
-                $category[$key['cid'].'-'.$key['ctitle']][] = array($key['fid'], $key['ftitle'], $key['posts']);
+                $category[$key['cid'].'-'.$key['ctitle']][] = [$key['fid'], $key['ftitle'], $key['posts']];
             
             return $this->render('index/index.twig',[
                 'category' => isset($category) ? $category : " "
