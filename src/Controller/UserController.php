@@ -81,6 +81,25 @@
         }
         public function profile()
         {
-            return $this->render('user/profile.twig');
+            $route = $this->containerBuild()->get('App\Base\Route');
+
+            $id = explode('-', ltrim($route->getParam(), '-'))[0];
+            $builder = $this->getManager()->createQueryBuilder();
+
+            $user = $builder 
+            ->select('u.name, u.join_date, u.avatar_url')
+            ->addSelect('(SELECT count(p.id) 
+                FROM App\Entity\Post p
+                WHERE p.author = u.id) posts
+            ')
+            ->from('App\Entity\User', 'u')
+            ->where('u.id = ?1')
+            ->setParameter(1, $id)
+            ->getQuery()
+            ->execute();
+            return $this->render('user/profile.twig',
+            [
+                'user' => $user
+            ]);
         }
     }

@@ -195,3 +195,58 @@ body > main.container
     padding: 15px;
     margin-bottom: 10px;
 }
+
+.profile_header
+{
+    padding-bottom: 0;
+    padding-top: 125px;
+    position: relative;
+    height: 200px;
+    text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+    font-size: 16px;
+}
+.profile_photo
+{
+    z-index: 1;
+}
+.userPhoto
+{
+    vertical-align: middle;
+display: inline-block;
+line-height: 1px;
+position: relative;
+margin: 2px;
+width: 120px;
+height: 120px;
+border-radius: 60px;
+}
+.profile_username
+{
+    font-size: 28px;
+font-weight: 300;
+color:#fff;
+}
+
+.profile_stats {
+    background: #15181e;
+    color: #fff;
+    height: 65px;
+    padding: 12px 12px 12px 155px;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+}
+.profile_stats div
+{
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    display: inline-block;
+}
+.profile_stats h4
+{
+    color: #989aa0;
+text-transform: uppercase;
+font-size: 11px;
+margin: 0;
+}
