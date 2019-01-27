@@ -87,13 +87,15 @@
             $builder = $this->getManager()->createQueryBuilder();
 
             $user = $builder 
-            ->select('u.name, u.join_date, u.avatar_url')
+            ->select('u.name, u.join_date, u.avatar_url, g.groupName')
             ->addSelect('(SELECT count(p.id) 
                 FROM App\Entity\Post p
                 WHERE p.author = u.id) posts
             ')
             ->from('App\Entity\User', 'u')
+            ->join('App\Entity\Groups', 'g')
             ->where('u.id = ?1')
+            ->andWhere('g.id = u.group')
             ->setParameter(1, $id)
             ->getQuery()
             ->execute();

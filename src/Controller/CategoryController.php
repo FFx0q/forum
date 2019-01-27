@@ -45,6 +45,19 @@
                 ->setParameter(1, $id)
                 ->getQuery()
                 ->execute();
+                
+                foreach($topics as $key)
+                {
+                    if($key['replies'] == 0)
+                    {
+                        $builder
+                            ->delete("App\Entity\Topic", 't')
+                            ->where('t.id = ?1')
+                            ->setParameter(1, $key['id'])
+                            ->getQuery()
+                            ->execute();
+                    }
+                }
 
             return $this->render("category/category.twig", 
             [

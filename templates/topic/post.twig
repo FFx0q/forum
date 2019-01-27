@@ -45,10 +45,12 @@
                 </div>
         </article>
     {% endfor %}
-    <section class="post_reply">
-        <form method="post" action="/newreply.php?tid={{posts.0.topic_id}}" id="postform">
-            <textarea name="post" from="postform" class="float-right" required></textarea>
-            <input type="submit" class="btn btn-primary float-right" value="Reply" required/>
-        </form>
-    </section>
+    {% if permission.edit == 1 %}  
+        <section class="post_reply">
+            <form method="post" action="/newreply.php?tid={{posts.0.topic_id}}" id="postform">
+                <textarea name="post" from="postform" class="float-right" required></textarea>
+                <input type="submit" class="btn btn-primary float-right" value="Reply" required/>
+            </form>
+        </section>
+    {% endif %}
 {% endblock %}

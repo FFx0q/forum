@@ -39,6 +39,11 @@
          */
         private $avatar_url;
 
+        /**
+         * @ORM\ManyToOne(targetEntity="Groups")
+         */
+        private $group;
+
 
         /**
          * Get the value of id
