@@ -1,0 +1,89 @@
+.post {
+  margin-top: 5%;
+  background: #0d0f13;
+  padding-top: 15px;
+  overflow: hidden;
+  color: #fff;
+}
+.post .post-author {
+  float: left;
+  margin: 0 1% 15px 0;
+  border-left: 0;
+  padding: 5px 1%;
+  width: 20%;
+}
+.post .post-author .author-avatar img {
+  border-radius: 100px;
+  width: 120px;
+  height: 120px;
+}
+.post .post-author .author-information {
+  float: none;
+  padding: 0;
+  text-align: center;
+}
+.post .post-author .author-statistics {
+  float: none;
+  margin: 6px 0 0 0;
+  padding: 6px 6px 3px 6px;
+  color: #666;
+  font-size: 10px;
+  font-weight: bold;
+}
+.post .post-content {
+  float: left;
+  padding: 0 1% 5px 1%;
+  width: 79%;
+}
+.post .post-content .post-head {
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+.post .post-content .post-head .post-date {
+  color: #666;
+}
+.post .post-content .post-content {
+  padding: 12px 0;
+  color: #fff;
+  font-family: tahoma, helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.topic_title {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.post-reply {
+  margin-top: 15px;
+  background: #1a1d24;
+  width: 100%;
+}
+.post-reply textarea {
+  margin-bottom: 10px;
+  background: #15181e;
+  border-radius: 0;
+  border-color: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 95%;
+  min-height: 200px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.largetext {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.userinfo {
+  padding: 2px;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+/*# sourceMappingURL=post.css.map */

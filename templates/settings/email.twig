@@ -1,0 +1,9 @@
+{% extends "settings/settings.twig" %}
+{% block settings %}
+    <h2 class="sectionHead">Change email</h2>
+    <form method="post" action="/settings.php?uid={{id}}">
+        New email
+        <input type="email" name="email" />
+        <input type="submit" value="Save" />
+    </form>
+{% endblock %}

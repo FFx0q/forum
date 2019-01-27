@@ -3,16 +3,16 @@
 {% for user in user %}
     <section class="wrapper">
         <header>
-            <div class="profile_header row">
-                <div class="profile_photo col-sm-2">
+            <div class="profile-header row">
+                <div class="profile-photo col-sm-2">
                     <img src="/uploads/avatars/{{user.avatar_url}}" class="userPhoto"/>
                 </div>
                 <div class="col-sm-4">
-                   <h1 class="profile_username"> {{user.name}} </h1>
+                   <h1 class="profile-username"> {{user.name}} </h1>
                    <span>{{user.groupName}}</span>
                 </div>
             </div>
-            <div class="profile_stats">
+            <div class="profile-stats">
                 <div>
                     <h4>Posts</h4>
                     {{user.posts}}
@@ -24,7 +24,7 @@
                 </div>
             </div>
      </header>
-        <section class="profile_content">
+        <section class="profile-content">
     
         </section>
     </section>

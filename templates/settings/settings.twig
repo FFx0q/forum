@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+{% block content %}
+    <div style="background: #1a1d24;" class="row">
+        <aside class="col-sm-3">
+            <ul class="menu_list">
+                <li><a href="/settings/overview" class="menu_item">Overview</a></li>
+                <li><a href="/settings/email" class="menu_item">Email</a></li>
+                <li><a href="/settings/password" class="menu_item">Password</a></li>
+            </ul>
+        </aside>
+        <section class="col-sm-5"> 
+            {% block settings %}{% endblock %}
+        </section>
+    </div>
+
+{% endblock %}

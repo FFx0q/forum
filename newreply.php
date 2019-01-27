@@ -17,5 +17,4 @@
         $data = $date->getTimestamp();
         
         $controller->create($uid, $tid, $post, $data);
-        
     }

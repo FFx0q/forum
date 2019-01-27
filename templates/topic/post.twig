@@ -2,19 +2,19 @@
 {% block content %}
     <div><h1 class="topic_title">{{posts.0.title}}</h1></div>
     {% for post in posts %}
-        <article id="post-{{post.id}}" class="post classic">
-            <aside class="post_author col-sm-4">
+        <article id="post-{{post.id}}" class="post">
+            <aside class="post-author col-sm-4">
             <center>
-                <div class="author_avatar">
+                <div class="author-avatar">
                     <img src="/uploads/avatars/avatar_1.png" />
                 </div>
             </center>
-                <div class="author_information">
+                <div class="author-information">
                     <span class="largetext">
                         <a href="/user/profile/{{post.name}}">{{post.name}}</a>
                     </span>
                 </div>
-                <div class="author_statistics">
+                <div class="author-statistics">
                     <div class="userinfo">
                         <i class="fas fa-comment"></i> Posts: 
                         <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.posts}}</span>
@@ -29,24 +29,24 @@
                     </div>
                 </div>
             </aside>
-            <section class="post_content col-sm-8">
-                <div class="post_head">
+            <section class="post-content col-sm-8">
+                <div class="post-head">
                     <div style="vertical-align: top; float: right;">
                         <strong>
                             <a href="#post-{{loop.index}}">#{{loop.index}}</a>
                         </strong>
                     </div>
-                    <span class="post_date">
+                    <span class="post-date">
                         {{post.date|date('d/m/Y')}}
                     </span>
                 </div>
-                <div class="post_body">
+                <div class="post-body">
                     {{post.post}}
                 </div>
         </article>
     {% endfor %}
     {% if permission.edit == 1 %}  
-        <section class="post_reply">
+        <section class="post-reply">
             <form method="post" action="/newreply.php?tid={{posts.0.topic_id}}" id="postform">
                 <textarea name="post" from="postform" class="float-right" required></textarea>
                 <input type="submit" class="btn btn-primary float-right" value="Reply" required/>
