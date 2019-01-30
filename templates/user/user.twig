@@ -1,8 +1,10 @@
 {% extends 'base.twig' %}
 {% block content %}
-    <section class="col-sm">
-        <h2 class="categoryTitle"><p>Member List</p></h2>
-        <ul class="cForums">
+    <section class="content">
+        <header class="page-header">
+            <h1 class="page-title">Member List</h1>
+        </header>
+        <ul class="user-list">
         {% for user in users %}
             <li class="cForumRow"> 
                 <div class="cForumMain">

@@ -18,7 +18,6 @@
         background-color: #15181e;
         .site-title
         {
-            width: 20%;
             color: #fff;
             font-weight: 300;
             font-size: 28px;
@@ -26,14 +25,13 @@
             text-decoration: none;
             line-height: 58px;
         }
-            .user-nav 
-            {
-                position: absolute;
-                text-decoration: none;
-                right: 20px;
-                list-style: none;
-            }
-        
+        .user-nav 
+        {
+            position: absolute;
+            text-decoration: none;
+            right: 20px;
+            list-style: none;
+        } 
         nav 
         {
             align-items: center;
