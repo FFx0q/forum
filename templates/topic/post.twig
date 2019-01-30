@@ -15,22 +15,22 @@
                     </span>
                 </div>
                 <div class="author-statistics">
-                    <div class="userinfo">
+                    <div class="user-info">
                         <i class="fas fa-comment"></i> Posts: 
                         <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.posts}}</span>
                     </div>
-                    <div class="userinfo">
+                    <div class="user-info">
                         <i class="fas fa-comments"></i> Topics:
                         <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.topics}}</span>
                     </div>
-                    <div class="userinfo">
+                    <div class="user-info">
                         <i class="fas fa-user"></i> Join date:
                         <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.join_date|date("M/Y")}}</span>
                     </div>
                 </div>
             </aside>
             <section class="post-content col-sm-8">
-                <div class="post-head">
+                <header class="post-head">
                     <div style="vertical-align: top; float: right;">
                         <strong>
                             <a href="#post-{{loop.index}}">#{{loop.index}}</a>
@@ -39,7 +39,7 @@
                     <span class="post-date">
                         {{post.date|date('d/m/Y')}}
                     </span>
-                </div>
+                </header>
                 <div class="post-body">
                     {{post.post}}
                 </div>
@@ -49,7 +49,7 @@
         <section class="post-reply">
             <form method="post" action="/newreply.php?tid={{posts.0.topic_id}}" id="postform">
                 <textarea name="post" from="postform" class="float-right" required></textarea>
-                <input type="submit" class="btn btn-primary float-right" value="Reply" required/>
+                <input type="submit" class="" value="Reply" required/>
             </form>
         </section>
     {% endif %}

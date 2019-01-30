@@ -1,32 +1,32 @@
-{% extends "base.twig" %}
+{% extends 'base.twig' %}
 {% block content %}
-{% for user in user %}
-    <section class="wrapper">
-        <header>
-            <div class="profile-header row">
-                <div class="profile-photo col-sm-2">
-                    <img src="/uploads/avatars/{{user.avatar_url}}" class="userPhoto"/>
+    {% for user in user %}
+        <section class="content">
+            <header>
+                <div class="profile-header">
+                   <div class="profile-photo Column">
+                        <img src="/uploads/avatars/{{user.avatar_url}}" class="userPhoto"/>
+                    </div>
+                    <div class="Column">
+                        <h1 class="profile-username"> {{user.name}} </h1>
+                        <span>{{user.groupName}}</span>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                   <h1 class="profile-username"> {{user.name}} </h1>
-                   <span>{{user.groupName}}</span>
-                </div>
-            </div>
-            <div class="profile-stats">
-                <div>
-                    <h4>Posts</h4>
-                    {{user.posts}}
-                </div>
+                <div class="profile-stats">
+                    <div>
+                        <h4>Posts</h4>
+                        {{user.posts}}
+                    </div>
 
-                <div>
-                    <h4>Join date</h4>
-                    {{user.join_date|date}}
+                    <div>
+                        <h4>Join date</h4>
+                        {{user.join_date|date}}
+                    </div>
                 </div>
-            </div>
-     </header>
-        <section class="profile-content">
-    
+            </header>
+            <section class="profile-content">
+
+            </section>
         </section>
-    </section>
     {% endfor %}
 {% endblock %}

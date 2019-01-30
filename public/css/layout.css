@@ -1,0 +1,96 @@
+.container {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 15px;
+  max-width: 95%;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-areas: "header header" "content sidebar" "footer footer";
+}
+.container .header {
+  grid-area: header;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #15181e;
+}
+.container .header .site-title {
+  width: 20%;
+  color: #fff;
+  font-weight: 300;
+  font-size: 28px;
+  text-align: left;
+  text-decoration: none;
+  line-height: 58px;
+}
+.container .header .user-nav {
+  position: absolute;
+  text-decoration: none;
+  right: 20px;
+  list-style: none;
+}
+.container .header nav {
+  align-items: center;
+  display: flex;
+  background: #1a1d24;
+  height: 40px;
+}
+.container .header nav .nav-menu {
+  border-radius: 2px 2px 0px 0px;
+  background: #1a1d24;
+}
+.container .header nav .nav-menu li {
+  display: inline-block;
+}
+.container .header nav .nav-menu li a {
+  padding: 12px 18px 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: bold;
+  text-decoration: none;
+}
+.container .forum {
+  grid-area: content;
+}
+.container .forum .content {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.container .sidebar {
+  grid-area: sidebar;
+}
+.container .footer {
+  grid-area: footer;
+  position: relative;
+  height: 30%;
+  clear: both;
+  padding-top: 30px;
+}
+
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+.user-menu .dropdown-content {
+  display: none;
+  position: absolute;
+  background: #0c0e12;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 1px;
+}
+.user-menu .dropdown-content a {
+  color: #686f7d;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  line-height: 1.4;
+}
+.user-menu .dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.user-menu:hover .dropdown-content {
+  display: block;
+}
+
+/*# sourceMappingURL=layout.css.map */

@@ -1,80 +1,81 @@
 .post 
 {
-    margin-top: 5%;
+    display: flex;
+    margin-top: 1%;
     background: #0d0f13;
     padding-top: 15px;
     overflow: hidden;
     color: #fff;
 
-        .post-author
-        {
-            float: left;
-            margin: 0 1% 15px 0;
-            border-left: 0;
-            padding: 5px 1%;
-            width: 20%;
+    .topic_title
+    {
+        color:#fff;
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 1.2;
+    }
 
-            .author-avatar
+    .post-author
+    {
+        margin: 0 1% 15px 0;
+        border-left: 0;
+        padding: 5px 1%;
+        width: 20%;
+
+        .author-avatar
+        {
+            img 
             {
-                img 
-                {
-                    border-radius: 100px;
-                    width: 120px;
-                    height: 120px;
-                }
+                border-radius: 100px;
+                width: 120px;
+                height: 120px;
             }
-            .author-information
-            {
-                float: none;
-                padding: 0;
-                text-align: center;
+        }
+        .author-information
+        {
+            padding: 0;
+            text-align: center;
+        }
+        .author-statistics 
+        {
+            margin: 6px 0 0 0;
+            padding: 6px 6px 3px 6px;
+            color: #666;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: left;
+
+            .user-info {
+                padding: 2px;
+                font-size: 12px;
+                line-height: 26px;
             }
-            .author-statistics 
+        }
+    }
+    .post-content 
+    {
+        padding: 0 1% 5px 1%;
+        width: 79%;
+        text-align: left;
+
+        .post-head 
+        {
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+            font-size: 11px;
+            .post-date 
             {
-                float: none;
-                margin: 6px 0 0 0;
-                padding: 6px 6px 3px 6px;
                 color: #666;
-                font-size: 10px;
-                font-weight: bold;
             }
         }
-        .post-content 
+        .post-content
         {
-            float: left;
-            padding: 0 1% 5px 1%;
-            width: 79%;
-
-            .post-head 
-            {
-                padding-bottom: 4px;
-                margin-bottom: 4px;
-                font-size: 11px;
-
-                .post-date 
-                {
-                    color: #666;
-                }
-            }
-
-            .post-content
-            {
-                padding: 12px 0;
-                color: #fff;
-                font-family: tahoma, helvetica, arial, sans-serif;
-                font-size: 14px;
-                font-weight: 300;
-            }
+            padding: 12px 0;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 300;
         }
-    
-}
-
-.topic_title
-{
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 1.2;
-    color:#fff;
+    }
 }
 
 .post-reply 
@@ -100,9 +101,4 @@
 .largetext {
     margin-bottom: 8px;
     font-size: 16px;
-}
-.userinfo {
-    padding: 2px;
-    line-height: 26px;
-    font-size: 12px;
 }
