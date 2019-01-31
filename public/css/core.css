@@ -425,4 +425,35 @@ body a {
   border-radius: 60px;
 }
 
+.input-wrap {
+  display: block;
+  padding: 15px;
+}
+.input-wrap .input {
+  outline: 0;
+  border: 0;
+  background: 0 0;
+  color: #eee;
+  padding: 10px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.button {
+  overflow: hidden;
+  margin: 1rem;
+  padding: 0;
+  text-transform: uppercase;
+  width: 150px;
+  height: 40px;
+  border-radius: 10em;
+  background-color: transparent;
+  border: 2px solid #046092;
+  color: #eee;
+}
+
+.form {
+  text-align: right;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=core.css.map */

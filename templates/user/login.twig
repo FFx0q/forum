@@ -1,25 +1,24 @@
 {% extends 'base.twig' %}
 {% block content %}
-<form method="POST" action="{{ link }}" class="mx-auto">
-    <div class="form-row">
-		<div class="form-group col-md-6">
+<form method="POST" action="{{ link }}" class="form">
+		<div class="input-wrap">
 		<label for="username">Username</label>
 		<input type="text" 
-			   class="form-control" 
+			   class="input" 
 			   id="username" 
 			   name="loginName" 
 		       placeholder="Username"
 		/>
 	</div>
-    <div class="form-group col-md-6">
+    <div class="input-wrap">
 		<label for="password">Password</label>
 		<input type="password" 
-			   class="form-control" 
+			   class="input" 
 			   id="password" 
                name="loginPass" 
 		       placeholder="Password"
 		/>
 	</div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="button">Sign in</button>
 </form>
 {% endblock %}
