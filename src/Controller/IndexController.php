@@ -31,8 +31,21 @@
             foreach($data as $key)
                 $category[$key['cid'].'-'.$key['ctitle']][] = [$key['fid'], $key['ftitle'], $key['posts']];
 
+            $posters = $this->getManager()->createQueryBuilder()
+                ->select('u.id, u.name, u.avatar_url')
+                ->addSelect('(SELECT count(p.id) as post
+                    FROM \App\Entity\Post p
+                    WHERE p.author = u.id) as posts
+                    ')
+                ->from('\App\Entity\User', 'u')
+                ->setMaxResults(5)
+                ->orderBy('posts', 'DESC')
+                ->getQuery()
+                ->execute();
+
             return $this->render('index/index.twig',[
-                'category' => isset($category) ? $category : " "
+                'category' => isset($category) ? $category : " ",
+                'posters' => isset($posters) ? $posters : " "
             ]);
         }
     }

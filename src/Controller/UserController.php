@@ -122,9 +122,10 @@
             ->setParameter(1, $id)
             ->getQuery()
             ->execute();
+
             return $this->render('user/profile.twig',
             [
-                'user' => $usstringer
+                'user' => $user
             ]);
         }
     }

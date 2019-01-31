@@ -1,0 +1,21 @@
+<ul class="widget-list">
+    <li class="widget-item">
+        <header class="widget-header">
+            <h3 class="widget-title">Top 5 Posters</h3>
+        </header>
+        <section class="widget-content">
+            <ul>
+            {% for poster in posters %}
+            <li>
+                <a href="/user/profile/{{poster.id}}-user" class="user-photo-tiny">
+                    <img src="/uploads/avatars/{{poster.avatar_url}}"/>
+                </a>
+                
+                <a href="/user/profile/{{poster.id}}-user">{{poster.name}}</a>
+                <span>{{poster.posts}}</span>
+            </li>
+            {% endfor %}
+            </ul>
+        </section>
+    </li>
+</ul>
