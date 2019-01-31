@@ -33,7 +33,7 @@
             $password, 
             $email, 
             $created, 
-            $default_group = 1, 
+            $default_group = 2, 
             $avatar = "avatar_default.png"
         )
         {
