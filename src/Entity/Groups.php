@@ -10,7 +10,7 @@
     {
         /**
          * @ORM\Id
-         * @ORM\Column(type="integer", name="id")
+         * @ORM\Column(type="smallint", name="id")
          * @ORM\GeneratedValue
          */
         private $id;   

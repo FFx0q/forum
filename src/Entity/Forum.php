@@ -17,7 +17,7 @@
 
 
         /**
-         * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="subcategories")
+         * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="category")
          */
         private $category;
 

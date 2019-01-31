@@ -13,20 +13,20 @@
 
         /**
          * @ORM\Id
-         * @ORM\Column(type="integer", name="id")
+         * @ORM\Column(type="smallint", name="id")
          * @ORM\GeneratedValue
          */
         private $id;
-
-        /**
-         * @ORM\Column(type="string")
-         */
-        private $title;
 
         /*
          * @ORM\OneToMany(targetEntity="App\Entity\Forum", mappedBy="category")
          */
         private $forums;
+
+        /**
+         * @ORM\Column(type="string")
+         */
+        private $title;
 
         public function __construct()
         {

@@ -24,9 +24,10 @@
             ->join('App\Entity\Topic', 't')
             ->where('c.id = f.category')
             ->andWhere('t.forum = f.id')
+            ->groupBy('f.title')
             ->getQuery()
             ->execute();
-            
+
             foreach($data as $key)
                 $category[$key['cid'].'-'.$key['ctitle']][] = [$key['fid'], $key['ftitle'], $key['posts']];
             

@@ -11,16 +11,24 @@
         public function forum()
         {
             $route = $this->containerBuild()->get('App\Base\Route');
+            $builder = $this->getManager()->createQueryBuilder();
+            
+            $id = explode('-', ltrim($route->getParam(), '-'))[0];
+       
+            $data = $builder 
+                ->select('f.id, f.title')
+                ->addSelect('(SELECT count(p.id)
+                    FROM \App\Entity\Post p
+                    JOIN \App\Entity\Topic t
+                    WHERE p.topic = t.id AND t.forum = f.id) as posts
+                ')
+                ->from('\App\Entity\Forum', 'f')
+                ->getQuery()
+                ->execute();
 
-            $id = explode('-', ltrim($route->getParam(), '-'));
-            $data = $this->getManager()->getRepository(Forum::class)->findBy(['category' => $id[0]]);
-
-            foreach ($data as $key => $value) 
-                $forums[] = $data[$key]->getId().'-'.$data[$key]->getTitle();
-    
             return $this->render("category/forum.twig", 
             [
-                'forums' => isset($forums) ? $forums : " "
+                'forums' => isset($data) ? $data : " "
             ]);
         }
         public function category()

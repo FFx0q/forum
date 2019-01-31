@@ -10,7 +10,7 @@
     {
         /**
          * @ORM\Id
-         * @ORM\Column(type="integer", name="id")
+         * @ORM\Column(type="smallint", name="id")
          * @ORM\GeneratedValue
          */
         private $id;
@@ -21,17 +21,17 @@
         private $group;
 
         /**
-         * @ORM\Column(type="string")
+         * @ORM\Column(type="boolean")
          */
         private $edit;
 
         /**
-         * @ORM\Column(type="string")
+         * @ORM\Column(type="boolean")
          */
         private $show;
 
         /**
-         * @ORM\Column(type="string")
+         * @ORM\Column(type="boolean")
          */
         private $delete;
     }

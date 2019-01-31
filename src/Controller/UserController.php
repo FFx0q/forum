@@ -17,14 +17,26 @@
             ]);
         }
 
-        public function create($username, $password, $email, $created)
+        public function create(
+            $username, 
+            $password, 
+            $email, 
+            $created, 
+            $default_group = 1, 
+            $avatar = "avatar_default.png"
+        )
         {
             $em = $this->getManager();
+
             $user = new User();
+            $group = $em->find('App\Entity\Groups', $default_group);
+
 			$user->setName($username);
 			$user->setPassword($password);
 			$user->setEmail($email);
-			$user->setJoinDate($created);
+            $user->setJoinDate($created);
+            $user->setAvatar_url($avatar);
+            $user->setGroup($group);
 			$em->persist($user);
 			$em->flush();
 
@@ -101,7 +113,7 @@
             ->execute();
             return $this->render('user/profile.twig',
             [
-                'user' => $user
+                'user' => $usstringer
             ]);
         }
     }

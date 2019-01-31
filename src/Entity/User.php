@@ -10,11 +10,16 @@
     {
         /** 
          * @ORM\Id 
-         * @ORM\Column(type="integer") 
+         * @ORM\Column(type="smallint") 
          * @ORM\GeneratedValue 
          */
         private $id;
 
+        /**
+         * @ORM\ManyToOne(targetEntity="Groups")
+         */
+        private $group;
+        
         /** 
          * @ORM\Column(type="string") 
          */
@@ -38,12 +43,6 @@
          *  @ORM\Column(type="string")
          */
         private $avatar_url;
-
-        /**
-         * @ORM\ManyToOne(targetEntity="Groups")
-         */
-        private $group;
-
 
         /**
          * Get the value of id
@@ -149,6 +148,26 @@
         public function setAvatar_url($avatar_url)
         {
                 $this->avatar_url = $avatar_url;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of group
+         */ 
+        public function getGroup()
+        {
+                return $this->group;
+        }
+
+        /**
+         * Set the value of group
+         *
+         * @return  self
+         */ 
+        public function setGroup($group)
+        {
+                $this->group = $group;
 
                 return $this;
         }
