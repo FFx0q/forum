@@ -1,12 +1,12 @@
 {% extends "base.twig" %}
 {% block content %}
-    <section class="content">
+    <section class="content-area">
         <header class="page-header">
               <h1 class="page-title">{{posts.0.title}}</h1>
         </header>
         {% for post in posts %}
             <article id="post-{{post.id}}" class="post">
-                <aside class="post-author col-sm-4">
+                <aside class="post-author">
                 <center>
                     <div class="author-avatar">
                         <img src="/uploads/avatars/avatar_1.png" />
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </aside>
-                <section class="post-content col-sm-8">
+                <section class="post-content">
                     <header class="post-head">
                         <div style="vertical-align: top; float: right;">
                             <strong>

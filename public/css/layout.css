@@ -1,14 +1,16 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .container {
   position: relative;
   margin: 0 auto;
   padding: 0 15px;
   max-width: 95%;
-  display: grid;
-  grid-template-columns: 75% 25%;
-  grid-template-areas: "header header" "content sidebar" "footer footer";
 }
 .container .header {
-  grid-area: header;
+  grid-column: 1/span 5;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #15181e;
 }
@@ -21,10 +23,14 @@
   line-height: 58px;
 }
 .container .header .user-nav {
+  display: inherit;
   position: absolute;
   text-decoration: none;
   right: 20px;
   list-style: none;
+}
+.container .header .user-nav .user-nav-item {
+  padding: 5px;
 }
 .container .header nav {
   align-items: center;
@@ -47,17 +53,27 @@
   text-decoration: none;
 }
 .container .forum {
-  grid-area: content;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
-.container .forum .content {
+.container .content {
+  grid-column: 1/span 5;
+  display: flex;
   font-size: 14px;
   line-height: 1.5;
 }
+.container .content .content-area {
+  width: 100%;
+}
 .container .sidebar {
-  grid-area: sidebar;
+  display: flex;
+  grid-column: span 2;
+  width: 25%;
 }
 .container .footer {
-  grid-area: footer;
+  display: flex;
+  grid-column: 1/span 5;
   position: relative;
   height: 30%;
   clear: both;

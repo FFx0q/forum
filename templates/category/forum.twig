@@ -1,7 +1,9 @@
 {% extends 'base.twig' %}
 {% block content %}
-    <section class="col-sm">
-        <h2 class="categoryTitle">Forums</h2>
+    <section class="forum">
+        <header class="page-header">
+            <h2 class="page-title">Forums</h2>
+        </header>
         <ul class="cForumList">
             {% for forum in forums %}
                 <li class="cForumRow"> 
