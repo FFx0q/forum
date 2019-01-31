@@ -23,6 +23,8 @@
                     WHERE p.topic = t.id AND t.forum = f.id) as posts
                 ')
                 ->from('\App\Entity\Forum', 'f')
+                ->where('f.category = ?1')
+                ->setParameter(1, $id)
                 ->getQuery()
                 ->execute();
 

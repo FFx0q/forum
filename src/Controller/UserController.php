@@ -10,6 +10,17 @@
         public function user() 
         {
             $users = $this->getManager()->getRepository(User::class)->findAll();
+            $builder = $this->getManager()->createQueryBuilder();
+
+            $users = $builder
+                ->select('u.id, u.name')
+                ->addSelect('(SELECT count(p.id)
+                    FROM \App\Entity\Post p
+                    WHERE p.author = u.id) as posts
+                    ')
+                ->from('\App\Entity\User', 'u')
+                ->getQuery()
+                ->execute();
             
             return $this->render('user/user.twig', 
             [

@@ -17,20 +17,20 @@
             ->select('c.id cid, c.title ctitle, f.id fid, f.title ftitle')
             ->addSelect('(SELECT count(p.id) 
                 FROM App\Entity\Post p
-                WHERE p.topic = t.id) as posts
+                JOIN \App\Entity\Topic a
+                WHERE p.topic = a.id AND a.forum = f.id) as posts
             ')
             ->from('App\Entity\Category','c')
             ->join('App\Entity\Forum', 'f')
             ->join('App\Entity\Topic', 't')
             ->where('c.id = f.category')
-            ->andWhere('t.forum = f.id')
             ->groupBy('f.title')
             ->getQuery()
             ->execute();
 
             foreach($data as $key)
                 $category[$key['cid'].'-'.$key['ctitle']][] = [$key['fid'], $key['ftitle'], $key['posts']];
-            
+
             return $this->render('index/index.twig',[
                 'category' => isset($category) ? $category : " "
             ]);
