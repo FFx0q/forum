@@ -45,6 +45,10 @@
         private $avatar_url;
 
         /**
+         * @ORM\Column(type="integer")
+         */
+        private $reputation;
+        /**
          * Get the value of id
          */ 
         public function getId()

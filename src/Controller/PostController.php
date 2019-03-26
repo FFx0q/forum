@@ -2,13 +2,9 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-
     use App\Base\Route;
-
-    use App\Entity\Topic;
+    use App\Entity\Question;
     use App\Entity\Post;
-
-
 
     class PostController extends Controller 
     {
@@ -17,7 +13,7 @@
             $em = $this->getManager();
             
             $user = $em->find('App\Entity\User', $uid);
-            $topic = $em->find('App\Entity\Topic', $tid);
+            $topic = $em->find('App\Entity\Question', $tid);
 
             $post = new Post();
             

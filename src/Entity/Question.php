@@ -8,7 +8,7 @@
     /**
      * @ORM\Entity
      */
-    class Topic 
+    class Question 
     {
         /**
          * @ORM\Id
@@ -22,11 +22,7 @@
          */
         
         private $author;
-        /**
-         * @ORM\ManyToOne(targetEntity="Forum")
-         */
-        private $forum;
-
+        
         /**
          * @ORM\Column(type="string")
          */

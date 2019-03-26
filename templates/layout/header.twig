@@ -1,22 +1,2 @@
-<header class="header">
-    <div style="display:flex; padding: 5px">
-        <a href="/index/index" class="site-title">phpBoard</a>
-        <ul class="user-nav">
-            {% if session.login is null %}
-                {% include 'layout/header_guest.twig' %}
-            {% else %}
-                {% include 'layout/header_user.twig' %}
-            {% endif %}   
-        </ul>
-    </div>
-    <nav>
-        <ul class="nav-menu">
-            <li>
-                <a href="/index">Home</a>                
-            </li>
-            <li>
-                <a href="/user/user">Users List</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<h1>phpBoard</h1>
+<a href="/topic/create" class="button">Ask a question</a>

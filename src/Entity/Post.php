@@ -21,9 +21,9 @@
         
         private $author;
         /**
-         * @ORM\ManyToOne(targetEntity="Topic")
+         * @ORM\ManyToOne(targetEntity="Question")
          */
-        private $topic;
+        private $question;
 
          /** 
           * @ORM\Column(type="string") 
@@ -34,6 +34,11 @@
          *  @ORM\Column(type="string")
          */
         private $post_date;
+        
+        /**
+         * @ORM\Column(type="integer")
+         */
+        private $votes;
 
         /**
          * Get the value of id
@@ -66,9 +71,9 @@
         /**
          * Get the value of topic
          */ 
-        public function getTopic()
+        public function getQuestion()
         {
-                return $this->topic;
+                return $this->question;
         }
 
         /**
@@ -76,9 +81,9 @@
          *
          * @return  self
          */ 
-        public function setTopic($topic)
+        public function setQuestion($question)
         {
-                $this->topic = $topic;
+                $this->question = $question;
 
                 return $this;
         }
