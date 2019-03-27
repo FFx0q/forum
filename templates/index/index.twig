@@ -1,22 +1,24 @@
 {% extends "base.twig" %}
 {% block content %}
-    <h1>Top Question</h1>
-    <div id="question_list">
-        {% for question in questions %}
-                <div class="question_row">
-                        <h4 class="question_title">
-                            <a href="/question/show/{{question.qid}}">{{question.title}}</a>
-                        </h4>
-                        <p class="question_answered">
-                            answered {{question.topic_date|date("F j \\a\\t g:i")}} {{question.username}} {{question.reputation}}
-                        </p>
-                        <div class="question_statitics">
-                            {{question.vote}} Votes 
-                            {{question.answers}} Answers
-                        </div>
-                </div>
-            {% else %}
-                No questions found 
-        {% endfor %}
+    <div class="main_bar">
+        <h1>Top Question</h1>
+        <div id="question_list">
+            {% for question in questions %}
+                    <div class="question_row">
+                            <h4 class="question_title">
+                                <a href="/question/show/{{question.qid}}">{{question.title}}</a>
+                            </h4>
+                            <p class="question_answered">
+                                answered {{question.topic_date|date("F j \\a\\t g:i")}} {{question.username}} {{question.reputation}}
+                            </p>
+                            <div class="question_statitics">
+                                {{question.vote}} Votes 
+                                {{question.answers}} Answers
+                            </div>
                     </div>
+                {% else %}
+                    No questions found 
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

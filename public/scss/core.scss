@@ -5,9 +5,8 @@ $font_color: #000;
 
 * 
 {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
+    margin: 0;
 }
 
 body 
@@ -24,22 +23,22 @@ body
 .flex-container 
 {
     display: flex;
+    padding: 0 15px;
+    margin: 0 auto;
+    position: relative;
 }
 .left-sidebar 
 {
-    width: 300px;
-    .nav-link 
+    width: calc(300px - 30px);
+    nav
     {
-        div
-        {
-            color: #ccc;
-            text-transform: uppercase;
-            padding: 15px 0;
-        }
+        display: flex;
+        flex-direction: column;
         li
         {
            list-style:none;
            padding: 10px 0;
+           width: 50%;
         }
     }
 }
@@ -62,35 +61,65 @@ body
         justify-content: center;
     }
 }
-.content
+#content
 {
+    max-width: 1100px;
     width: calc(100% - 300px);
     background: $background_conent;
-    #question_list
-    {
-        margin-left: 24px;
-        .question_row
+    .main_bar {
+        padding: 15px;
+        .question_header
+        {
+            border-bottom: 1px solid #ececec;
+        }
+        .user_info
         {
             display: flex;
             width: 100%;
             flex-flow: row wrap;
-            align-items: stretch;
-            justify-content: space-around;
-            padding: 12px 0;
-            .question_title
+            margin-bottom: 5px;
+            .post_date
             {
-                flex: 1 100%;
-                font-size: 15px;
+                color: #6a737c;
+                font-size: 12px;
             }
-            .question_answered
+            .user_avatar
             {
-                flex: 1;
-                color: #aaa;
-                font-size: 11px;
+                img 
+                {
+                    flex: 1;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 100px;
+                }
             }
-            .question_statitics
+        }
+        #question_list
+        {
+            margin-left: 24px;
+            .question_row
             {
-                flex: 1;
+                display: flex;
+                width: 100%;
+                flex-flow: row wrap;
+                align-items: stretch;
+                justify-content: space-around;
+                padding: 12px 0;
+                .question_title
+                {
+                    flex: 1 100%;
+                    font-size: 15px;
+                }
+                .question_answered
+                {
+                    flex: 1;
+                    color: #aaa;
+                    font-size: 11px;
+                }
+                .question_statitics
+                {
+                    flex: 1;
+                }
             }
         }
     }

@@ -1,60 +1,25 @@
 {% extends "base.twig" %}
 {% block content %}
-    <section class="content-area">
-        <header class="page-header">
-              <h1 class="page-title">{{posts.0.title}}</h1>
-        </header>
-        {% for post in posts %}
-            <article id="post-{{post.id}}" class="post">
-                <aside class="post-author">
-                <center>
-                    <div class="author-avatar">
-                        <img src="/uploads/avatars/avatar_1.png" />
+    <div class="main_bar">
+        <h1 class="question_header">{{posts.0.title}}</h1>
+        <div id="question">
+            <div class="user_info">
+                <div class="user_avatar"><img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48"></div>
+                <div class="post_detail">
+                    <span>{{posts.0.name}}</span>
+                    <div class="post_date">
+                        <span>asked {{posts.0.post_date|date('d/m/Y')}}</span>
                     </div>
-                </center>
-                    <div class="author-information">
-                        <span class="largetext">
-                            <a href="/user/profile/{{post.name}}">{{post.name}}</a>
-                        </span>
-                    </div>
-                    <div class="author-statistics">
-                        <div class="user-info">
-                            <i class="fas fa-comment"></i> Posts: 
-                            <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.posts}}</span>
-                        </div>
-                        <div class="user-info">
-                            <i class="fas fa-comments"></i> Topics:
-                            <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.topics}}</span>
-                        </div>
-                        <div class="user-info">
-                            <i class="fas fa-user"></i> Join date:
-                            <span style="color: #E1E1E1; float: right; font-weight: 800;">{{post.join_date|date("M/Y")}}</span>
-                        </div>
-                    </div>
-                </aside>
-                <section class="post-content">
-                    <header class="post-head">
-                        <div style="vertical-align: top; float: right;">
-                            <strong>
-                                <a href="#post-{{loop.index}}">#{{loop.index}}</a>
-                            </strong>
-                        </div>
-                        <span class="post-date">
-                            {{post.date|date('d/m/Y')}}
-                        </span>
-                    </header>
-                    <div class="post-body">
-                        {{post.post}}
-                    </div>
-            </article>
-        {% endfor %}
-        {% if permission.edit == 1 %}  
-            <section class="post-reply">
-                <form method="post" action="/newreply.php?tid={{posts.0.topic_id}}" id="postform">
-                    <textarea name="post" from="postform" class="float-right" required></textarea>
-                    <input type="submit" class="" value="Reply" required/>
-                </form>
-            </section>
-        {% endif %}
-    </section>
+                </div>
+            </div>
+            <div class="post">
+                {{posts.0.post}}
+            </div>
+        </div>
+        <div id="answers">
+            {% for post in posts %}
+                
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
