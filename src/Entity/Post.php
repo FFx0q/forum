@@ -127,5 +127,16 @@
 
                 return $this;
         }
+        public function getVotes($votes)
+        {
+                return $this->votes;
+        }
+
+        public function setVotes($votes)
+        {
+                $this->votes = $votes;
+
+                return $this;
+        }
 
     }

@@ -18,8 +18,25 @@
         </div>
         <div id="answers">
             {% for post in posts %}
-                
+                <div class="user_info">
+                    <div class="user_avatar"><img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48"></div>
+                    <div class="post_detail">
+                        <span>{{post.name}}</span>
+                        <div class="post_date">
+                            <span>asked {{post.post_date|date('d/m/Y')}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="post">
+                    {{post.post}}
+                </div>             
             {% endfor %}
         </div>
+        <section class="post-reply">
+            <form method="post" action="/newreply.php?tid={{posts.0.qid}}" id="postform">
+                <textarea name="post" from="postform" class="float-right" required></textarea>
+                <input type="submit" class="" value="Reply" required/>
+            </form>
+        </section>
     </div>
 {% endblock %}

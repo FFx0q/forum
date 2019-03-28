@@ -18,13 +18,14 @@
             $post = new Post();
             
             $post->setAuthor($user)
-                 ->setTopic($topic)
+                 ->setQuestion($topic)
                  ->setPost($content)
-                 ->setPostDate($date);
+                 ->setPostDate($date)
+                 ->setVotes(3);
 
             $em->persist($post);
             $em->flush();
             
-            Route::redirect('topic/show/'.$tid.'-topic');
+            Route::redirect('question/show/'.$tid);
         }
     }
