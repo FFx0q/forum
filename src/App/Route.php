@@ -1,5 +1,6 @@
 <?php 
     namespace App\Base;
+    
     class Route 
     {
         private $request;
