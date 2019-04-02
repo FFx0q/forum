@@ -5,7 +5,7 @@
     {
         private $controller = "home";
         private $action = "index";
-        private $params;
+        private $param;
 
         public function __construct(Request $request)
         {
@@ -13,7 +13,7 @@
             
             $this->controller = empty($parts[1]) ? "Home" : ucwords($parts[1]);
             $this->action = empty($parts[2]) ? "Index" : ucwords($parts[2]);
-            $this->param = empty($parts[3]) ? 0 : array_slice($parts, 3);
+            $this->param = empty($parts[3]) ? 0 : $parts[3];
         }
 
         public function getController()
@@ -26,8 +26,8 @@
             return $this->action;
         }
         
-        public function getParams()
+        public function getParam()
         {
-            return $this->params;
+            return $this->param;
         }
     }

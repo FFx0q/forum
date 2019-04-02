@@ -7,7 +7,7 @@
     $request = new App\Base\Request();
     $router = new App\Base\Router($request);
 
-    $c = "App\\Controller\\".$router->getController();
+    $c = "App\\Controller\\".$router->getController()."Controller";
     $controller = new $c();
     
     $action = $router->getAction()."Action";

@@ -5,7 +5,7 @@
     use App\Base\View;
     use App\Models\Question;
 
-    class Home extends Controller
+    class HomeController extends Controller
     {
         public function IndexAction() 
         {
