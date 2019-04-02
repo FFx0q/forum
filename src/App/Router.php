@@ -10,21 +10,10 @@
         public function __construct(Request $request)
         {
             $parts = explode('/', $request->getUrl());
-
-            if(count($parts))
-            {
-                if(isset($parts[1]))
-                {
-                    $this->controller = ucwords($parts[1]);
-
-                    if(isset($parts[2]))
-                    {
-                        $this->action = ucwords($parts[2]);
-                    }
-                    $this->params = array_slice($parts, 3);
-                }
-
-            }
+            
+            $this->controller = empty($parts[1]) ? "Home" : ucwords($parts[1]);
+            $this->action = empty($parts[2]) ? "Index" : ucwords($parts[2]);
+            $this->param = empty($parts[3]) ? 0 : array_slice($parts, 3);
         }
 
         public function getController()
