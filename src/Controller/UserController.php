@@ -2,29 +2,28 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-    use App\Entity\User;
-    use App\Base\Route;
+    use App\Base\View;
+    use App\Models\User;
     
     class UserController extends Controller
     {
-        public function user() 
+        public function ListAction() 
         {
-            $users = $this->getManager()->getRepository(User::class)->findAll();
-            $builder = $this->getManager()->createQueryBuilder();
-
-            $users = $builder
-                ->select('u.id, u.name')
-                ->addSelect('(SELECT count(p.id)
-                    FROM \App\Entity\Post p
-                    WHERE p.author = u.id) as posts
-                    ')
-                ->from('\App\Entity\User', 'u')
-                ->getQuery()
-                ->execute();
+            $users = User::getAllUsers();
             
-            return $this->render('user/user.twig', 
+            return View::render('user/list.twig', 
             [
-                'users'=>$users
+                'users' => isset($users) ? $users : 0
+            ]);
+        }
+
+        public function ProfileAction()
+        {
+            $user = User::getUserById($this->getRouter()->getParam());
+
+            return View::render('user/profile.twig',
+            [
+                'user' => isset($user) ? $user : 0
             ]);
         }
 
@@ -101,31 +100,5 @@
         {
             unset($_SESSION["login"]);
             Route::redirect("/index/index");
-        }
-        public function profile()
-        {
-            $route = $this->containerBuild()->get('App\Base\Route');
-
-            $id = explode('-', ltrim($route->getParam(), '-'))[0];
-            $builder = $this->getManager()->createQueryBuilder();
-
-            $user = $builder 
-            ->select('u.name, u.join_date, u.avatar_url, g.groupName')
-            ->addSelect('(SELECT count(p.id) 
-                FROM App\Entity\Post p
-                WHERE p.author = u.id) posts
-            ')
-            ->from('App\Entity\User', 'u')
-            ->join('App\Entity\Groups', 'g')
-            ->where('u.id = ?1')
-            ->andWhere('g.id = u.group')
-            ->setParameter(1, $id)
-            ->getQuery()
-            ->execute();
-
-            return $this->render('user/profile.twig',
-            [
-                'user' => $user
-            ]);
         }
     }

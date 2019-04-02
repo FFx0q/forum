@@ -11,7 +11,7 @@
         {
             $data = Question::getAllQuestion();
             
-            return View::render('home/home.twig',
+            return View::render('home/index.twig',
                 [
                     'questions' => $data
                 ]
