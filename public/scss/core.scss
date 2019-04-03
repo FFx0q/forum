@@ -152,5 +152,26 @@ body
             grid-gap: 10px;
             grid-template-columns: repeat(4, 1fr)
         }
+        .profile_header
+        {
+            display: flex;
+            .profile_avatar
+            {
+                img 
+                {
+                    width: 142px;
+                    height: 142px;
+                    border-radius: 50%;
+                }
+            }
+            .profile_detail
+            {
+                margin-left: 2%;
+            }
+        }
+        .profile_content
+        {
+            margin-top: 5%;
+        }
     }
 }

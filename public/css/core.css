@@ -121,5 +121,24 @@ body a {
 #content .main_bar #question_list .question_row .question_statitics {
   flex: 1;
 }
+#content .main_bar #user_list {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+}
+#content .main_bar .profile_header {
+  display: flex;
+}
+#content .main_bar .profile_header .profile_avatar img {
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
+}
+#content .main_bar .profile_header .profile_detail {
+  margin-left: 2%;
+}
+#content .main_bar .profile_content {
+  margin-top: 5%;
+}
 
 /*# sourceMappingURL=core.css.map */

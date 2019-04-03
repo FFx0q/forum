@@ -1,32 +1,17 @@
 {% extends 'base.twig' %}
 {% block content %}
-    {% for user in user %}
-        <section class="content-area">
-            <header>
-                <div class="profile-header">
-                   <div class="profile-photo Column">
-                        <img src="/uploads/avatars/{{user.avatar_url}}" class="userPhoto"/>
-                    </div>
-                    <div class="Column">
-                        <h1 class="profile-username"> {{user.name}} </h1>
-                        <span>{{user.groupName}}</span>
-                    </div>
-                </div>
-                <div class="profile-stats">
-                    <div>
-                        <h4>Posts</h4>
-                        {{user.posts}}
-                    </div>
-
-                    <div>
-                        <h4>Join date</h4>
-                        {{user.join_date|date}}
-                    </div>
-                </div>
-            </header>
-            <section class="profile-content">
-
-            </section>
-        </section>
-    {% endfor %}
+    <div class="main_bar">
+        <header class="profile_header">
+            <div class="profile_avatar">
+                <img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48">
+            </div>
+            <div class="profile_detail">
+                <h1>{{ user.0.name }}</h1>
+                <span>{{ user.join_date }}</span>
+            </div>
+        </header>
+        <div class="profile_content">
+            <h4>User content</h4>
+        </div>
+    </div>
 {% endblock %}
