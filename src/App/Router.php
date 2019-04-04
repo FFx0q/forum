@@ -30,4 +30,9 @@
         {
             return $this->param;
         }
+
+        public static function redirect($url)
+        {
+            header("Location: ".$url);
+        }
     }

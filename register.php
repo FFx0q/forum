@@ -6,7 +6,6 @@
 
 	$date = new DateTime();
 	$controller = new App\Controller\UserController();
-	$em = $controller->getManager();
 
 	if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
@@ -16,7 +15,7 @@
 			
 		if($controller->usernameExists($username) == FALSE)
 		{
-			$controller->create($username, $password, $email, $date->getTimestamp());
+			$controller->CreateAction(2, $username, $password, $email, $date->getTimestamp(), "avatar.jpg");
 		}
 	}
 

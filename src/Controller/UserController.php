@@ -4,6 +4,7 @@
     use App\Base\Controller;
     use App\Base\View;
     use App\Models\User;
+    use App\Base\Router;
     
     class UserController extends Controller
     {
@@ -27,37 +28,39 @@
             ]);
         }
 
-        public function create(
+        public function LoginAction()
+        {
+            $user = User::getOneUserBy('name', 'maCotsu');
+            return View::render('user/login.twig', [
+                'link' => '/login.php'
+            ]);      
+        }
+
+        public function RegisterAction()
+        {
+            return View::render('user/register.twig', [
+                'link' => '/register.php'
+            ]);
+        }
+
+        public function CreateAction(
+            $group_id,
             $username, 
             $password, 
             $email, 
-            $created, 
-            $default_group = 2, 
-            $avatar = "avatar_default.png"
+            $created,  
+            $avatar = "avatar_default.png",
+            $reputation = 0
         )
         {
-            $em = $this->getManager();
-
-            $user = new User();
-            $group = $em->find('App\Entity\Groups', $default_group);
-
-			$user->setName($username);
-			$user->setPassword($password);
-			$user->setEmail($email);
-            $user->setJoinDate($created);
-            $user->setAvatar_url($avatar);
-            $user->setGroup($group);
-			$em->persist($user);
-			$em->flush();
-
-			Route::redirect('index/index');
+            User::createNewUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
         }
 
         public function usernameExists($username)
         {
-            if($this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]))
+            if(User::getOneUserBy('name', $username))
             {
-                Route::redirect('user/register');
+                Router::redirect('user/register');
                 return true;
             }
             return false;
@@ -65,9 +68,9 @@
 
         public function userExists($username, $password)
         { 
-            $user = $this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]);
+            $user = User::getOneUserBy('name', $username);
 
-            if($user && password_verify($password, $user->getPassword()))
+            if($user && password_verify($password, $user[0]['member_password_hash']))
                 return true;
             else 
                 return false;
@@ -75,30 +78,15 @@
 
         public function logged($username)
         {
-            $id = $this->getManager()->getRepository(User::class)->findBy(['name'=> $username])[0]->getId();
+            $id = User::getOneUserBy('name', $username)[0]['id'];
+            $_SESSION['login'] = $id;
 
-            $_SESSION['login'] = $id.'-'.$username;
-
-            Route::redirect('index/index');
-        }
-
-        public function register()
-        {
-            return $this->render('user/register.twig', [
-                'link' => '/register.php'
-            ]);
-        }
-
-        public function login()
-        {
-            return $this->render('user/login.twig', [
-                'link' => '/login.php'
-            ]);      
+            Router::redirect('home/index');
         }
 
         public function logout()
         {
             unset($_SESSION["login"]);
-            Route::redirect("/index/index");
+            Router::redirect("home/index");
         }
     }
