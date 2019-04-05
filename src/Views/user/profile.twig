@@ -1,0 +1,17 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <div class="main_bar">
+        <header class="profile_header">
+            <div class="profile_avatar">
+                <img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48">
+            </div>
+            <div class="profile_detail">
+                <h1>{{ user.0.name }}</h1>
+                <span>{{ user.join_date }}</span>
+            </div>
+        </header>
+        <div class="profile_content">
+            <h4>User content</h4>
+        </div>
+    </div>
+{% endblock %}

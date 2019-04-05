@@ -12,5 +12,5 @@
     }
     else 
     {
-        \App\Base\Route::redirect('user/login');
+        \App\Base\Router::redirect('user/login');
     }

@@ -2,63 +2,71 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-    use App\Entity\User;
-    use App\Base\Route;
+    use App\Base\View;
+    use App\Models\User;
+    use App\Base\Router;
     
     class UserController extends Controller
     {
-        public function user() 
+        public function ListAction() 
         {
-            $users = $this->getManager()->getRepository(User::class)->findAll();
-            $builder = $this->getManager()->createQueryBuilder();
-
-            $users = $builder
-                ->select('u.id, u.name')
-                ->addSelect('(SELECT count(p.id)
-                    FROM \App\Entity\Post p
-                    WHERE p.author = u.id) as posts
-                    ')
-                ->from('\App\Entity\User', 'u')
-                ->getQuery()
-                ->execute();
+            $users = User::getAllUsers();
             
-            return $this->render('user/user.twig', 
+            return View::render('user/list.twig', 
             [
-                'users'=>$users
+                'users' => isset($users) ? $users : 0
             ]);
         }
 
-        public function create(
+        public function ProfileAction()
+        {
+            $user = User::getUserById($this->getRouter()->getParam());
+
+            return View::render('user/profile.twig',
+            [
+                'user' => isset($user) ? $user : 0
+            ]);
+        }
+
+        public function LoginAction()
+        {
+            $user = User::getOneUserBy('name', 'maCotsu');
+            return View::render('user/login.twig', [
+                'link' => '/login.php'
+            ]);      
+        }
+
+        public function RegisterAction()
+        {
+            return View::render('user/register.twig', [
+                'link' => '/register.php'
+            ]);
+        }
+
+        public function CreateAction(
+            $group_id,
             $username, 
             $password, 
             $email, 
-            $created, 
-            $default_group = 2, 
-            $avatar = "avatar_default.png"
+            $created,  
+            $avatar = "avatar_default.png",
+            $reputation = 0
         )
         {
-            $em = $this->getManager();
+            User::createNewUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
+        }
 
-            $user = new User();
-            $group = $em->find('App\Entity\Groups', $default_group);
-
-			$user->setName($username);
-			$user->setPassword($password);
-			$user->setEmail($email);
-            $user->setJoinDate($created);
-            $user->setAvatar_url($avatar);
-            $user->setGroup($group);
-			$em->persist($user);
-			$em->flush();
-
-			Route::redirect('index/index');
+        public function LogoutAction()
+        {
+            unset($_SESSION["login"]);
+            Router::redirect("/home/index");
         }
 
         public function usernameExists($username)
         {
-            if($this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]))
+            if(User::getOneUserBy('name', $username))
             {
-                Route::redirect('user/register');
+                Router::redirect('user/register');
                 return true;
             }
             return false;
@@ -66,9 +74,9 @@
 
         public function userExists($username, $password)
         { 
-            $user = $this->getManager()->getRepository('App\Entity\User')->findOneBy(['name' => $username]);
+            $user = User::getOneUserBy('name', $username);
 
-            if($user && password_verify($password, $user->getPassword()))
+            if($user && password_verify($password, $user[0]['member_password_hash']))
                 return true;
             else 
                 return false;
@@ -76,56 +84,9 @@
 
         public function logged($username)
         {
-            $id = $this->getManager()->getRepository(User::class)->findBy(['name'=> $username])[0]->getId();
+            $id = User::getOneUserBy('name', $username)[0]['id'];
+            $_SESSION['login'] = $id;
 
-            $_SESSION['login'] = $id.'-'.$username;
-
-            Route::redirect('index/index');
-        }
-
-        public function register()
-        {
-            return $this->render('user/register.twig', [
-                'link' => '/register.php'
-            ]);
-        }
-
-        public function login()
-        {
-            return $this->render('user/login.twig', [
-                'link' => '/login.php'
-            ]);      
-        }
-
-        public function logout()
-        {
-            unset($_SESSION["login"]);
-            Route::redirect("/index/index");
-        }
-        public function profile()
-        {
-            $route = $this->containerBuild()->get('App\Base\Route');
-
-            $id = explode('-', ltrim($route->getParam(), '-'))[0];
-            $builder = $this->getManager()->createQueryBuilder();
-
-            $user = $builder 
-            ->select('u.name, u.join_date, u.avatar_url, g.groupName')
-            ->addSelect('(SELECT count(p.id) 
-                FROM App\Entity\Post p
-                WHERE p.author = u.id) posts
-            ')
-            ->from('App\Entity\User', 'u')
-            ->join('App\Entity\Groups', 'g')
-            ->where('u.id = ?1')
-            ->andWhere('g.id = u.group')
-            ->setParameter(1, $id)
-            ->getQuery()
-            ->execute();
-
-            return $this->render('user/profile.twig',
-            [
-                'user' => $user
-            ]);
+            Router::redirect('home/index');
         }
     }

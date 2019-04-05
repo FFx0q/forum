@@ -2,7 +2,6 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-
     use App\Entity\User;
     use App\Base\Route;
 

@@ -16,7 +16,7 @@
 
         public function getTemplateDir()
         {
-            return $this->getRootDir().'/templates';
+            return $this->getRootDir().'/Views';
         }
 
         public function getCacheDir()
