@@ -1,1 +1,10 @@
-<h1>phpBoard</h1>
+<div class="brand">
+    <h3>phpBoard</h3>
+</div>
+<div class="header_section">
+    {% if session.login is null %}
+        {% include "layout/header_guest.twig" %}
+    {% else %}
+        {% include "layout/header_user.twig" %}
+    {% endif %}
+</div>

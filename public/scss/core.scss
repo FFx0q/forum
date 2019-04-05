@@ -48,17 +48,12 @@ body
     display: flex;
     align-items: center;
     border-bottom: 1px solid #ececec;
-    .button 
-    {
-        display: flex;
-        color: #fff;
-        text-decoration: none;
-        background: $button_color;
-        width: 150px;
-        height: 45px;
-        border-radius: 10px;
-        align-items: center;
-        justify-content: center;
+    width: 1002px;
+    margin: 0 auto;
+    min-height: 45px;
+    justify-content: space-between;
+    .header_section{
+        justify-content: baseline;
     }
 }
 #content
@@ -93,10 +88,10 @@ body
             {
                 img 
                 {
-                    flex: 1;
+                    flex: 1px;
                     width: 40px;
                     height: 40px;
-                    border-radius: 100px;
+                    border-radius: 50%;
                 }
             }
         }
@@ -174,4 +169,18 @@ body
             margin-top: 5%;
         }
     }
+}
+
+.userTinyPhoto 
+{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.userLargePhoto
+{
+    width: 142px;
+    height: 142px;
+    border-radius: 50%;
 }

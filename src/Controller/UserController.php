@@ -56,6 +56,12 @@
             User::createNewUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
         }
 
+        public function LogoutAction()
+        {
+            unset($_SESSION["login"]);
+            Router::redirect("/home/index");
+        }
+
         public function usernameExists($username)
         {
             if(User::getOneUserBy('name', $username))
@@ -82,11 +88,5 @@
             $_SESSION['login'] = $id;
 
             Router::redirect('home/index');
-        }
-
-        public function logout()
-        {
-            unset($_SESSION["login"]);
-            Router::redirect("home/index");
         }
     }

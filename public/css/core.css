@@ -38,17 +38,13 @@ body a {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #ececec;
+  width: 1002px;
+  margin: 0 auto;
+  min-height: 45px;
+  justify-content: space-between;
 }
-.header .button {
-  display: flex;
-  color: #fff;
-  text-decoration: none;
-  background: #004e89;
-  width: 150px;
-  height: 45px;
-  border-radius: 10px;
-  align-items: center;
-  justify-content: center;
+.header .header_section {
+  justify-content: baseline;
 }
 
 #content {
@@ -78,10 +74,10 @@ body a {
   font-size: 12px;
 }
 #content .main_bar .user_info .user_avatar img {
-  flex: 1;
+  flex: 1px;
   width: 40px;
   height: 40px;
-  border-radius: 100px;
+  border-radius: 50%;
 }
 #content .main_bar .post-reply {
   margin-top: 15px;
@@ -139,6 +135,18 @@ body a {
 }
 #content .main_bar .profile_content {
   margin-top: 5%;
+}
+
+.userTinyPhoto {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.userLargePhoto {
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=core.css.map */

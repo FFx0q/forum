@@ -1,10 +1,4 @@
-<li class="user-link">
-    <div class="user-menu">
-        <span>{{session.login|split('-')[1]}}</span> <i class="fa fa-caret-down"></i>
-        <div class="dropdown-content">
-            <a href="/user/profile/{{session.login|split('-')[0]}}">Profile</a>
-            <a href="/settings/overview">Settings</a>
-            <a href="/user/logout">Logout</a>
-        </div>
-    </div>
-</li>
+<a href="/user/profile/{{session.login}}">
+    <img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48" class="userTinyPhoto"/>
+</a>
+<a href="/user/logout">Logout</a>
