@@ -1,38 +1,28 @@
 {% extends "base.twig" %}
 {% block content %}
-    <div class="main_bar">
-        <h1 class="question_header">{{posts.0.title}}</h1>
-        <div id="question">
-            <div class="user_info">
-                <div class="user_avatar"><img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48"></div>
-                <div class="post_detail">
-                    <span>{{posts.0.name}}</span>
-                    <div class="post_date">
-                        <span>asked {{posts.0.post_date|date('d/m/Y')}}</span>
-                    </div>
+    <h1 class="post__header">{{posts.0.title}}</h1>
+    {% for post in posts %}
+        <div class="post">
+            <div class="post__author">
+                <div class="post__author_avatar">
+                    <img src="{{post.avatar_url}}" alt="{{post.name}}" class="user__photo_tiny" />
+                </div>
+                <div class="post__author_information">
+                        <strong>{{post.name}}</strong>
+                        <span>{{post.reputation}}</span>
                 </div>
             </div>
-            <div class="post">
-                {{posts.0.post}}
-            </div>
-        </div>
-        <div id="answers">
-            {% for post in posts %}
-                <div class="user_info">
-                    <div class="user_avatar"><img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48"></div>
-                    <div class="post_detail">
-                        <span>{{post.name}}</span>
-                        <div class="post_date">
-                            <span>asked {{post.post_date|date('d/m/Y')}}</span>
-                        </div>
-                    </div>
+            <div class="post__content">
+                <div class="post__content_head">
+                    {{post.post_date|date('d/m/Y')}}
                 </div>
-                <div class="post">
+                <div class="post__content_body">
                     {{post.post}}
-                </div>             
-            {% endfor %}
+                </div>
+            </div>
         </div>
-        <section class="post-reply">
+    {% endfor %}
+        <section class="post__reply">
             <form method="post" action="/newreply.php?tid={{posts.0.qid}}" id="postform">
                 <textarea name="post" from="postform" class="float-right" required></textarea>
                 <input type="submit" class="" value="Reply" required/>

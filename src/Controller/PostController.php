@@ -26,6 +26,6 @@
             $em->persist($post);
             $em->flush();
             
-            Route::redirect('question/show/'.$tid);
+            Route::redirect('/question/show/'.$tid);
         }
     }
