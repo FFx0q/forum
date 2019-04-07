@@ -6,7 +6,7 @@
 
     class Model
     {
-        protected static function getInstance()
+        public static function getInstance()
         {
             $db = null;
 

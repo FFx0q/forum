@@ -177,6 +177,26 @@ body {
 
 }
 
+.form
+{
+	display: flex;
+	flex-direction: column;
+	label
+	{
+		margin-top: 18px;
+		margin-bottom: 6px;
+		font-size: 13px;
+	}
+	input 
+	{
+		padding: 8px 10px;
+		font-size: 14px;
+		border: 1px solid #c8ccd0;
+		background: $body-color;
+		width: 25%;
+
+	}
+}
 .user__photo 
 {
     border-radius: $avatar-radius;

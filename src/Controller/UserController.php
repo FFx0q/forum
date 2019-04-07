@@ -22,9 +22,12 @@
         {
             $user = User::getUserById($this->getRouter()->getParam());
 
+            if(empty($user))
+                Router::redirect('/home/index');
+                
             return View::render('user/profile.twig',
             [
-                'user' => isset($user) ? $user : 0
+                'user' => $user
             ]);
         }
 
@@ -87,6 +90,6 @@
             $id = User::getOneUserBy('name', $username)[0]['id'];
             $_SESSION['login'] = $id;
 
-            Router::redirect('home/index');
+            Router::redirect('/home/index');
         }
     }
