@@ -181,13 +181,14 @@ body {
 {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	label
 	{
 		margin-top: 18px;
 		margin-bottom: 6px;
 		font-size: 13px;
 	}
-	input 
+	.form__input 
 	{
 		margin-top: 5px;
 		padding: 8px 10px;

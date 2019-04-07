@@ -1,24 +1,19 @@
 {% extends 'base.twig' %}
 {% block content %}
 <form method="POST" action="{{ link }}" class="form">
-		<div class="input-wrap">
-		<label for="username">Username</label>
+		<label>Username</label>
 		<input type="text" 
-			   class="input" 
-			   id="username" 
-			   name="loginName" 
-		       placeholder="Username"
+			class="form__input"
+			name="loginName" 
+		    placeholder="Username"
 		/>
-	</div>
-    <div class="input-wrap">
-		<label for="password">Password</label>
+
+		<label>Password</label>
 		<input type="password" 
-			   class="input" 
-			   id="password" 
-               name="loginPass" 
-		       placeholder="Password"
+			class="form__input"
+            name="loginPass" 
+		    placeholder="Password"
 		/>
-	</div>
     <input type="submit" value="Sign in" />
 </form>
 {% endblock %}

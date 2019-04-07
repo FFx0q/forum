@@ -3,15 +3,15 @@
     <div class="setting__wrapper">
         <form method="post" action="/settings.php?uid={{data.0.id}}" class="form">
             <label> Email Address </label>
-            <input name="email" type="email" value="{{data.0.email}}" />
+            <input name="email" type="email" value="{{data.0.email}}" class="form__input" />
 
             <label> Display name </label>
-            <input name="display_name" type="text" value="{{data.0.name }}" />
+            <input name="display_name" type="text" value="{{data.0.name }}" class="form__input"/>
 
             <label> Password </label>
-            <input name="password" type="password" />
+            <input name="password" type="password" class="form__input" />
             
-            <input type="submit" value="Save" />
+            <input type="submit" value="Save" class="form__input" />
         </form>
     </div>
 {% endblock %}
