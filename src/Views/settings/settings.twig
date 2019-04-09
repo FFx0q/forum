@@ -1,20 +1,17 @@
 {% extends "base.twig" %}
 {% block content %}
-    <section class="forum">
-        <header class="page-header">
-            <h1 class="page-title">Settings</h1>
-        </header>
-        <div style="background: #1a1d24;" class="Columns">
-            <aside class="Column"  style="width: 280px;">
-                <ul class="menu_list">
-                    <li><a href="/settings/overview" class="menu_item">Overview</a></li>
-                    <li><a href="/settings/email" class="menu_item">Email</a></li>
-                    <li><a href="/settings/password" class="menu_item">Password</a></li>
-                </ul>
-            </aside>
-            <section class="Column"> 
-                {% block settings %}{% endblock %}
-            </section>
-        </div>
-    </section>
+    <div class="setting__wrapper">
+        <form method="post" action="/settings.php?uid={{data.0.id}}" class="form">
+            <label> Email Address </label>
+            <input name="email" type="email" value="{{data.0.email}}" class="form__input" aria-label="Email address"/>
+
+            <label> Display name </label>
+            <input name="display_name" type="text" value="{{data.0.name }}" class="form__input" aria-label="Name" />
+
+            <label> Password </label>
+            <input name="password" type="password" class="form__input" aria-label="Password"/>
+            
+            <input type="submit" value="Save" class="form__input" aria-label="Save" />
+        </form>
+    </div>
 {% endblock %}

@@ -1,16 +1,17 @@
 {% extends 'base.twig' %}
 {% block content %}
-    <div class="main_bar">
-        <header class="profile_header">
-            <div class="profile_avatar">
-                <img src="https://lh3.googleusercontent.com/-VPkhip3osug/AAAAAAAAAAI/AAAAAAAAAHc/w2Ae1JmeUMo/photo.jpg?sz=48">
+    <div class="profile">
+        <header class="profile__header">
+            <div class="profile__header_avatar">
+                <img src="/uploads/avatars/{{user.0.avatar_url}}" alt="{{user.0.name}}" class="user__photo user__photo_large">
             </div>
-            <div class="profile_detail">
+            <div class="profile__user_detail">
                 <h1>{{ user.0.name }}</h1>
-                <span>{{ user.join_date }}</span>
+                <p>Reputation: {{ user.0.reputation }}</p>
+                <p>Join date: {{ user.0.join_date|date('d/m/Y')}}</p>
             </div>
         </header>
-        <div class="profile_content">
+        <div class="profile__content">
             <h4>User content</h4>
         </div>
     </div>
