@@ -2,30 +2,14 @@
     namespace App\Controller;
 
     use App\Base\Controller;
-    use App\Base\Route;
-    use App\Entity\Question;
-    use App\Entity\Post;
+    use App\Base\Router;
+    use App\Models\Post;
 
     class PostController extends Controller 
     {
-        public function create($uid, $tid, $content, $date)
+        public function create($uid, $qid, $content, $date, $votes = 0)
         {
-            $em = $this->getManager();
-            
-            $user = $em->find('App\Entity\User', $uid);
-            $topic = $em->find('App\Entity\Question', $tid);
-
-            $post = new Post();
-            
-            $post->setAuthor($user)
-                 ->setQuestion($topic)
-                 ->setPost($content)
-                 ->setPostDate($date)
-                 ->setVotes(3);
-
-            $em->persist($post);
-            $em->flush();
-            
-            Route::redirect('/question/show/'.$tid);
+            Post::createNewPost($uid, $qid, $content, $date, $votes);
+            Router::redirect('/question/show/'.$qid);
         }
     }

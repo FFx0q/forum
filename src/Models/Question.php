@@ -37,4 +37,17 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
             
         }
+
+        public function createNewQuestion(
+            $uid,
+            $title,
+            $date
+        )
+        {
+            $db = static::getInstance();
+
+            $sql = "INSERT INTO Question (author_id, title, topic_date) VALUES(?, ?, ?)";
+            $db->prepare($sql)->execute([$uid, $title, $date]);
+            return $db->lastInsertId();
+        }
     }

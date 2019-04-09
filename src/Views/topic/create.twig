@@ -1,0 +1,13 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <form action="/newthread.php" method="post" class="form">
+        <section class="post__reply">
+            <h2>Title</h2>
+            <input type="text" name="title" class="form__input" aria-label="Title" required/>
+
+            <textarea name="post" from="postform" aria-label="Post content" required></textarea>
+            <input type="submit" class="form__input" value="Create new question" aria-label="Create new question"/>
+        </section>
+    </form>
+{% endblock %}
