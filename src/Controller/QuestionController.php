@@ -6,6 +6,7 @@
     use App\Base\Router;
     use App\Base\Request;
     use App\Models\Question;
+    use App\Models\Post;
     
     
     class QuestionController extends Controller
@@ -18,5 +19,18 @@
             [
                 'posts' => $posts
             ]);
+        }
+
+        public function CreateAction()
+        {
+            return View::render('topic/create.twig');
+        }
+
+        public function create($uid, $title, $content, $date)
+        {
+            $qid = Question::createNewQuestion($uid, $title, $date);
+            Post::createNewPost($uid, $qid, $content, $date);
+
+            Router::redirect("/question/show/".$qid);
         }
     }
