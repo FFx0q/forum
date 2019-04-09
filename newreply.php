@@ -6,15 +6,13 @@
 
     $date = new DateTime();
 	$controller = new App\Controller\PostController();
-    $em = $controller->getManager();
     
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $post = isset($_POST['post']) ? $_POST['post'] : " ";
-        $tid = isset($_GET['tid']) ? $_GET['tid'] : " ";
-        $uid = isset($_SESSION['login']) ? (int)explode('-', $_SESSION['login'])[0] : " ";
-
+        $qid = isset($_GET['qid']) ? $_GET['qid'] : " ";
+        $uid = isset($_SESSION['login']) ? (int)$_SESSION['login'] : " ";
         $data = $date->getTimestamp();
-        
-        $controller->create($uid, $tid, $post, $data);
+
+        $controller->create($uid, $qid, $post, $data, 0);
     }

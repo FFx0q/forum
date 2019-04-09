@@ -23,7 +23,7 @@
         </div>
     {% endfor %}
         <section class="post__reply">
-            <form method="post" action="/newreply.php?tid={{posts.0.qid}}" id="postform">
+            <form method="post" action="/newreply.php?qid={{posts.0.question_id}}" id="postform">
                 <textarea name="post" from="postform" class="float-right" required></textarea>
                 <input type="submit" class="" value="Reply" required/>
             </form>

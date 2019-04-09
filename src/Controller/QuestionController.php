@@ -14,7 +14,6 @@
         public function ShowAction()
         {
             $posts = Question::getQuestionById($this->getRouter()->getParam());
-
             return View::render('topic/post.twig',
             [
                 'posts' => $posts
