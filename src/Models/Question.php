@@ -25,12 +25,11 @@
             $db = static::getInstance();
 
             $stmt = $db
-                ->prepare('SELECT p.post, p.post_date, p.question_id qid, q.title, u.name
-                         FROM Post p
-                         JOIN Question q
-                         JOIN User u
-                         ON p.question_id = q.id
-                         WHERE q.id = :id
+                ->prepare('SELECT * FROM Post p
+                    JOIN User u
+                    JOIN Question q
+                    ON p.question_id = q.id
+                    WHERE q.id = :id
                 ');
 
             $stmt->bindParam(':id', $id);
