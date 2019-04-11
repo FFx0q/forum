@@ -6,6 +6,18 @@
 
     class Post extends Model
     {
+        public function getAllPosts()
+        {
+            $db = static::getInstance();
+
+            $stmt = $db->prepare('
+                SELECT *
+                FROM Post
+            ');
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         public function createNewPost($uid, $qid, $content, $date, $votes = 0)
         {
             $db = static::getInstance();
