@@ -21,4 +21,12 @@
                 'data' => $data
             ]);
         }
+        public function UsersAction()
+        {
+            $users = User::getAllUsers();
+
+            View::render('admin/user_list.twig',[
+                'users' => $users
+            ]);
+        }
     }

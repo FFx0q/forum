@@ -1,0 +1,31 @@
+{% extends "admin/base_admin.twig" %}
+{% block content %}
+    <div class="container-fluid">
+        <table class="table table-borderless">
+            <thead class="thead-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Joined</th>
+                    <th>Group</th>
+                    <th>Tools</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.join_date|date('m/y')}}</td>
+                    <td>{{user.group_id}}</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <a href="#"><i class="fas fa-user-minus"></i></a>
+                            <a href="#"><i class="fas fa-user-edit"></i><a/>
+                        </ul>
+                    </td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
