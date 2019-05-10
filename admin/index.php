@@ -17,28 +17,44 @@
         $stmt[$i]->execute();
         $result[$i] = $stmt[$i]->fetch(PDO::FETCH_ASSOC);
     }
-
 ?>
-
-<div id="content">
-    <div class="row justify-content-center">
-        <div class="card col-sm-3 text-center w-25">
-            <div class="card-body">
-                <h5 class="card-title">Posts</h5>
-                <p class="card-text"><?php echo $result[0]['p'] ?></p>
-            </div>
-        </div>
-        <div class="card col-sm-43 text-center w-25">
-            <div class="card-body">
-                <h5 class="card-title">Questions</h5>
-                <p class="card-text"><?php echo $result[2]['q'] ?></p>
-            </div>
-        </div>
-        <div class="card col-sm-3 text-center w-25">
-            <div class="card-body">
-                <h5 class="card-title">Users</h5>
-                <p class="card-text"><?php echo $result[1]['u'] ?></p>
+<div class="row">
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">group</i>
+                </div>
+                <p class="card-category">Users</p>
+                <h3 class="card-title"><?= $result[1]['u'] ?></h3>
             </div>
         </div>
     </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">forum</i>
+                </div>
+                <p class="card-category">Qesution</p>
+                <h3 class="card-title"><?= $result[2]['q'] ?></h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons">comment</i>
+                </div>
+                <p class="card-category">Post</p>
+                <h3 class="card-title"><?= $result[0]['p'] ?></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <?php require_once ("template/footer.php"); ?>
+</footer>
 </div>

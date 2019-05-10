@@ -11,19 +11,54 @@
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $u = $result['join_date'];
+    $date = new DateTime("@$u");
 ?>
 
-<div id="content">
-    <?php include "form/edit_form.php" ?>
-</div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Edit Profile</h4>
+                </div>
+                <div class="card-body">
+                    <?php include "form/edit_form.php" ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-avatar">
+                    <img class="img" src="/uploads/avatars/<?= $result['avatar_url']?>" />
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title"><?= $result['name'] ?></h4>
+                    <p class="card-description">
+                        Joined: <?= $date->format('Y-m-d') ?>
+                        <br /> Reputation: <?= $result['reputation'] ?>
+                        <br /> Warning: <?= $result['warnings'] ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
-    if(!empty($_POST['username']) AND !empty($_POST['email']) AND !empty($_POST['reputation'])) {
-        $name = htmlspecialchars($_POST['username']);
-        $email = htmlspecialchars($_POST['email']);
-        $reputatin = intval($_POST['reputation']);
+    $dir = "/uploads/avatars/";
+    $file = $dir.$result['id']."_avatar";
+    $type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
-        $sql = "UPDATE User SET name = '$name', email='$email', reputation='$reputatin' WHERE id = $id";
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = htmlspecialchars($_POST['username']);
+        $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+        $email = htmlspecialchars($_POST['email']);
+        $reputation = intval($_POST['reputation']);
+        $warnings = intval($_POST['warnings']);
+
+        $sql = "UPDATE User 
+            SET name = '$name',email='$email', reputation='$reputation', warnings='$warnings' 
+            WHERE id = $id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(); 
     }

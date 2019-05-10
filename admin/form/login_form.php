@@ -1,11 +1,4 @@
-<form class="form row justify-content-center" method="post">
-    <div class="form-group">
-         <input type="text" name="username"  class="form-control" placeholder="username..." />
-    </div>
-    <div class="form-group">
-         <input type="password" name="password"  class="form-control" placeholder="password..." />
-    </div>
-    <div class="form-group">
-        <input type="submit" class="btn btn-warning" value="Login" />
-    </div>
-</form>
+<h2 class="form-signin-header">phpBoard</h2>
+<input type="text" class="form-control" name="username" placeholder="Username..." required="" autofus="" />
+<input type="password" class="form-control" name="password" placeholder="Password..." required="" />
+<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
