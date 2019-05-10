@@ -60,4 +60,13 @@
             $sql = "INSERT INTO User (group_id, `name`, member_password_hash, email, join_date, avatar_url, reputation) VALUES(?, ?, ?, ?, ?, ?, ?)";
             return $db->prepare($sql)->execute([$group_id, $username, $password, $email, $created, $avatar, $reputation]);
         }
+
+        public function deleteUserById($id)
+        {
+            $db = static::getInstance();
+
+            $sql = "DELETE FROM User WHERE id = ?";
+            return $db->prepare($sql)->execute([$id]);
+
+        }
     }
