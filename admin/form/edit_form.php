@@ -41,7 +41,7 @@
     </div>
     <div class="row">
         <div class="col-md-11">
-                <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+                <input type="file" name="myfile" class="form-control">
         </div>
     </div>
     <button type="submit" class="btn btn-primary pull-right">Update Profile</button>

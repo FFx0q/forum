@@ -45,10 +45,6 @@
     </div>
 
 <?php
-    $dir = "/uploads/avatars/";
-    $file = $dir.$result['id']."_avatar";
-    $type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = htmlspecialchars($_POST['username']);
         $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
@@ -59,7 +55,7 @@
         $sql = "UPDATE User 
             SET name = '$name',email='$email', reputation='$reputation', warnings='$warnings' 
             WHERE id = $id";
+
         $stmt = $pdo->prepare($sql);
         $stmt->execute(); 
     }
-?>
