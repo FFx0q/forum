@@ -1,19 +1,18 @@
 {% extends 'base.twig' %}
 {% block content %}
-<form method="POST" action="{{ link }}" class="form">
-		<label>Username</label>
+	<form method="POST" action="/login/login" class="form">
 		<input type="text" 
 			class="form__input"
 			name="loginName" 
 		    placeholder="Username"
 		/>
 
-		<label>Password</label>
 		<input type="password" 
 			class="form__input"
             name="loginPass" 
 		    placeholder="Password"
 		/>
-    <input type="submit" value="Log in" aria-label="Log in"/>
-</form>
+    	<input type="submit" value="Log in" aria-label="Log in"/>
+		<span>Looking to <a href="/register/">create an account</a> ?</span>
+	</form>
 {% endblock %}

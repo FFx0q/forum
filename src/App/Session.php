@@ -1,5 +1,5 @@
 <?php
-
+    namespace App\Base;
 
     class Session
     {
@@ -18,7 +18,7 @@
         public static function get($key)
         {
             if (isset($_SESSION[$key])) {
-                return $_SERVER[$key];
+                return $_SESSION[$key];
             }
         }
 
@@ -26,10 +26,4 @@
         {
             session_destroy();
         }
-
-        public static function isUserLoggedIn() 
-        {
-            return (self::get('user_logged_in') ? true : false);
-        }
-
     }

@@ -10,7 +10,6 @@
         public function IndexAction() 
         {
             $data = Question::getAllQuestion();
-            
             return View::render('home/index.twig',
                 [
                     'questions' => $data
