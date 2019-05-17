@@ -12,8 +12,8 @@
 
             if($db == null)
             {
-                $con = 'mysql:host='.Config::get('database/dbhost').';dbname='.Config::get('database/dbname').';charset=utf8';
-                $db = new PDO($con, Config::get('database/dbuser'), Config::get('database/dbpass'));
+                $con = 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';charset=utf8';
+                $db = new PDO($con, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
                 
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
