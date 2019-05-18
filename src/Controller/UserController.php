@@ -31,21 +31,6 @@
             ]);
         }
 
-        public function LoginAction()
-        {
-            $user = User::getOneUserBy('name', 'maCotsu');
-            return View::render('user/login.twig', [
-                'link' => '/login.php'
-            ]);      
-        }
-
-        public function RegisterAction()
-        {
-            return View::render('user/register.twig', [
-                'link' => '/register.php'
-            ]);
-        }
-
         public function CreateAction(
             $group_id,
             $username, 
@@ -57,39 +42,5 @@
         )
         {
             User::createNewUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
-        }
-
-        public function LogoutAction()
-        {
-            unset($_SESSION["login"]);
-            Router::redirect("/home/index");
-        }
-
-        public function usernameExists($username)
-        {
-            if(User::getOneUserBy('name', $username))
-            {
-                Router::redirect('user/register');
-                return true;
-            }
-            return false;
-        }
-
-        public function userExists($username, $password)
-        { 
-            $user = User::getOneUserBy('name', $username);
-
-            if($user && password_verify($password, $user[0]['member_password_hash']))
-                return true;
-            else 
-                return false;
-        }
-
-        public function logged($username)
-        {
-            $id = User::getOneUserBy('name', $username)[0]['id'];
-            $_SESSION['login'] = $id;
-
-            Router::redirect('/home/index');
         }
     }
