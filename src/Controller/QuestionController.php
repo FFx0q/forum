@@ -5,6 +5,7 @@
     use App\Base\View;
     use App\Base\Router;
     use App\Base\Request;
+    use App\Base\Session;
     use App\Models\Question;
     use App\Models\Post;
     
@@ -13,7 +14,9 @@
     {
         public function ShowAction()
         {
-            $posts = Question::getQuestionById($this->getRouter()->getParam());
+            $question = new Question();
+            $posts = $question->findQuestionById($this->getRouter()->getParam());
+
             return View::render('topic/post.twig',
             [
                 'posts' => $posts
@@ -25,11 +28,20 @@
             return View::render('topic/create.twig');
         }
 
-        public function create($uid, $title, $content, $date)
+        public function SaveAction()
         {
-            $qid = Question::createNewQuestion($uid, $title, $date);
-            Post::createNewPost($uid, $qid, $content, $date);
+            $question = new Question();
+            $post = new Post();
+            $date = new \DateTime();
 
-            Router::redirect("/question/show/".$qid);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $uid = (int)Session::get('user_id');
+                $title = isset($_POST['title']) ? trim(htmlspecialchars($_POST['title'])) : " ";
+                $content = isset($_POST['post']) ? trim(htmlspecialchars($_POST['post'])) : " ";
+                $qid = $question->save($uid, $title, $date->getTimestamp());
+                $post->save($uid, $qid, $content, $date->getTimestamp());
+
+                Router::redirect("/question/show/".$qid);
+            }
         }
     }

@@ -9,7 +9,9 @@
     {
         public function IndexAction() 
         {
-            $data = Question::getAllQuestion();
+            $model = new Question();
+
+            $data = $model->getAllQuestion();
             return View::render('home/index.twig',
                 [
                     'questions' => $data

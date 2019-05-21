@@ -6,10 +6,9 @@
 
     class Question extends Model
     {
-        public static function getAllQuestion()
+        public function getAllQuestion()
         {
-            $db = static::getInstance();
-            $stmt = $db->query('SELECT q.id as qid, title, topic_date, 
+            $stmt = $this->getDb()->query('SELECT q.id as qid, title, topic_date, 
                                 count(p.id) as answers ,p.votes as vote, u.name, u.reputation
                                 FROM Question q
                                 JOIN Post p 
@@ -20,15 +19,17 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public static function getQuestionById($id)
+        /*
+         * Return all posts for question
+         */
+        public function findQuestionById($id)
         {
-            $db = static::getInstance();
-
-            $stmt = $db
-                ->prepare('SELECT * FROM Post p
+            $stmt = $this->getDb()
+                ->prepare('SELECT * 
+                    FROM Post p
                     JOIN User u
                     JOIN Question q
-                    ON p.question_id = q.id
+                    ON p.question_id = q.id AND u.id = p.author_id
                     WHERE q.id = :id
                 ');
 
@@ -38,16 +39,15 @@
             
         }
 
-        public function createNewQuestion(
+        public function save(
             $uid,
             $title,
             $date
         )
         {
-            $db = static::getInstance();
 
             $sql = "INSERT INTO Question (author_id, title, topic_date) VALUES(?, ?, ?)";
-            $db->prepare($sql)->execute([$uid, $title, $date]);
-            return $db->lastInsertId();
+            $this->getDb()->prepare($sql)->execute([$uid, $title, $date]);
+            return $this->getDb()->lastInsertId();
         }
     }

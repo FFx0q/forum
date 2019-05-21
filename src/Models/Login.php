@@ -1,5 +1,4 @@
 <?php
-    
     namespace App\Models;
 
     use App\Base\Model;
@@ -11,12 +10,12 @@
     {
         public static function login($username, $password)
         {
-            $data = User::getOneUserBy('name', $username)[0];
-            var_dump($data);
-
+            $user = new User();
+            $data = $user->findOneBy('User', ['name' => $username]);
+            
             if ($data) {
                 if (password_verify($password, $data['member_password_hash'])) {
-                    self::setLoginIntoSession($data['id'], $username);
+                    self::setLoginIntoSession($data['id'], $username, $data['avatar_url']);
                 } else {
                     return false;
                 }
@@ -26,7 +25,7 @@
             return true;
         }
 
-        public static function setLoginIntoSession($id, $username)
+        public static function setLoginIntoSession($id, $username, $avatar)
         {
             Session::init();
             session_regenerate_id(true);
@@ -34,6 +33,7 @@
 
             Session::set('user_id', $id);
             Session::set('user_name', $username);
+            Session::set('user_avatar', $avatar);
             Session::set('user_logged_in', true);
         }
         public static function logout() 

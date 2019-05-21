@@ -6,23 +6,27 @@
 
     class Post extends Model
     {
-        public function getAllPosts()
+        public function getAllPosts($id)
         {
             $db = static::getInstance();
 
             $stmt = $db->prepare('
                 SELECT *
-                FROM Post
+                FROM Post p
+                JOIN Question q
+                JOIN User u
+                ON q.id = p.question_id and u.id = p.author_id
+                WHERE p.question_id = :id
             ');
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        public function createNewPost($uid, $qid, $content, $date, $votes = 0)
+        public function save($uid, $qid, $content, $date)
         {
-            $db = static::getInstance();
             $sql = "INSERT INTO Post(author_id, question_id, post, post_date, votes) VALUES(?, ?, ?, ?, ?)";
             
-            return $db->prepare($sql)->execute([$uid, $qid, $content, $date, $votes]);
+            return $this->getDb()->prepare($sql)->execute([$uid, $qid, $content, $date, 0]);
         }
     }

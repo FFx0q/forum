@@ -167,16 +167,15 @@ body a {
   width: 25%;
 }
 
-.user__photo {
-  border-radius: 50%;
-}
 .user__photo_tiny {
   width: 32px;
   height: 32px;
+  border-radius: 50%;
 }
 .user__photo_large {
   width: 142px;
   height: 142px;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=core.css.map */

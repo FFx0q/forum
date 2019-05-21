@@ -10,8 +10,9 @@
     {
         public function ListAction() 
         {
-            $users = User::getAllUsers();
-            
+            $user = new User();
+            $users = $user->findAll('User');
+
             return View::render('user/list.twig', 
             [
                 'users' => isset($users) ? $users : 0
@@ -20,14 +21,16 @@
 
         public function ProfileAction()
         {
-            $user = User::getUserById($this->getRouter()->getParam());
+            $user = new User();
 
-            if(empty($user))
+            $profile = $user->find('User', $this->getRouter()->getParam());
+
+            if(empty($profile))
                 Router::redirect('/home/index');
                 
             return View::render('user/profile.twig',
             [
-                'user' => $user
+                'user' => $profile
             ]);
         }
 
@@ -41,6 +44,6 @@
             $reputation = 0
         )
         {
-            User::createNewUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
+            User::saveUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
         }
     }

@@ -202,16 +202,18 @@ body {
 }
 .user__photo 
 {
-    border-radius: $avatar-radius;
+    
     &_tiny
     {
         width: 32px;
-        height: 32px;
+		height: 32px;
+		border-radius: $avatar-radius;
     }
     &_large 
     {
         width: 142px;
-        height: 142px;
+		height: 142px;
+		border-radius: $avatar-radius;
     }
 
 }

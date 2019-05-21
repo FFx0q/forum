@@ -3,13 +3,21 @@
 
     use App\Base\Controller;
     use App\Base\Router;
+    use App\Base\Session;
     use App\Models\Post;
 
     class PostController extends Controller 
     {
-        public function create($uid, $qid, $content, $date, $votes = 0)
+        public function CreateAction()
         {
-            Post::createNewPost($uid, $qid, $content, $date, $votes);
+            $post = new Post();
+
+            $uid = (int)Session::get('user_id');
+            $qid = (int)$this->getRouter()->getParam();
+            $content = isset($_POST['post']) ? trim(htmlspecialchars($_POST['post'])) : " ";
+            $date = new \DateTime();
+
+            $post->save($uid, $qid, $content, $date->getTimestamp(), 0);
             Router::redirect('/question/show/'.$qid);
         }
     }

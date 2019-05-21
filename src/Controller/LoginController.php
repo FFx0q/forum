@@ -10,6 +10,7 @@
     {
         public function IndexAction()
         {   
+            var_dump($_SESSION);
             if (Login::isUserLoggedIn()) {
                 Router::redirect('/home/index');
             } else {
@@ -19,15 +20,18 @@
 
         public function LoginAction() 
         {
-            $username = $_POST['loginName'];
-            $password = $_POST['loginPass'];
 
-            $success = Login::login($username, $password);
+            if (isset($_POST['username']) AND isset($_POST['password'])) {
+                $username = htmlspecialchars($_POST['username']);
+                $password = htmlspecialchars($_POST['password']);
 
-            if ($success) {
-                Router::redirect('/home/index');
-            } else {
-                Router::redirect('/login/index');
+                $success = Login::login($username, $password);
+
+                if ($success) {
+                    Router::redirect('/home/index');
+                } else {
+                    Router::redirect('/login/index');
+                }
             }
         }
 

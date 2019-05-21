@@ -2,6 +2,6 @@
 /cache/
 /.vscode
 config/app.php
-/uploads/avatars
+/uploads/avatars/*
 public/css/*.css.map
 .env
