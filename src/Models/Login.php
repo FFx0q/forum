@@ -11,18 +11,33 @@
         public static function login($username, $password)
         {
             $user = new User();
-            $data = $user->findOneBy('User', ['name' => $username]);
+            $data = self::validateUser($username, $password);
             
-            if ($data) {
-                if (password_verify($password, $data['member_password_hash'])) {
-                    self::setLoginIntoSession($data['id'], $username, $data['avatar_url']);
-                } else {
-                    return false;
-                }
-            } else {
+            if (!$data) {
                 return false;
             }
+            
+            self::setLoginIntoSession($data['id'], $username, $data['avatar_url']);
+
             return true;
+        }
+
+        public static function validateUser($username, $password)
+        {
+            $user = new User();
+            $data = $user->findOneBy('User', ['name' => $username]);
+
+            if (!$data) {
+                Session::add('errors', "Wrong username or password");
+                return false;
+            }
+
+            if (!password_verify($password, $data['member_password_hash'])) {
+                Session::add('errors', 'Wrong username or password');
+                return false;
+            }
+
+            return $data;
         }
 
         public static function setLoginIntoSession($id, $username, $avatar)

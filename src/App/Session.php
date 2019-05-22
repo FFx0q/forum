@@ -10,6 +10,11 @@
             }
         }
 
+        public static function add($key, $value)
+        {
+            $_SESSION[$key][] = $value;
+        }
+
         public static function set($key, $value)
         {
             $_SESSION[$key] = $value;

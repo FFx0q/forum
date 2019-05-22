@@ -17,4 +17,9 @@
         {
             return $this->route = new Router(new Request());
         }
+
+        public function validate($str) : string 
+        {
+            return trim(htmlspecialchars($str));
+        }
     }

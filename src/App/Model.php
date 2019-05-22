@@ -45,7 +45,7 @@
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute(array_values($params));
            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function findBy($table, $params = [])
