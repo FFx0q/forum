@@ -1,35 +1,34 @@
 {% extends 'base.twig' %}
 {% block content %}
-<form method="POST" action="/register/register" class="form">
-		<label>Username</label>
-		<input type="text" 
-			class="form__input"
-			name="username" 
-		    placeholder="Username"
-			required
-		/>
+	<form method="POST" action="/register/register" class="form">
+			<h2>Register</h2>
 
+			{% for error in session.errors %}
+				<div class="error">{{error}}</div>
+			{% endfor %}
 
-		<label>Password</label>
-		<input type="password"
-			class="form__input"
-			name="password" 
-		    placeholder="Password"
-			required
-		/>
+			<input type="text" 
+				class="form__input"
+				name="username" 
+				placeholder="Username"
+				required
+			/>
 
-		<label>Email</label>
-		<input type="email" 
-			class="form__input"
-		    name="email" 
-			placeholder="Email"
-			required
-		/>
-	{% for error in session.errors %}
-		<span class="errors">{{error}}</span>
-	{% endfor %}
-	<input type="submit" value="Sign in" aria-label="Sign in"/>
+			<input type="password"
+				class="form__input"
+				name="password" 
+				placeholder="Password"
+				required
+			/>
+			
+			<input type="email" 
+				class="form__input"
+				name="email" 
+				placeholder="Email"
+				required
+			/>
+		<input type="submit" value="Sign in" aria-label="Sign in"/>
 
-</form>
+	</form>
 
 {% endblock %}

@@ -152,19 +152,20 @@ body a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
-.form label {
-  margin-top: 18px;
-  margin-bottom: 6px;
-  font-size: 13px;
+.form h2 {
+  margin: 15px;
 }
 .form .form__input {
-  margin-top: 5px;
-  padding: 8px 10px;
-  font-size: 14px;
-  border: 1px solid #c8ccd0;
-  background: #FFF;
-  width: 25%;
+  border-radius: 3px;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  height: 46px;
+  margin-bottom: 5px;
+  padding: 13px 12px;
+  width: 35%;
 }
 
 .user__photo_tiny {
@@ -176,6 +177,14 @@ body a {
   width: 142px;
   height: 142px;
   border-radius: 50%;
+}
+
+.error {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ebccd1;
+  color: #b94a48;
+  background-color: #f2dede;
 }
 
 /*# sourceMappingURL=core.css.map */

@@ -1,6 +1,11 @@
 {% extends 'base.twig' %}
 {% block content %}
 	<form method="POST" action="/login/login" class="form">
+		<h2>Login</h2>
+
+		{% for error in session.errors %}
+			<div class="error">{{error}}</div>
+		{% endfor %}
 
 		<input type="text" 
 			class="form__input"
@@ -16,6 +21,6 @@
     	<input type="submit" value="Log in" aria-label="Log in"/>
 		<span>Looking to <a href="/register/">create an account</a> ?</span>
 
-		<span class="error">{{session.errors.0}}</span>
+		
 	</form>
 {% endblock %}

@@ -12,7 +12,6 @@
     {
         public function IndexAction()
         {
-            Session::remove('errors');
             return View::render('/register/register.twig');
         }
 
