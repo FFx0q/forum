@@ -39,11 +39,7 @@
             
         }
 
-        public function save(
-            $uid,
-            $title,
-            $date
-        )
+        public function save($uid, $title, $date)
         {
 
             $sql = "INSERT INTO Question (author_id, title, topic_date) VALUES(?, ?, ?)";

@@ -4,6 +4,7 @@
     use App\Base\Controller;
     use App\Base\Router;
     use App\Base\View;
+    use App\Base\Session;
     use App\Models\Register;
 
 
@@ -11,20 +12,21 @@
     {
         public function IndexAction()
         {
+            Session::remove('errors');
             return View::render('/register/register.twig');
         }
 
         public function RegisterAction()
         {
-            if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']))
-            {
-                $username = htmlspecialchars($_POST['username']);
-                $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
-                $email = htmlspecialchars($_POST['email']);
+            Session::remove('errors');
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $username = $this->validate($_POST['username']);
+                $password = $this->validate($_POST['password']);
+                $email = $this->validate($_POST['email']);
                 $date = new \DateTime();
 
                 $success = Register::register($username, $password, $email, $date->getTimestamp());
-                
+
                 if ($success) {
                     Router::redirect('/login/index');
                 } else {

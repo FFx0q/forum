@@ -6,19 +6,10 @@
 
     class User extends Model
     {
-        public function saveUser(
-            $group_id, 
-            $username, 
-            $password, 
-            $email, 
-            $created, 
-            $avatar,
-            $reputation
-        )
+        public function saveUser($username, $password, $email, $created)
         {
-            $db = static::getInstance();
-
-            $sql = "INSERT INTO User (group_id, `name`, member_password_hash, email, join_date, avatar_url, reputation) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            return $db->prepare($sql)->execute([$group_id, $username, $password, $email, $created, $avatar, $reputation]);
+            $sql = "INSERT INTO User (group_id, `name`, member_password_hash, email, join_date, avatar_url, reputation, warnings) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            return $this->getDb()->prepare($sql)->execute([2, $username, $password, $email, $created, 'default.jpg', 0, 0]);
         }
     }

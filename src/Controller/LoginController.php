@@ -10,6 +10,7 @@
     {
         public function IndexAction()
         {   
+            
             if (Login::isUserLoggedIn()) {
                 Router::redirect('/home/index');
             } else {
@@ -19,13 +20,13 @@
 
         public function LoginAction() 
         {
-
+            Session::remove('errors');
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $username = $this->validate($_POST['username']);
                 $password = $this->validate($_POST['password']);
 
                 $success = Login::login($username, $password);
-
+                
                 if ($success) {
                     Router::redirect('/home/index');
                 } else {

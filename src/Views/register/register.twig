@@ -25,7 +25,9 @@
 			placeholder="Email"
 			required
 		/>
-
+	{% for error in session.errors %}
+		<span class="errors">{{error}}</span>
+	{% endfor %}
 	<input type="submit" value="Sign in" aria-label="Sign in"/>
 
 </form>

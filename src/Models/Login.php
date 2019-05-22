@@ -50,6 +50,7 @@
             Session::set('user_name', $username);
             Session::set('user_avatar', $avatar);
             Session::set('user_logged_in', true);
+            Session::remove('errors');
         }
         public static function logout() 
         {
