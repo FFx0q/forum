@@ -11,7 +11,7 @@
         public function ListAction() 
         {
             $user = new User();
-            $users = $user->findAll('User');
+            $users = $user->findAll();
 
             return View::render('user/list.twig', 
             [
@@ -23,7 +23,7 @@
         {
             $user = new User();
 
-            $profile = $user->find('User', $this->getRouter()->getParam());
+            $profile = $user->find($this->getRouter()->getParam());
 
             if(empty($profile))
                 Router::redirect('/home/index');

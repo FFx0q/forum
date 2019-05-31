@@ -25,7 +25,7 @@
         public static function validateUser($username, $password)
         {
             $user = new User();
-            $data = $user->findOneBy('User', ['name' => $username]);
+            $data = $user->findOneBy(['name' => $username]);
 
             if (!$data) {
                 Session::add('errors', "Wrong username or password");

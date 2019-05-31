@@ -7,6 +7,14 @@
     class Model
     {
         protected $db;
+        private $table;
+
+        public function __construct()
+        {
+            // remove namespace from string
+            $temp = explode('\\', static::class);
+            $this->table = end($temp);
+        }
 
         protected function getDb() 
         {
@@ -22,9 +30,10 @@
          * Return single record find by id
          */
 
-        public function find($table, $id)
+        public function find($id)
         {
-            $sql = "SELECT * FROM {$table} WHERE id = :id";
+
+            $sql = "SELECT * FROM {$this->table} WHERE id = :id";
             $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -32,7 +41,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function findOneBy($table, $params = [])
+        public function findOneBy($params = [])
         {
             $where = [];
 
@@ -40,7 +49,7 @@
                 $where[] = $key . " = ? ";
             }
             
-            $sql = sprintf("SELECT * FROM %s WHERE %s LIMIT 1", $table, implode('AND ', $where));
+            $sql = sprintf("SELECT * FROM %s WHERE %s LIMIT 1", $this->table, implode('AND ', $where));
             
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute(array_values($params));
@@ -48,7 +57,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
         }
 
-        public function findBy($table, $params = [])
+        public function findBy($params = [])
         {
             $where = [];
 
@@ -56,7 +65,7 @@
                 $where[] = $key . " = ? ";
             }
             
-            $sql = sprintf("SELECT * FROM %s WHERE %s", $table, implode('AND ', $where));
+            $sql = sprintf("SELECT * FROM %s WHERE %s", $this->table, implode('AND ', $where));
             
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute(array_values($params));
@@ -64,17 +73,17 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);          
         } 
 
-        public function findAll($table)
+        public function findAll()
         {
-            $stmt = $this->getDb()->prepare("SELECT * FROM {$table}");
+            $stmt = $this->getDb()->prepare("SELECT * FROM {$this->table}");
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function delete($table, $id)
+        public function delete($id)
         {
-            $sql = "DELETE FROM {$table} WHERE id = ?";
+            $sql = "DELETE FROM {$this->table} WHERE id = ?";
 
             return $this->db->prepare($sql)->execute([$id]);
         }

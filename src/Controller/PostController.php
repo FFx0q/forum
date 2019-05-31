@@ -14,7 +14,7 @@
 
             $uid = (int)Session::get('user_id');
             $qid = (int)$this->getRouter()->getParam();
-            $content = isset($_POST['post']) ? trim(htmlspecialchars($_POST['post'])) : " ";
+            $content = isset($_POST['post']) ? $this->validate($_POST['post']) : " ";
             $date = new \DateTime();
 
             $post->save($uid, $qid, $content, $date->getTimestamp(), 0);

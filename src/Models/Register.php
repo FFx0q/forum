@@ -12,7 +12,7 @@
             $user = new User();
 
             $validation = self::registerValidation($username, $password, $email);
-            $data = $user->findOneBy('User', ['name'=>$username]);
+            $data = $user->findOneBy(['name'=>$username]);
 
             if (!$validation) {
                 return false;
