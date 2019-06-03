@@ -12,4 +12,27 @@
             
             return $this->getDb()->prepare($sql)->execute([2, $username, $password, $email, $created, 'default.jpg', 0, 0]);
         }
+
+        public function setUsername($id, $username)
+        {
+            $sql = "UPDATE User SET name = ? WHERE id = ?";
+            
+            return $this->getDb()->prepare($sql)->execute([$username, $id]);
+        }
+
+        public function setEmail($id, $email)
+        {
+            $sql = "UPDATE User SET email = ? WHERE id = ?";
+
+            return $this->getDb()->prepare($sql)->execute([$email, $id]);
+        }
+
+        public function setPassword($id, $password)
+        {
+            $sql = "UPDATE User SET member_password_hash = ? WHERE id = ?";
+
+            return $this->getDb()->prepare($sql)->execute([$password, $id]);
+        }
+
+
     }

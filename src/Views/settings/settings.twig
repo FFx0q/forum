@@ -1,7 +1,10 @@
 {% extends "base.twig" %}
 {% block content %}
-    <div class="setting__wrapper">
-        <form method="post" action="/settings.php?uid={{data.0.id}}" class="form">
+    <div class="content__wrapper">
+        {% for error in session.errors %}
+		    <div class="error">{{error}}</div>
+		{% endfor %}
+        <form method="post" action="/settings/save/{{data.0.id}}" class="form">
             <label> Email Address </label>
             <input name="email" type="email" value="{{data.0.email}}" class="form__input" aria-label="Email address"/>
 
