@@ -2,6 +2,7 @@
     namespace App\Models;
 
     use App\Base\Model;
+    use App\Base\Database;
     use PDO;
 
     class Question extends Model
@@ -15,10 +16,8 @@
                                 JOIN User u
                                 ON p.question_id = q.id and q.author_id = u.id
                                 GROUP BY q.id');
-
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-
         /*
          * Return all posts for question
          */

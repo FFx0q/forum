@@ -9,7 +9,7 @@
 
     class HomeController extends Controller
     {
-        public function IndexAction() 
+        public function index() 
         {
             $question = new Question();
             $acl = new Acl();

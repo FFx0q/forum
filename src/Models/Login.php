@@ -57,7 +57,7 @@
         }
         public static function logout() 
         {
-            session_destroy();
+            Session::destroy();
         }
         public static function isUserLoggedIn()
         {
