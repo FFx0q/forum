@@ -7,6 +7,7 @@
     use App\Base\Router;
     use App\Base\Request;
     use App\Base\Session;
+    use App\Base\Acl;
     use App\Models\Question;
     use App\Models\Post;
     
@@ -18,17 +19,28 @@
         public function show($id)
         {
             $question = new Question();
+            $acl = new Acl();
             $posts = $question->findQuestionById($id);
-
+          
+            $permission = [
+                'show' => $acl->check('show'),
+                'create' => $acl->check('create')
+            ];
             return View::render('topic/post.twig',
             [
-                'posts' => $posts
+                'posts' => $posts,
+                'permission' => $permission
             ]);
         }
 
         public function create()
         {
-            return View::render('topic/create.twig');
+            $acl = new Acl();
+            $permission = $acl->check('create', Session::get('user_group'));
+
+            return View::render('topic/create.twig', [
+                'permission' => $permission
+            ]);
         }
 
         public function save()

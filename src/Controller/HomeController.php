@@ -3,18 +3,24 @@
 
     use App\Base\Controller;
     use App\Base\View;
+    use App\Base\Session;
+    use App\Base\Acl;
     use App\Models\Question;
 
     class HomeController extends Controller
     {
         public function index() 
         {
-            $model = new Question();
+            $question = new Question();
+            $acl = new Acl();
+            $permission = $acl->check('show');
 
-            $data = $model->getAllQuestion();
+            $data = $question->getAllQuestion();
+
             return View::render('home/index.twig',
                 [
-                    'questions' => $data
+                    'questions' => $data,
+                    'permission' => $permission
                 ]
             );
         }
