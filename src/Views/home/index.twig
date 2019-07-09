@@ -1,10 +1,11 @@
 {% extends "base.twig" %}
 {% block content %}
     <div class="content__wrapper">
-        <h1>Top Question</h1>
-        <div id="question__list">
-            {% for question in questions %}
-                    <div class="question__row">
+        {% if permission > 0 %}
+            <h1>Top Question</h1>
+            <div id="question__list">
+                {% for question in questions %}
+                        <div class="question__row">
                             <h4 class="question__row_title">
                                 <a href="/question/show/{{question.qid}}">{{question.title}}</a>
                             </h4>
@@ -15,10 +16,13 @@
                                 {{question.vote}} Votes 
                                 {{question.answers}} Answers
                             </div>
-                    </div>
-                {% else %}
-                    No questions found 
-            {% endfor %}
-        </div>
+                        </div>
+                    {% else %}
+                        No questions found 
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>You don't have a permission</p>
+        {% endif %}
     </div>
 {% endblock %}

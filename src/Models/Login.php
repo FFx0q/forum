@@ -17,7 +17,8 @@
                 return false;
             }
             
-            self::setLoginIntoSession($data['id'], $username, $data['avatar_url']);
+            self::setLoginIntoSession($data['id'], $data['group_id'],
+                $username, $data['avatar_url']);
 
             return true;
         }
@@ -40,7 +41,8 @@
             return $data;
         }
 
-        public static function setLoginIntoSession($id, $username, $avatar)
+        public static function setLoginIntoSession($id, $group_id, 
+            $username, $avatar)
         {
             Session::init();
             session_regenerate_id(true);
@@ -49,6 +51,7 @@
             Session::set('user_id', $id);
             Session::set('user_name', $username);
             Session::set('user_avatar', $avatar);
+            Session::set('user_group', $group_id);
             Session::set('user_logged_in', true);
             Session::remove('errors');
         }
