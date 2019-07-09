@@ -18,5 +18,10 @@
             "App\\": "src/",
             "App\\Base\\": "src/App/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "touch .env"
+        ]
     }
 }
