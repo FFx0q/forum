@@ -8,7 +8,9 @@
     
     class UserController extends Controller
     {
-        public function ListAction() 
+        public function index() {}
+            
+        public function list() 
         {
             $user = new User();
             $users = $user->findAll();
@@ -19,14 +21,13 @@
             ]);
         }
 
-        public function ProfileAction()
+        public function profile($id)
         {
             $user = new User();
+            $profile = $user->find($id);
 
-            $profile = $user->find($this->getRouter()->getParam());
-
-            if(empty($profile))
-                Router::redirect('/home/index');
+            if (empty($profile))
+                Router::redirect('/home');
                 
             return View::render('user/profile.twig',
             [
@@ -34,7 +35,7 @@
             ]);
         }
 
-        public function CreateAction(
+        public function create(
             $group_id,
             $username, 
             $password, 

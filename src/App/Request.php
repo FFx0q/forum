@@ -2,14 +2,11 @@
     namespace App\Base;
     class Request 
     {
-        public $url;
-
-        public function __construct() 
+  
+        public static function getUri()
         {
-            $this->url = $_SERVER['REQUEST_URI'];
-        }
-        public function getUrl()
-        {
-            return $this->url;
+            $request = filter_input(INPUT_SERVER, 'REQUEST_URI');
+            $request = ltrim($request, $request[0]);
+            return $request;           
         }
     }

@@ -7,7 +7,7 @@
 
     class HomeController extends Controller
     {
-        public function IndexAction() 
+        public function index() 
         {
             $model = new Question();
 

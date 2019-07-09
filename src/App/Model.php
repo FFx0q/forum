@@ -3,10 +3,10 @@
 
     use PDO;
     use App\Core;
+    use App\Base\Database;
 
-    class Model
+    class Model extends Database
     {
-        protected $db;
         private $table;
 
         public function __construct()
@@ -16,14 +16,11 @@
             $this->table = end($temp);
         }
 
-        protected function getDb() 
+        public function getDb()
         {
-            if ($this->db == null) {
-                $pdo = 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';charset=utf8';
-                $this->db = new PDO($pdo, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
-                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }
-            return $this->db;        
+            $db = Database::getInstance();
+
+            return $db->getConnection();
         }
 
         /*

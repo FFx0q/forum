@@ -8,16 +8,17 @@
 
     class PostController extends Controller 
     {
-        public function CreateAction()
+        public function index() {}
+            
+        public function create($id)
         {
             $post = new Post();
 
             $uid = (int)Session::get('user_id');
-            $qid = (int)$this->getRouter()->getParam();
             $content = isset($_POST['post']) ? $this->validate($_POST['post']) : " ";
             $date = new \DateTime();
 
-            $post->save($uid, $qid, $content, $date->getTimestamp(), 0);
-            Router::redirect('/question/show/'.$qid);
+            $post->save($uid, $id, $content, $date->getTimestamp(), 0);
+            Router::redirect('/question/show/'.$id);
         }
     }

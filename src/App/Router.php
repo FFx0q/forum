@@ -9,7 +9,7 @@
 
         public function __construct(Request $request)
         {
-            $parts = explode('/', $request->getUrl());
+            $parts = explode('/', $request->getUri());
             
             $this->controller = empty($parts[1]) ? "Home" : ucwords($parts[1]);
             $this->action = empty($parts[2]) ? "Index" : ucwords($parts[2]);

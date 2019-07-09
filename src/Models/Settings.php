@@ -13,7 +13,7 @@
             $user = new User();
             $validation = self::validation($username, $password, $email);
             
-            if(!$validation)
+            if (!$validation)
                 return false;
 
             $user->setUsername($id, $username);
