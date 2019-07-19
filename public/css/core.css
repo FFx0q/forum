@@ -40,7 +40,7 @@ body a {
 .header {
   background: #FFF;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   border-bottom: 1px solid #ececec;
   width: 1002px;
   margin: 0 auto;
@@ -151,21 +151,28 @@ body a {
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100vh;
 }
 .form h2 {
   margin: 15px;
 }
-.form .form__input {
+.form__input {
   border-radius: 3px;
   border: none;
-  color: #333333;
+  color: rgba(0, 0, 0, 0.7);
   font-size: 16px;
-  height: 46px;
+  height: 38px;
   margin-bottom: 5px;
   padding: 13px 12px;
-  width: 35%;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.form__input:focus {
+  border: 1px solid #68a6b6;
 }
 
 .user__photo_tiny {
@@ -178,6 +185,18 @@ body a {
   height: 142px;
   border-radius: 50%;
 }
+.user__photo_medium {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.user_info {
+  display: flex;
+}
+.user_detail {
+  margin-left: 5%;
+}
 
 .error {
   padding: 15px;
@@ -185,6 +204,15 @@ body a {
   border: 1px solid #ebccd1;
   color: #b94a48;
   background-color: #f2dede;
+}
+
+.box {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  max-width: 50%;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=core.css.map */

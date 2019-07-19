@@ -1,7 +1,5 @@
 /vendor/
 /cache/
 /.vscode
-config/app.php
-/uploads/avatars/*
 public/css/*.css.map
-.env
+config/.env

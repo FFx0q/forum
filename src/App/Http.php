@@ -4,7 +4,6 @@
 
     class Http
     {
-
         public static function isGet()
         {
             return $_SERVER["REQUEST_METHOD"] == "GET";

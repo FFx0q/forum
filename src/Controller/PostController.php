@@ -12,7 +12,7 @@
             
         public function create($id)
         {
-            $post = new Post();
+            $post = new Post($this->db);
 
             $uid = (int)Session::get('user_id');
             $content = isset($_POST['post']) ? $this->validate($_POST['post']) : " ";

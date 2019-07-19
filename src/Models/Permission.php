@@ -7,7 +7,7 @@
 
     class Permission extends Model
     {
-        public function HasPermission($permission_name)
+        public function hasPermission(string $permission)
         {
             $group_id = Session::get('user_group');
             $stmt = $this->getDb()
@@ -19,7 +19,7 @@
                     WHERE p.permission_name = :name
                     AND g.id = :id
                 ');
-            $stmt->bindParam(':name', $permission_name);
+            $stmt->bindParam(':name', $permission);
             $stmt->bindParam(':id', $group_id);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC)[0]['c'];

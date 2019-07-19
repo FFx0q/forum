@@ -18,7 +18,7 @@ phpBoard is a web application where people with questions get the answers they n
 `composer install`
 4. Create database and import [schema](https://github.com/FFx0q/phpBoard/blob/master/schema.sql)\
 `mysql -u username -p database_name < schema.sql`
-5. Create database connection in .env
+5. Create database connection in config/.env
 ```
 DB_HOST=
 DB_USERNAME=

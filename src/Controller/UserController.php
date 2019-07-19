@@ -12,24 +12,23 @@
             
         public function list() 
         {
-            $user = new User();
+            $user = new User($this->db);
             $users = $user->findAll();
 
-            return View::render('user/list.twig', 
-            [
-                'users' => isset($users) ? $users : 0
+            return $this->render('user/list.twig', [
+                'users' => $users
             ]);
         }
 
         public function profile($id)
         {
-            $user = new User();
+            $user = new User($this->db);
             $profile = $user->find($id);
 
-            if (empty($profile))
+            if (!isset($profile))
                 Router::redirect('/home');
                 
-            return View::render('user/profile.twig',
+            return $this->render('user/profile.twig',
             [
                 'user' => $profile
             ]);

@@ -5,32 +5,29 @@
     use App\Core;
     use App\Base\Database;
 
-    class Model extends Database
+    abstract class Model
     {
-        private $table;
+        protected $table;
+        protected $db;
 
-        public function __construct()
+        public function __construct(Database $database)
         {
-            // remove namespace from string
-            $temp = explode('\\', static::class);
-            $this->table = end($temp);
+            $parts = explode('\\', static::class);
+            $this->table = end($parts);
+            $this->db = $database;
         }
 
         public function getDb()
         {
-            $db = Database::getInstance();
-
-            return $db->getConnection();
+            return $this->db->getConnection();
         }
 
         /*
          * Return single record find by id
          */
-
-        public function find($id)
+        public function find(int $id)
         {
-
-            $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+            $sql = "SELECT * FROM ". $this->table ." WHERE id = :id";
             $stmt = $this->getDb()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -38,7 +35,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function findOneBy($params = [])
+        public function findOneBy(array $params = [])
         {
             $where = [];
 
@@ -54,7 +51,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
         }
 
-        public function findBy($params = [])
+        public function findBy(array $params = [])
         {
             $where = [];
 
@@ -78,7 +75,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function delete($id)
+        public function delete(int $id)
         {
             $sql = "DELETE FROM {$this->table} WHERE id = ?";
 

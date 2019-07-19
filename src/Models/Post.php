@@ -8,9 +8,7 @@
     {
         public function getAllPosts($id)
         {
-            $db = static::getInstance();
-
-            $stmt = $db->prepare('
+            $stmt = $this->getDb()->prepare('
                 SELECT *
                 FROM Post p
                 JOIN Question q

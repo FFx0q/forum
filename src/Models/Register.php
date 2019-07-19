@@ -4,12 +4,14 @@
     use App\Base\Model;
     use App\Models\User;
     use App\Base\Session;
+    use App\Base\Database;
 
     class Register extends Model
     {
         public static function register($username, $password, $email, $date)
         {
-            $user = new User();
+            $db = new Database();
+            $user = new User($db);
 
             $validation = self::registerValidation($username, $password, $email);
             $data = $user->findOneBy(['name'=>$username]);

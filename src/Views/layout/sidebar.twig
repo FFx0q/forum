@@ -6,14 +6,16 @@
         <li class="menu__item">
             <i class="fas fa-users"></i> <a href="/user/list">Users</a>
         </li>
-        <li class="menu__item">
-            <i class="fas fa-user-alt"></i> <a href="/user/profile/{{session.user_id}}">Profile</a>
-        </li>
-        <li class="menu__item">
-            <i class="fas fa-bullhorn"></i> <a href="/question/create">Ask question</a>
-        </li>
-        <li class="menu__item">
-            <i class="fas fa-cog"></i> <a href="/settings">Settings</a>
-        </li>
+        {% if session.user_id > 0 %}
+            <li class="menu__item">
+                <i class="fas fa-user-alt"></i> <a href="/user/profile/{{ session.user_id }}">Profile</a>
+            </li>
+            <li class="menu__item">
+                <i class="fas fa-bullhorn"></i> <a href="/question/create">Ask question</a>
+            </li>
+            <li class="menu__item">
+                <i class="fas fa-cog"></i> <a href="/settings">Settings</a>
+            </li>
+        {% endif %}
     </ul>
 </nav>

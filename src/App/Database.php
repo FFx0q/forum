@@ -6,30 +6,21 @@
 
     class Database
     {
-        protected $_connection = null;
-        private static $instance = null;
+        protected $connection = null;
 
-
-        private function __construct()
+        public function __construct()
         {
-            $pdo = 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';charset=utf8';
-            $this->_connection = new PDO($pdo, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
-            $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-
-        private function __clone() { }
-
-        public static function getInstance()
-        {
-            if (self::$instance == null) {
-                self::$instance = new Database;
+            try {
+                $dsn = 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';charset=utf8';
+                $this->connection = new PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+                $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo 'Connection failed: ' . $e->getMessage();
             }
-
-            return self::$instance;
         }
 
         public function getConnection()
         {
-            return $this->_connection;
+            return $this->connection;
         }
     }

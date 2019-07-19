@@ -1,26 +1,28 @@
 {% extends 'base.twig' %}
 {% block content %}
-	<form method="POST" action="/login/login" class="form">
-		<h2>Login</h2>
+	<div class="content__wrapper">
+		<section class="box">
+			<form method="POST" action="/login/login" class="form">
+				<h2>Login</h2>
 
-		{% for error in session.errors %}
-			<div class="error">{{error}}</div>
-		{% endfor %}
-
-		<input type="text" 
-			class="form__input"
-			name="username" 
-		    placeholder="Username"
-		/>
-
-		<input type="password" 
-			class="form__input"
-            name="password" 
-		    placeholder="Password"
-		/>
-    	<input type="submit" value="Log in" aria-label="Log in"/>
-		<span>Looking to <a href="/register/">create an account</a> ?</span>
-
-		
-	</form>
+				{% for error in session.errors %}
+					<div class="error">{{error}}</div>
+				{% endfor %}
+				<label for="username">Username</label>
+				<input id="username_form"
+					type="text" 
+					class="form__input"
+					name="username" 
+				/>
+				<label for="password_form">Password</label>
+				<input id="password_form"
+					type="password" 
+					class="form__input"
+					name="password" 
+				/>
+				<input type="submit" value="Log in" aria-label="Log in" class="form__input"/>
+				<span><a href="/register/">Create Account</a></span>
+			</form>
+		</section>
+	</div>
 {% endblock %}

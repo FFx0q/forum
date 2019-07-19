@@ -40,7 +40,6 @@
 
         public function save($uid, $title, $date)
         {
-
             $sql = "INSERT INTO Question (author_id, title, topic_date) VALUES(?, ?, ?)";
             $this->getDb()->prepare($sql)->execute([$uid, $title, $date]);
             return $this->getDb()->lastInsertId();

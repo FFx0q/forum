@@ -3,7 +3,6 @@
 
     use App\Base\Http;
     use App\Base\Controller;
-    use App\Base\View;
     use App\Base\Router;
     use App\Base\Request;
     use App\Base\Session;
@@ -18,16 +17,15 @@
             
         public function show($id)
         {
-            $question = new Question();
-            $acl = new Acl();
+            $question = new Question($this->db);
             $posts = $question->findQuestionById($id);
           
             $permission = [
-                'show' => $acl->check('show'),
-                'create' => $acl->check('create')
+                'show' => $this->acl->check('show'),
+                'create' => $this->acl->check('create')
             ];
-            return View::render('topic/post.twig',
-            [
+
+            return $this->render('topic/post.twig', [
                 'posts' => $posts,
                 'permission' => $permission
             ]);
@@ -35,18 +33,17 @@
 
         public function create()
         {
-            $acl = new Acl();
-            $permission = $acl->check('create', Session::get('user_group'));
+            $permission = $this->acl->check('create');
 
-            return View::render('topic/create.twig', [
+            return $this->render('topic/create.twig', [
                 'permission' => $permission
             ]);
         }
 
         public function save()
         {
-            $question = new Question();
-            $post = new Post();
+            $question = new Question($this->db);
+            $post = new Post($this->db);
             $date = new \DateTime();
 
             if (!Http::isPost())
@@ -55,7 +52,7 @@
             $uid = (int)Session::get('user_id');
             $title = isset($_POST['title']) ? trim(htmlspecialchars($_POST['title'])) : " ";
             $content = isset($_POST['post']) ? trim(htmlspecialchars($_POST['post'])) : " ";
-            $qid = $question->save($uid, $title, $date->getTimestamp());
+            $qid = (int)$question->save($uid, $title, $date->getTimestamp());
             $post->save($uid, $qid, $content, $date->getTimestamp());
             Router::redirect("/question/show/".$qid);
         }

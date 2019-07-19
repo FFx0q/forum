@@ -22,5 +22,6 @@
         new Route('Post', 'create', '|^post/create/([0-9]+)/?$|'),
 
         new Route('Settings', 'index', '|^settings/?$|'),
+        new Route('Settings', 'save', '|^settings/save/([0-9]+)/?$|')
         
     ];

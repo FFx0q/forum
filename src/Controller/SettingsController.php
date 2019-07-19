@@ -3,7 +3,6 @@
 
     use App\Base\Http;
     use App\Base\Controller;
-    use App\Base\View;
     use App\Base\Session;
     use App\Base\Router;
     use App\Models\User;
@@ -16,18 +15,17 @@
             if (!Session::get('user_logged_in'))
                 Router::redirect('/home');
 
-            $user = new User();
+            $user = new User($this->db);
             $data = $user->find(Session::get('user_id'));
 
-            return View::render('settings/settings.twig', [
+            return $this->render('settings/settings.twig', [
                 'data' => $data
             ]);
         }
 
-        public function save()
+        public function save() : void
         {
-            $id = Session::get('user_id');
-            $settings = new Settings();        
+            $settings = new Settings($this->db);        
             Session::remove('errors');
     
             if (!Http::isPost())

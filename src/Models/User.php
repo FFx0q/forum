@@ -10,7 +10,7 @@
         {
             $sql = "INSERT INTO User (group_id, `name`, member_password_hash, email, join_date, avatar_url, reputation, warnings) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
-            return $this->getDb()->prepare($sql)->execute([2, $username, $password, $email, $created, 'default.jpg', 0, 0]);
+            return $this->getDb()->prepare($sql)->execute([2, $username, $password, $email, $created, 'avatar_default.png', 0, 0]);
         }
 
         public function setUsername($id, $username)

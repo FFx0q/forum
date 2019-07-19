@@ -3,24 +3,31 @@
 
     use App\Base\Model;
     use App\Models\Permission;
+    use App\Base\Database;
  
-    class Acl extends Model
+    class Acl
     {
-        public function check($permission)
+        public function check(string $permission) : bool
         {
-            if(!$this->group_permissions($permission))
-                return false;
+            if ($this->groupPermission($permission))
+                return true;
 
-            return true;
+            return false;
         }
         
-        public function group_permissions($permission_name)
+        public function groupPermission(string $permissionName) : bool
         {
-            $permission = new Permission();
-
-            if($permission->HasPermission($permission_name) > 0)
+            $db = new Database();
+            $permission = new Permission($db);
+    
+            if ($permission->hasPermission($permissionName) > 0)
                 return true;
                 
             return false;
+        }
+
+        public function userPermission(string $permission) : bool 
+        {
+            //todo 
         }
     }

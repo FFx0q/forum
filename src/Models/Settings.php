@@ -10,7 +10,7 @@
         public function save($username, $password, $email)
         {
             $id = Session::get('user_id');
-            $user = new User();
+            $user = new User($this->db);
             $validation = self::validation($username, $password, $email);
             
             if (!$validation)

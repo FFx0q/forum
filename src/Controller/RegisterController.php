@@ -13,10 +13,10 @@
     {
         public function index()
         {
-            return View::render('/register/register.twig');
+            return $this->render('/register/register.twig');
         }
 
-        public function register()
+        public function register() : void
         {
             Session::remove('errors');
 
@@ -31,9 +31,9 @@
             $success = Register::register($username, $password, $email, $date->getTimestamp());
 
             if ($success) {
-                Router::redirect('/login/index');
+                Router::redirect('/login');
             } else {
-                Router::redirect('/register/index');
+                Router::redirect('/register');
             }
         }
 

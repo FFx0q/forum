@@ -4,13 +4,16 @@
     use App\Base\Model;
     use App\Base\Session;
     use App\Models\User;
+    use App\Base\Database;
     use PDO;
     
     class Login extends Model
     {
         public static function login($username, $password)
         {
-            $user = new User();
+            $db = new Database;
+            $user = new User($db);
+            
             $data = self::validateUser($username, $password);
             
             if (!$data) {
@@ -25,7 +28,9 @@
 
         public static function validateUser($username, $password)
         {
-            $user = new User();
+            $db = new Database;
+            $user = new User($db);
+
             $data = $user->findOneBy(['name' => $username]);
 
             if (!$data) {

@@ -1,12 +1,15 @@
 <?php
-    require_once(__DIR__.'/vendor/autoload.php');
-    
-    App\Base\Session::init();
 
-    $dotenv = Dotenv\Dotenv::create(__DIR__);
+    use App\Core;
+    require_once(__DIR__.'/vendor/autoload.php');
+
+    App\Base\Session::init();
+    $core = new Core();
+
+    $dotenv = Dotenv\Dotenv::create($core->getConfigDir());
     $dotenv->load();
 
-    $routes = require (__DIR__.'/routes.php');
+    $routes = require ($core->getConfigDir().'/routes.php');
     $args = $foundRoute = null;
     $request = new App\Base\Request;
 

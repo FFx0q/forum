@@ -3,18 +3,18 @@
 
     use App\Base\Http;
     use App\Base\Controller;
-    use App\Base\View;
     use App\Base\Router;
     use App\Models\Login;
     use App\Base\Session;
+    
     class LoginController extends Controller 
     {
         public function index()
         {   
             if (Login::isUserLoggedIn()) {
-                Router::redirect('/home/index');
+                Router::redirect('/home');
             } else {
-                return View::render('login/login.twig');
+                return $this->render('login/login.twig');
             }
         }
 
