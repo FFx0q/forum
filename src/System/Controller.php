@@ -1,5 +1,5 @@
 <?php
-    namespace App\Base;
+    namespace System;
 
     use App\Base\Router;
     use App\Base\Request;
@@ -12,21 +12,28 @@
         protected $acl;
         protected $db;
         protected $core;
+        protected $method;
 
         private $twig = null;
         
         abstract public function index();
 
-        public function __construct()
+        public function __construct(string $method)
         {
             $this->core = new Core();
             $this->acl = new Acl();
             $this->db = new Database();
+            $this->method = $method;
         }
         
         public function validate(string $str) : string 
         {
             return trim(htmlspecialchars($str));
+        }
+
+        public function getMetohd() : string
+        {
+            return $this->method;
         }
 
         public function render(string $template, array $args = [])

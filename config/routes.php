@@ -1,6 +1,14 @@
 <?php
-    use App\Base\Route;
+    use System\Route\Route;
+    use System\Route\RouteCollection;
 
+    $collection = new RouteCollection();
+
+    $collection->attachRoute(new Route("/test"));
+    
+    return $collection;
+
+    /*
     return [
         new Route('Home', 'index', '|^/?$|'),
         new Route('Home', 'index', '|^home/?$|'),
@@ -24,4 +32,4 @@
         new Route('Settings', 'index', '|^settings/?$|'),
         new Route('Settings', 'save', '|^settings/save/([0-9]+)/?$|')
         
-    ];
+    ];*/
