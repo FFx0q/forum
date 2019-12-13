@@ -10,7 +10,10 @@
 
         public function __construct(PDO $db)
         {
-            $this->db = $db;        
+            $this->db = $db;
+
+            $parts = explode('\\', static::class);
+            $this->table = end($parts);
         }
 
         public function getDatabase() : PDO
@@ -23,13 +26,13 @@
             $stmt = $this->getDatabase()->prepare("SELECT * FROM {$this->table} WHERE id = :id");
             $stmt->execute(['id' => $id]);
 
-            return $stmt->fetch();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
         
         public function findAll()
         {
             $stmt = $this->getDatabase()->query("SELECT * FROM {$this->table}");
 
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }

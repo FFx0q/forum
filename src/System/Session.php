@@ -27,7 +27,7 @@
             }
         }
         
-        public static function remove($key) 
+        public static function remove($key)
         {
             if (isset($_SESSION[$key])) {
                 unset($_SESSION[$key]);

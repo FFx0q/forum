@@ -1,6 +1,6 @@
 <?php
     namespace System\Http;
-    
+
     class Response
     {
         private $statusCode;
@@ -57,7 +57,7 @@
             }
 
             foreach ($this->getHeaders() as $name => $value) {
-                header($name . ": ". $value,false, $this->getStatusCode());
+                header($name . ": ". $value, false, $this->getStatusCode());
             }
             
             header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), false, $this->statusCode);

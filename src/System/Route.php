@@ -1,7 +1,7 @@
 <?php
     namespace App\Base;
 
-    class Route 
+    class Route
     {
         private $controller;
         private $method;
@@ -36,5 +36,4 @@
             $argv = array_values($argv);
             return $result;
         }
-
     }

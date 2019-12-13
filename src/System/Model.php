@@ -39,7 +39,7 @@
         {
             $where = [];
 
-            foreach($params as $key => $value) {
+            foreach ($params as $key => $value) {
                 $where[] = $key . " = ? ";
             }
             
@@ -55,7 +55,7 @@
         {
             $where = [];
 
-            foreach($params as $key => $value) {
+            foreach ($params as $key => $value) {
                 $where[] = $key . " = ? ";
             }
             
@@ -64,8 +64,8 @@
             $stmt = $this->getDb()->prepare($sql);
             $stmt->execute(array_values($params));
            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);          
-        } 
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         public function findAll()
         {

@@ -26,7 +26,7 @@
             $this->method = $method;
         }
         
-        public function validate(string $str) : string 
+        public function validate(string $str) : string
         {
             return trim(htmlspecialchars($str));
         }

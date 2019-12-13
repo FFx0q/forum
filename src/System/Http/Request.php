@@ -20,7 +20,7 @@
             $result = strtolower($string);
             preg_match_all('/_[a-z]/', $result, $matches);
 
-            foreach($matches[0] as $match) {
+            foreach ($matches[0] as $match) {
                 $char = str_replace("_", "", strtoupper($match));
                 $result = str_replace($match, $char, $result);
             }
