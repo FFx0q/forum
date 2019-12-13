@@ -9,11 +9,12 @@
     use App\Base\Acl;
     use App\Models\Question;
     use App\Models\Post;
-    
-    
+
     class QuestionController extends Controller
     {
-        public function index() {}
+        public function index()
+        {
+        }
             
         public function show($id)
         {
@@ -46,8 +47,9 @@
             $post = new Post($this->db);
             $date = new \DateTime();
 
-            if (!Http::isPost())
+            if (!Http::isPost()) {
                 return;
+            }
                 
             $uid = (int)Session::get('user_id');
             $title = isset($_POST['title']) ? trim(htmlspecialchars($_POST['title'])) : " ";

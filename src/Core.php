@@ -1,6 +1,7 @@
 <?php
     namespace App;
-    class Core 
+
+    class Core
     {
         private $rootDir = null;
 

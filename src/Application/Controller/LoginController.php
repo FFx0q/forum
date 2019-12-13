@@ -1,4 +1,4 @@
-<?php 
+<?php
     namespace App\Controller;
 
     use App\Base\Http;
@@ -6,11 +6,11 @@
     use App\Base\Router;
     use App\Models\Login;
     use App\Base\Session;
-    
-    class LoginController extends Controller 
+
+    class LoginController extends Controller
     {
         public function index()
-        {   
+        {
             if (Login::isUserLoggedIn()) {
                 Router::redirect('/home');
             } else {
@@ -18,11 +18,12 @@
             }
         }
 
-        public function login() 
+        public function login()
         {
             Session::remove('errors');
-            if (!Http::isPost())
+            if (!Http::isPost()) {
                 return;
+            }
                 
             $username = $this->validate($_POST['username']);
             $password = $this->validate($_POST['password']);

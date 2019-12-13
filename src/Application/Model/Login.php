@@ -6,7 +6,7 @@
     use App\Models\User;
     use App\Base\Database;
     use PDO;
-    
+
     class Login extends Model
     {
         public static function login($username, $password)
@@ -20,8 +20,12 @@
                 return false;
             }
             
-            self::setLoginIntoSession($data['id'], $data['group_id'],
-                $username, $data['avatar_url']);
+            self::setLoginIntoSession(
+                $data['id'],
+                $data['group_id'],
+                $username,
+                $data['avatar_url']
+            );
 
             return true;
         }
@@ -46,9 +50,12 @@
             return $data;
         }
 
-        public static function setLoginIntoSession($id, $group_id, 
-            $username, $avatar)
-        {
+        public static function setLoginIntoSession(
+            $id,
+            $group_id,
+            $username,
+            $avatar
+        ) {
             Session::init();
             session_regenerate_id(true);
             $_SESSION = [];
@@ -60,7 +67,7 @@
             Session::set('user_logged_in', true);
             Session::remove('errors');
         }
-        public static function logout() 
+        public static function logout()
         {
             Session::destroy();
         }

@@ -32,5 +32,5 @@
 
         new Route('Settings', 'index', '|^settings/?$|'),
         new Route('Settings', 'save', '|^settings/save/([0-9]+)/?$|')
-        
+
     ];*/

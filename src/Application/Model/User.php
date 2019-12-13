@@ -33,6 +33,4 @@
 
             return $this->getDb()->prepare($sql)->execute([$password, $id]);
         }
-
-
     }

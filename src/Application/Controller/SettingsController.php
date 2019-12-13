@@ -8,12 +8,13 @@
     use App\Models\User;
     use App\Models\Settings;
 
-    class SettingsController extends Controller 
+    class SettingsController extends Controller
     {
         public function index()
         {
-            if (!Session::get('user_logged_in'))
+            if (!Session::get('user_logged_in')) {
                 Router::redirect('/home');
+            }
 
             $user = new User($this->db);
             $data = $user->find(Session::get('user_id'));
@@ -25,11 +26,12 @@
 
         public function save() : void
         {
-            $settings = new Settings($this->db);        
+            $settings = new Settings($this->db);
             Session::remove('errors');
     
-            if (!Http::isPost())
+            if (!Http::isPost()) {
                 return;
+            }
 
             $email = $this->validate($_POST['email']);
             $password = $this->validate($_POST['password']);
@@ -41,5 +43,5 @@
             } else {
                 Router::redirect('/settings');
             }
-        }       
+        }
     }

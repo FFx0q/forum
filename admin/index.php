@@ -12,7 +12,7 @@
         "SELECT COUNT(*) as q FROM Question",
     ];
 
-    for ($i=0; $i < 3; $i++) { 
+    for ($i=0; $i < 3; $i++) {
         $stmt[$i] = $pdo->prepare($sql[$i]);
         $stmt[$i]->execute();
         $result[$i] = $stmt[$i]->fetch(PDO::FETCH_ASSOC);
@@ -55,6 +55,6 @@
 </div>
 
 <footer class="footer">
-    <?php require_once ("template/footer.php"); ?>
+    <?php require_once("template/footer.php"); ?>
 </footer>
 </div>

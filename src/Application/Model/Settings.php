@@ -13,15 +13,15 @@
             $user = new User($this->db);
             $validation = self::validation($username, $password, $email);
             
-            if (!$validation)
+            if (!$validation) {
                 return false;
+            }
 
             $user->setUsername($id, $username);
             $user->setEmail($id, $email);
             $user->setPassword($id, password_hash($password, PASSWORD_DEFAULT));
 
             return true;
-            
         }
 
         public static function validation($username, $password, $email)
@@ -31,7 +31,7 @@
                 return false;
             }
 
-            if (strlen($password) < 6 ) {
+            if (strlen($password) < 6) {
                 Session::add('errors', 'Please enter a long password');
                 return false;
             }

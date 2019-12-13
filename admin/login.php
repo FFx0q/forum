@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    require_once "src/database.php";     
+    require_once "src/database.php";
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,8 @@
     </body>
 </html>
 
-<?php 
-    if(!empty($_POST['username']) AND !empty($_POST['password'])) {
+<?php
+    if (!empty($_POST['username']) and !empty($_POST['password'])) {
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
 
@@ -35,7 +35,7 @@
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        if( $username == $result['name'] &&
+        if ($username == $result['name'] &&
             password_verify($password, $result['member_password_hash']) &&
             $result['group_id'] == 1
         ) {

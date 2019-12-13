@@ -1,4 +1,4 @@
-<?php 
+<?php
     namespace App\Controller;
 
     use App\Base\Http;
@@ -7,7 +7,6 @@
     use App\Base\View;
     use App\Base\Session;
     use App\Models\Register;
-
 
     class RegisterController extends Controller
     {
@@ -20,8 +19,9 @@
         {
             Session::remove('errors');
 
-            if (!Http::isPost())
+            if (!Http::isPost()) {
                 return;
+            }
                 
             $username = $this->validate($_POST['username']);
             $password = $this->validate($_POST['password']);
@@ -36,5 +36,4 @@
                 Router::redirect('/register');
             }
         }
-
     }

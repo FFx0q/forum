@@ -15,7 +15,7 @@
     </head>
     <body class="dark-edition">
         <div class="wrapper">
-            <?php require_once ("sidebar.php"); ?>
+            <?php require_once("sidebar.php"); ?>
             <div class="main-panel">
                 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
                     <div class="container-fluid">

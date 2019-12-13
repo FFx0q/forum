@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
 
     require_once "src/auth.php";
@@ -45,7 +45,7 @@
     </div>
 
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = htmlspecialchars($_POST['username']);
         $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
         $email = htmlspecialchars($_POST['email']);
@@ -57,5 +57,5 @@
             WHERE id = $id";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(); 
+        $stmt->execute();
     }

@@ -46,7 +46,7 @@
                 Session::add('errors', 'Password field empty');
                 return false;
             } else {
-                if (strlen($password) < 6 ) {
+                if (strlen($password) < 6) {
                     Session::add('errors', 'Please enter a long password');
                     return false;
                 }
