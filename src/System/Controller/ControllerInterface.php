@@ -3,5 +3,5 @@
 
     interface ControllerInterface
     {
-        public function handle(int $id, string $method);
+        public function handle(string $method, int $id);
     }

@@ -5,6 +5,7 @@
     $collection = new RouteCollection();
 
     $collection->attachRoute(new Route("/test"));
+    $collection->attachRoute(new Route("/"));
     
     return $collection;
 
