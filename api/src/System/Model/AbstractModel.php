@@ -13,7 +13,8 @@
             $this->db = $db;
 
             $parts = explode('\\', static::class);
-            $this->table = end($parts);
+            $this->table = strtolower(end($parts));
+            
         }
 
         public function getDatabase() : PDO

@@ -4,8 +4,8 @@
 
     $collection = new RouteCollection();
 
-    $collection->attachRoute(new Route("/test"));
-    $collection->attachRoute(new Route("/"));
+    $collection->attachRoute(new Route("/category"));
+    $collection->attachRoute(new Route("/category/([0-9]+)"));
     
     return $collection;
 
