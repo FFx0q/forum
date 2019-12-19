@@ -1,9 +1,34 @@
 <?php
-    namespace App;
+    namespace System;
 
-    class Core
+    use Dotenv\Dotenv;
+
+    class Application
     {
+        private static $instance = null;
         private $rootDir = null;
+        private $booted = false;
+
+        private function __construct() {}
+        private function __clone() {}
+
+        public function getKernel()
+        {
+            if (self::$instance === null) {
+                self::$instance = new Application();
+            }
+
+            return self::$instance;
+        }
+        public function boot()
+        {
+            if ($this->booted === false) {
+                $this->booted = true;
+
+                $dotenv = Dotenv::create($this->getConfigDir());
+                $dotenv->load();
+            }   
+        }
 
         public function getRootDir()
         {
@@ -19,16 +44,6 @@
                 $this->rootDir = $dir;
             }
             return $this->rootDir;
-        }
-
-        public function getTemplateDir()
-        {
-            return $this->getRootDir().'/src/Views';
-        }
-
-        public function getCacheDir()
-        {
-            return $this->getRootDir().'/cache';
         }
 
         public function getConfigDir()
