@@ -25,4 +25,9 @@ class Database extends \PDO
     {
         return $this->connection;
     }
+
+    public function close()
+    {
+        $this->connection = null;
+    }
 }

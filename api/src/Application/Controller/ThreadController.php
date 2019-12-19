@@ -2,29 +2,29 @@
 
     namespace Application\Controller;
 
-    use Application\Model\Post;
+    use Application\Model\Thread;
     use System\Controller\AbstractController;
     use System\Http\Response;
 
-    class PostController extends AbstractController
+    class ThreadController extends AbstractController
     {
         public function handle(string $method, int $id = null)
         {
             switch ($method) {
                 case "GET": {
                     if ($id === null) {
-                        $this->getAllPosts();
+                        $this->getAllTheards();
                         break;
                     }
-                    $this->getPost($id);
+                    $this->getTheard($id);
                     break;
                 }
             }
         }
 
-        public function getAllPosts()
+        public function getAllTheards()
         {
-            $model = new Post($this->getDatabase());
+            $model = new Thread($this->getDatabase());
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
@@ -32,9 +32,9 @@
 
         }
 
-        public function getPost(int $id)
+        public function getTheard(int $id)
         {
-            $model = new Post($this->getDatabase());
+            $model = new Thread($this->getDatabase());
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));

@@ -6,6 +6,8 @@
 
     $collection->attachRoute(new Route("/category"));
     $collection->attachRoute(new Route("/category/([0-9]+)"));
+    $collection->attachRoute(new Route("/post"));
+    $collection->attachRoute(new Route("/post/([0-9]+)"));
     
     return $collection;
 

@@ -3,12 +3,12 @@
     
     use System\Model\AbstractModel;
 
-    class Post extends AbstractModel
+    class Thread extends AbstractModel
     {
-        public function getThreadPost(int $id)
+        public function getTheardsCategory(int $id)
         {
-            $sql = "SELECT * FROM {$this->table} WHERE thread_id = :id";
-            
+            $sql = "SELECT * FROM {$this->table} WHERE category_id = :id";
+
             $stmt = $this->getDatabase()->prepare($sql);
             $stmt->execute(['id' => $id]);
 
