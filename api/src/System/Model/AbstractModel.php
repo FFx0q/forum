@@ -2,13 +2,14 @@
     namespace System\Model;
 
     use PDO;
+    use System\Database\Database;
 
     abstract class AbstractModel
     {
         protected $table;
         private $db;
 
-        public function __construct(PDO $db)
+        public function __construct(Database $db)
         {
             $this->db = $db;
 
@@ -19,7 +20,7 @@
 
         public function getDatabase() : PDO
         {
-            return $this->db;
+            return $this->db->getConnection();
         }
 
         public function find($id)

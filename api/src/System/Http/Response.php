@@ -46,7 +46,7 @@
             $headers['Content-Type'] = "application/json";
 
             $headers['Access-Control-Allow-Origin'] = "*";
-
+            
             $this->setHeaders($headers);
 
             return $this;

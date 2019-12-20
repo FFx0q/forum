@@ -1,7 +1,7 @@
 <?php
 namespace System\Database;
 
-class Database extends \PDO
+class Database
 {
     private $connection = null;
 

@@ -3,8 +3,9 @@
 
     use System\Controller\ControllerInterface;
     use System\Database\Database;
+    use System\Http\Response;
 
-    abstract class AbstractController implements ControllerInterface
+abstract class AbstractController implements ControllerInterface
     {
         protected $connection;
         
@@ -12,11 +13,19 @@
         
         public function __construct()
         {
-            $this->connection = Database::create();
+            $this->connection = new Database;
         }
 
         public function invalidMethod()
         {
+            $response = new Response(403, Response::$statusTexts[403]);
+            $response->send();
+        }
+
+        public function notFound()
+        {
+            $response = new Response(404, Response::$statusTexts[404]);
+            $response->send();
         }
 
         public function getDatabase()

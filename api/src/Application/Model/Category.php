@@ -7,7 +7,7 @@
     {
         public function getCategory(int $id)
         {
-            return [$this->find($id)];
+            return $this->find($id);
         }
         public function getAllCategories()
         {
