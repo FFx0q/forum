@@ -8,21 +8,7 @@
 
     class PostController extends AbstractController
     {
-        public function handle(string $method, int $id = null)
-        {
-            switch ($method) {
-                case "GET": {
-                    if ($id === null) {
-                        $this->getAllPosts();
-                        break;
-                    }
-                    $this->getPost($id);
-                    break;
-                }
-            }
-        }
-
-        public function getAllPosts()
+        public function getPosts()
         {
             $model = new Post($this->getDatabase());
             $result = $model->findAll();
