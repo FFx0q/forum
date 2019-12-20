@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXITS `phpboard`;
+CREATE DATABASE IF NOT EXISTS `phpboard`;
 
 use `phpboard`;
 
