@@ -8,9 +8,7 @@
 abstract class AbstractController implements ControllerInterface
     {
         protected $connection;
-        
-        abstract public function handle(string $method, int $id);
-        
+                
         public function __construct()
         {
             $this->connection = new Database;

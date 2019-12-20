@@ -9,20 +9,7 @@ use System\Controller\AbstractController;
 
 class CategoryController extends AbstractController
     {
-        public function handle(string $method, int $id = null)
-        {
-            switch($method) {
-                case "GET": {
-                    if ($id === null) {
-                        $this->getAllCategories();
-                        break;
-                    }
-                    $this->getCategory($id);
-                    break;
-                }
-            }
-        }
-        public function getAllCategories()
+        public function getCategories()
         {
             $model = new Category($this->getDatabase());
             $result = $model->getAllCategories();

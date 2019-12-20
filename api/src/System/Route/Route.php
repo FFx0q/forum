@@ -6,16 +6,24 @@ use System\Http\Response;
 class Route
 {
     private $pattern;
+    private $callback;
 
-    public function __construct(string $pattern)
+    public function __construct(string $pattern, string $callback)
     {
         $this->pattern = $pattern;
+        $this->callback = $callback;
     }
 
     public function getPattern()
     {
         return $this->pattern;
     }
+
+    public function getCallback()
+    {
+        return $this->callback;
+    }
+
     public function getMethods()
     {
         return [
@@ -25,24 +33,19 @@ class Route
     }
     public function dispatch(string $uri, string $method)
     {
-        $parts = explode('/', $uri);
-        $controller = "Application\\Controller\\".ucwords($parts[1])."Controller";
+        $parts = explode('#', $this->getCallback());
         $param = null;
-
-        if ($uri === "/") {
-            $controller = "Application\\Controller\\IndexController";
-        }
-
+        $controller = "Application\\Controller\\{$parts[0]}";
+        
         if (!class_exists($controller)) {
             $response = new Response(404, Response::$statusTexts[404]);
             $response->prepare()->send();
         }
-
-        if (!empty($parts[2])) {
-            $param = $parts[2];
+        $uriParts = explode('/', $uri);
+        if (!empty($uriParts[2])) {
+            $param = $uriParts[2];
         }
             
-        $worker = new $controller;
-        call_user_func_array([$worker, "handle"], [$method, $param]);
+        call_user_func_array([new $controller, $parts[1]], [(int)$param]);
     }
 }
