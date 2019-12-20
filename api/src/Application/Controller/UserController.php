@@ -1,53 +1,46 @@
 <?php
-    namespace App\Controller;
+    namespace Application\Controller;
 
-    use App\Base\Controller;
-    use App\Base\View;
-    use App\Models\User;
-    use App\Base\Router;
+    use System\Controller\AbstractController;
+    use System\Http\Response;
 
-    class UserController extends Controller
+    use Application\Model\{User, Thread, Post};
+
+    class UserController extends AbstractController
     {
-        public function index()
+        public function getUsers()
         {
-        }
-            
-        public function list()
-        {
-            $user = new User($this->db);
-            $users = $user->findAll();
+            $model = new User($this->getDatabase());
+            $result = $model->findAll();
 
-            return $this->render('user/list.twig', [
-                'users' => $users
-            ]);
+            $response = new Response(200, json_encode($result));
+            $response->send();
         }
 
-        public function profile($id)
+        public function getUser(int $id = null)
         {
-            $user = new User($this->db);
-            $profile = $user->find($id);
+            $model = new User($this->getDatabase());
+            $result = $model->find($id);
 
-            if (!isset($profile)) {
-                Router::redirect('/home');
-            }
-                
-            return $this->render(
-                'user/profile.twig',
-                [
-                'user' => $profile
-            ]
-            );
+            $response = new Response(200, json_encode($result));
+            $response->send();
         }
 
-        public function create(
-            $group_id,
-            $username,
-            $password,
-            $email,
-            $created,
-            $avatar = "avatar_default.png",
-            $reputation = 0
-        ) {
-            User::saveUser($group_id, $username, $password, $email, $created, $avatar, $reputation);
+        public function getUserThreads(int $id = null)
+        {
+            $model = new Thread($this->getDatabase());
+            $result = $model->userThreads($id);
+
+            $response = new Response(200, json_encode($result));
+            $response->send();
+        }
+
+        public function getUserPosts(int $id = null)
+        {
+            $model = new Post($this->getDatabase());
+            $result = $model->userPosts($id);
+
+            $response = new Response(200, json_encode($result));
+            $response->send();
         }
     }

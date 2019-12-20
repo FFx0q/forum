@@ -31,4 +31,13 @@ class CategoryController extends AbstractController
             $response = new Response(200, json_encode($result));
             $response->send();
         }
+
+        public function getSubCategories(int $id = null)
+        {
+            $model = new Category($this->getDatabase());
+            $result = $model->getSubCategories($id);
+
+            $response = new Response(200, json_encode($result));
+            $response->send();
+        }
     }
