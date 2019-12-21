@@ -1,5 +1,5 @@
 <template>
-<router-view></router-view>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
 //import Index from "@/components/Index.vue";
 
 export default {
-  name: "index",
+  name: "index"
   /*components: {
     Index
   }*/

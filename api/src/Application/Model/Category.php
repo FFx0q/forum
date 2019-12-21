@@ -11,7 +11,7 @@
         }
         public function getAllCategories()
         {
-            $sql = "SELECT * FROM {$this->table} WHERE root_category IS NULL";
+            $sql = "SELECT * FROM {$this->table}";
             $stmt = $this->getDatabase()->prepare($sql);
             $stmt->execute();
 
