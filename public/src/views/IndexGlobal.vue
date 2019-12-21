@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <CategoryList />
-  </div>
+    <div>
+        <CategoryList />
+    </div>
 </template>
 <script>
-import CategoryList from "@/components/CategoryList";
-export default {
-  name: "index-global",
-  components: {
-    CategoryList
-  }
-};
+    import CategoryList from '@/components/CategoryList'
+    export default {
+        name: 'index-global',
+        components: {
+            CategoryList,
+        },
+    }
 </script>

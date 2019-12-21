@@ -1,15 +1,15 @@
 <template>
-  <router-view></router-view>
+    <router-view></router-view>
 </template>
 
 <script>
-// @ is an alias to /src
-//import Index from "@/components/Index.vue";
+    // @ is an alias to /src
+    //import Index from "@/components/Index.vue";
 
-export default {
-  name: "index"
-  /*components: {
+    export default {
+        name: 'index',
+        /*components: {
     Index
   }*/
-};
+    }
 </script>
