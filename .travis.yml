@@ -1,0 +1,36 @@
+language: php
+sudo: false
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+
+os: linux
+branches:
+  only:
+    - master
+    - /^release-\d+\.\d+\.\d+\
+cache:
+  directories:
+  - "$HOME/.npm"
+git:
+  depth: 1
+  quiet: true
+
+before_install:
+  - travis/prepare_api.sh
+
+install:
+  - cd api
+  - travis_retry composer install --no-interaction --prefer-source
+
+# Install Node Deps
+before_script:
+  - cd public
+  - npm ci
+
+# Tests and Migrate
+script:
+
