@@ -4,19 +4,29 @@
             <ol class="forumList">
                 <li class="forumRow" v-for="category in categories" v-bind:key="category.id">
                     <h2 class="forumTitle">
-                        <router-link :to="{
-                            name: 'Category',
-                            params: {
-                                id: category.id
-                            }}"> {{ category.name }} </router-link>
+                        <router-link
+                            :to="{
+                                name: 'Category',
+                                params: {
+                                    id: category.id,
+                                },
+                            }"
+                        >
+                            {{ category.name }}
+                        </router-link>
                     </h2>
                     <ol class="dataList" v-for="sub in category.subcategories" v-bind:key="sub.id">
                         <li class="dataItem forumRow" v-for="sub in category.subcategories" v-bind:key="sub.id">
-                            <router-link :to="{
-                                name: 'Category',
-                                params: {
-                                    id: sub.id
-                                }}"> {{ sub.name }} </router-link>
+                            <router-link
+                                :to="{
+                                    name: 'Category',
+                                    params: {
+                                        id: sub.id,
+                                    },
+                                }"
+                            >
+                                {{ sub.name }}
+                            </router-link>
                         </li>
                     </ol>
                 </li>
@@ -86,5 +96,4 @@
             font-weight: bold;
         }
     }
-
 </style>
