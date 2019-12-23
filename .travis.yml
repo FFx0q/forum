@@ -10,6 +10,7 @@ php:
 os: linux
 branches:
   only:
+    - CI
     - master
     - /^release-\d+\.\d+\.\d+\
 cache:
