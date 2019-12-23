@@ -20,6 +20,9 @@ git:
   depth: 1
   quiet: true
 
+services:
+  - mysql
+
 before_install:
   - travis/prepare_api.sh
 
@@ -29,9 +32,9 @@ install:
 
 # Install Node Deps
 before_script:
-  - cd public
+  - cd ../public
   - npm ci
 
 # Tests and Migrate
-script:
+#script:
 
