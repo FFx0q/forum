@@ -15,18 +15,26 @@
                             {{ category.name }}
                         </router-link>
                     </h2>
-                    <ol class="dataList" v-for="sub in category.subcategories" v-bind:key="sub.id">
+                    <ol class="dataList">
                         <li class="dataItem forumRow" v-for="sub in category.subcategories" v-bind:key="sub.id">
-                            <router-link
-                                :to="{
-                                    name: 'Category',
-                                    params: {
-                                        id: sub.id,
-                                    },
-                                }"
-                            >
+                            <div class="dataItem_main">
+                                <router-link
+                                    :to="{
+                                        name: 'Category',
+                                        params: {
+                                            id: sub.id,
+                                        },
+                                    }"
+                                >
                                 {{ sub.name }}
-                            </router-link>
+                                </router-link>
+                            </div>
+                            <div class="dataItem_stats">
+                                
+                            </div>
+                            <div class="dataItem_post">
+
+                            </div>
                         </li>
                     </ol>
                 </li>
@@ -78,6 +86,7 @@
     .forum {
         &List {
             display: flex;
+            flex-direction: column;
             list-style: none;
         }
         &Row {
@@ -94,6 +103,30 @@
             font-size: 1.2em;
             font-family: 'Asap' sans-serif;
             font-weight: bold;
+        }
+    }
+    .dataItem {
+        &_main {
+            display: table-cell;
+            width: 100%;
+            padding: 15px 10px;
+            margin: 0;
+        }
+        &_stats {
+            display: table-cell;
+            width: 15%;
+            min-width: 150px;
+            padding: 15px 10px;
+            text-align: center;
+        }
+        &_post {
+            display: table-cell;
+            width: 25%;
+            min-width: 270px;
+            max-width: 25%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
     }
 </style>
