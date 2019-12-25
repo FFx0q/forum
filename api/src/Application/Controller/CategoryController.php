@@ -15,7 +15,7 @@ class CategoryController extends AbstractController
             $result = $model->getAllCategories();
             
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getCategory(int $id = null)
@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
             }
             
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getSubCategories(int $id = null)
@@ -38,6 +38,6 @@ class CategoryController extends AbstractController
             $result = $model->getSubCategories($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
     }

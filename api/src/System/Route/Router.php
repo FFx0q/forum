@@ -8,18 +8,14 @@
     class Router
     {
         private $routes = [];
+        private $allowedMethod = [
+            'GET',
+            'POST'
+        ];
 
-        public function __construct(RouteCollection $collection)
+        public function __construct(array $collection)
         {
             $this->routes = $collection;
-        }
-
-        public function matchCurrentRequest(Request $request)
-        {
-            if (!$this->match($request->requestUri, $request->requestMethod)) {
-                $response = new Response(404, Response::$statusTexts[404]);
-                $response->prepare()->send();
-            }
         }
 
         public function redirect(string $url)
@@ -27,19 +23,22 @@
             header("Location: {$url}");
         }
 
-        private function match(string $uri, string $method)
+        public function match(string $uri, string $method)
         {
-            foreach ($this->routes->all() as $routes) {
-                if (!in_array($method, $routes->getMethods())) {
+            foreach ($this->routes as $route) {
+                if (!in_array($method, $this->allowedMethod)) {
                     $response = new Response(405, Response::$statusTexts[405]);
-                    $response->prepare()->send();
+                    $response->send();
                 }
-                $pattern = "|^{$routes->getPattern()}?$|";
+
+                $pattern = "|^{$route[1]}?$|";
+                $pattern = str_replace("{id}", "([0-9]+)", $pattern);
+
                 if (preg_match($pattern, $uri)) {
-                    $routes->dispatch($uri, $method);
-                    return true;
+                    return $route;
                 }
             }
+
             return false;
         }
     }

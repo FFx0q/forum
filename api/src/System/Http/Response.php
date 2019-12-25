@@ -33,21 +33,18 @@
 
         public function prepare() : object
         {
-            $request = new Request;
-            //prepare headers
-            $headers = $request->getHeaders();
-
+            $request = new Request($_SERVER);
+            
             // Check HTTP Version
-            if ("HTTP/1.1" != $request->serverProtocol) {
+            if ("HTTP/1.1" != $request->get('SERVER_PROTOCOL')) {
                 $this->setProtocolVersion("1.1");
             }
 
             // set Content-Type to application/json
-            $headers['Content-Type'] = "application/json";
-
-            $headers['Access-Control-Allow-Origin'] = "*";
+            $request->add('Content-Type', 'application/json');
+            $request->add('Access-Control-Allow-Origin', '*');
             
-            $this->setHeaders($headers);
+            $this->setHeaders($request->getHeaders());
 
             return $this;
         }

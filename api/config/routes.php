@@ -1,27 +1,19 @@
 <?php
-    use System\Route\Route;
-    use System\Route\RouteCollection;
+    return [
+        ["GET", "/category", "getCategories"],
+        ["GET", "/category/{id}", "getCategory"],
+        ["GET", "/category/{id}/subcategories", "getSubCategories"],
 
-    $collection = new RouteCollection();
+        ["GET", "/thread", "getThreads"],
+        ["GET", "/thread/{id}", "getThread"],
+        ["GET", "/thread/{id}/posts", "getThreadPosts"],
 
-    // Category Routes
-    $collection->attachRoute(new Route("/category", "CategoryController#getCategories"));
-    $collection->attachRoute(new Route("/category/([0-9]+)", "CategoryController#getCategory"));
-    $collection->attachRoute(new Route("/category/([0-9]+)/subcategories", "CategoryController#getSubCategories"));
+        ["GET", "/post", "getPosts"],
+        ["GET", "/post/{id}", "getPost"],
 
-    // Thread Routes
-    $collection->attachRoute(new Route("/threads", 'ThreadController#getThreads'));
-    $collection->attachRoute(new Route("/threads/([0-9]+)", "ThreadController#getThread"));
-    $collection->attachRoute(new Route("/threads/([0-9]+)/posts", "ThreadController#getThreadPosts"));
+        ["GET", "/user", "getUsers"],
+        ["GET", "/user/{id}", "getUser"],
+        ["GET", "/user/{id}/threads", "getUserThreads"],
+        ["GET", "/user/{id}/posts", "getUserPosts"]
 
-    // Post Routes
-    $collection->attachRoute(new Route("/posts", "PostController#getPosts"));
-    $collection->attachRoute(new Route("/posts/([0-9]+)", "PostController#getPosts"));
-
-    // User Routes
-    $collection->attachRoute(new Route("/users", 'UserController#getUsers'));
-    $collection->attachRoute(new Route("/users/([0-9]+)", "UserController#getUser"));
-    $collection->attachRoute(new Route("/users/([0-9]+)/threads", "UserController#getUserThreads"));
-    $collection->attachRoute(new Route("/users/([0-9]+)/posts", "UserController#getUserPosts"));
-    
-    return $collection;
+    ];

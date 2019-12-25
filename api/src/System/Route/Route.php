@@ -1,51 +1,41 @@
 <?php
 namespace System\Route;
 
+use System\Application;
+use System\Route\{RouteCollection, Router};
 use System\Http\Response;
 
 class Route
 {
-    private $pattern;
-    private $callback;
-
-    public function __construct(string $pattern, string $callback)
+    public static function __callStatic($name, $arguments)
     {
-        $this->pattern = $pattern;
-        $this->callback = $callback;
+        $httpMethod = strtoupper($arguments[1]);
+        $uri = $arguments[0];
+
+        return self::dispatch($httpMethod, $uri);
     }
 
-    public function getPattern()
+    public static function dispatch(string $method, string $uri)
     {
-        return $this->pattern;
-    }
+        $collection = require_once Application::getConfigDir()."routes.php";
+        $router = new Router($collection);
 
-    public function getCallback()
-    {
-        return $this->callback;
-    }
+        $match = $router->match($uri, $method);
 
-    public function getMethods()
-    {
-        return [
-                "POST",
-                "GET"
-            ];
-    }
-    public function dispatch(string $uri, string $method)
-    {
-        $parts = explode('#', $this->getCallback());
-        $param = null;
-        $controller = "Application\\Controller\\{$parts[0]}";
+        $parts = explode('/', $uri);
+        $controller = "Application\\Controller\\".ucwords($parts[1])."Controller";
         
         if (!class_exists($controller)) {
-            $response = new Response(404, Response::$statusTexts[404]);
-            $response->prepare()->send();
+            return new Response(404, Response::$statusTexts[404]);
         }
-        $uriParts = explode('/', $uri);
-        if (!empty($uriParts[2])) {
-            $param = $uriParts[2];
+        
+        $param = null;
+        if (isset($parts[2])) {
+            $param = $parts[2];
         }
-            
-        call_user_func_array([new $controller, $parts[1]], [(int)$param]);
+
+        $response = call_user_func_array([new $controller, $match[2]], [(int)$param]);
+
+        return $response;
     }
 }
