@@ -4,32 +4,46 @@
     class Request
     {
         private $headers = [];
+        private $method;
+        private $url;
 
-        public function __construct()
+        public function __construct(array $headers = [])
         {
-            foreach ($_SERVER as $key => $value) {
-                if (substr($key, 0, 5) == 'HTTP_') {
-                    $this->headers[$key] = $value;
-                }
-                $this->{$this->toCamelCase($key)} = $value;
-            }
+            $this->headers = $headers;
         }
 
-        private function toCamelCase(string $string) : string
+        public function getUrl() : string
         {
-            $result = strtolower($string);
-            preg_match_all('/_[a-z]/', $result, $matches);
-
-            foreach ($matches[0] as $match) {
-                $char = str_replace("_", "", strtoupper($match));
-                $result = str_replace($match, $char, $result);
-            }
-
-            return $result;
+            return $this->url;
         }
 
-        public function getHeaders()
+        public function getMethod() : string
+        {
+            return $this->method;
+        }
+
+        public function getHeaders() : array
         {
             return $this->headers;
+        }
+
+        public function has(string $key)
+        {
+            return isset($this->headers[$key]);
+        }
+
+        public function get(string $key)
+        {
+            return $this->headers[$key];
+        }
+
+        public function add(string $key, $value)
+        {
+            $this->headers[$key] = $value;
+        }
+
+        public function set(string $key, $value)
+        {
+            $this->headers[$key] = $value;
         }
     }

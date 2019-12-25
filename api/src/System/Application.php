@@ -2,6 +2,9 @@
     namespace System;
 
     use Dotenv\Dotenv;
+    use System\Http\Request;
+    use System\Http\Response;
+    use System\Route\Route;
 
     class Application
     {
@@ -30,24 +33,20 @@
             }   
         }
 
-        public function getRootDir()
+        public function handle(Request $request)
         {
-            if ($this->rootDir === null) {
-                $reflection = new \ReflectionObject($this);
-                $dir = dirname($reflection->getFileName());
-                while (!file_exists($dir.'/composer.json')) {
-                    if ($dir === dirname($dir)) {
-                        return $this->rootDir = $dir;
-                    }
-                    $dir = dirname($dir);
-                }
-                $this->rootDir = $dir;
-            }
-            return $this->rootDir;
+            $response = Route::any($request->get('REQUEST_URI'), $request->get('REQUEST_METHOD'));
+        
+            return $response;
         }
 
-        public function getConfigDir()
+        public static function getRootDir()
         {
-            return $this->getRootDir().'/config';
+            return dirname(dirname(__DIR__));
+        }
+
+        public static function getConfigDir()
+        {
+            return self::getRootDir()."/config/";
         }
     }

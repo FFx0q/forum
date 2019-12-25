@@ -1,11 +1,13 @@
 <?php
+    use System\Application;
+    use System\Http\Request;
+
     require_once(__DIR__.'/vendor/autoload.php');
 
-    $app = System\Application::getKernel();
+    $app = Application::getKernel();
     $app->boot();
 
-    $routes = require('config/routes.php');
-    $request = new System\Http\Request;
-
-    $router = new System\Route\Router($routes);
-    $router->matchCurrentRequest($request);
+    $request = new Request($_SERVER);
+    
+    $response = $app->handle($request);
+    $response->send();
