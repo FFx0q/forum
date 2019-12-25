@@ -17,8 +17,7 @@ use Post;
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
-            $response->send();
-
+            return $response;
         }
 
         public function getThread(int $id)
@@ -27,7 +26,7 @@ use Post;
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getThreadPosts(int $id)
@@ -36,6 +35,6 @@ use Post;
             $result = $model->getThreadPosts($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
     }

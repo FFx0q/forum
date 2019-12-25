@@ -14,7 +14,7 @@
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getUser(int $id = null)
@@ -23,7 +23,7 @@
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getUserThreads(int $id = null)
@@ -32,7 +32,7 @@
             $result = $model->userThreads($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
 
         public function getUserPosts(int $id = null)
@@ -41,6 +41,6 @@
             $result = $model->userPosts($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
     }

@@ -14,8 +14,7 @@
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
-            $response->send();
-
+            return $response;
         }
 
         public function getPost(int $id)
@@ -24,6 +23,6 @@
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));
-            $response->send();
+            return $response;
         }
     }
