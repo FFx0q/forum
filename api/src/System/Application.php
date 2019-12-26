@@ -2,6 +2,7 @@
     namespace System;
 
     use Dotenv\Dotenv;
+    use LogicException;
     use System\Http\Request;
     use System\Http\Response;
     use System\Route\Route;
@@ -9,7 +10,6 @@
     class Application
     {
         private static $instance = null;
-        private $rootDir = null;
         private $booted = false;
 
         private function __construct() {}
@@ -36,7 +36,17 @@
         public function handle(Request $request)
         {
             $response = Route::any($request->get('REQUEST_URI'), $request->get('REQUEST_METHOD'));
-        
+
+            if (!$response instanceof Response) {
+                $msg = "The controller must return a Response object";
+
+                if ($response === null) {
+                    $msg .= "\nDid you forget to add a return statement?";
+                }
+
+                throw new LogicException($msg);
+            }
+
             return $response;
         }
 
