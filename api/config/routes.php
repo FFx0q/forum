@@ -1,19 +1,30 @@
 <?php
-    return [
-        ["GET", "/category", "getCategories"],
-        ["GET", "/category/{id}", "getCategory"],
-        ["GET", "/category/{id}/subcategories", "getSubCategories"],
+    use System\Route\RouteCollection;
 
-        ["GET", "/thread", "getThreads"],
-        ["GET", "/thread/{id}", "getThread"],
-        ["GET", "/thread/{id}/posts", "getThreadPosts"],
+    $collection = new RouteCollection();
 
-        ["GET", "/post", "getPosts"],
-        ["GET", "/post/{id}", "getPost"],
+    $collection->group("/category", function() use($collection) {
+        $collection->get("/", "CategoryController#getCategories");
+        $collection->get("/{id}", "CategoryController#getCategory");
+        $collection->get("/{id}/subcategories", "CategoryController#getSubCategories");
+    });
 
-        ["GET", "/user", "getUsers"],
-        ["GET", "/user/{id}", "getUser"],
-        ["GET", "/user/{id}/threads", "getUserThreads"],
-        ["GET", "/user/{id}/posts", "getUserPosts"]
+    $collection->group("/thread", function() use($collection) {
+        $collection->get("/", "ThreadController#getThreads");
+        $collection->get("/{id}", "ThreadController#getThread");
+        $collection->get("/{id}/posts", "ThreadController#getThreadPosts");
+    });
 
-    ];
+    $collection->group("/post", function() use($collection) {
+        $collection->get("/", "PostController#getPosts");
+        $collection->get("/{id}", "PostController#getPost");
+    });
+
+    $collection->group("/user", function() use($collection) {
+        $collection->get("/", "UserController#getUsers");
+        $collection->get("/{id}", "UserController#getUser");
+        $collection->get("/{id}/threads", "UserController#getUserThreads");
+        $collection->get("/{id}/posts", "UserController#getUserPosts");
+    });
+
+    return $collection;

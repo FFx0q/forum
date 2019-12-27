@@ -26,24 +26,26 @@
         {
             $uri = $this->request->get('REQUEST_URI');
             $route = $this->match($uri);
-            var_dump($route);
-
 
             if ($route === false) {
                 $this->notFound();
+
+                return;
             }
         
-            $this->dispatch($route);            
+            return $this->dispatch($uri, $route);            
         }
 
-        private function dispatch($params)
+        private function dispatch(string $uri, array $params)
         {
             list($controller, $method) = explode('#', $params['callback']);
-
             $controller = $this->namespace . $controller;
 
+            $parts = explode('/', $uri);
+            $param = $parts[2] ?? null;
+
             if (class_exists($controller)) {
-                
+                return call_user_func_array([new $controller, $method], [$param]);
             }
         }
 

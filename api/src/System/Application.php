@@ -3,9 +3,8 @@
 
     use Dotenv\Dotenv;
     use LogicException;
-    use System\Http\Request;
-    use System\Http\Response;
-    use System\Route\Route;
+    use System\Http\{Response, Request};
+    use System\Route\{Router, RouteCollection};
 
     class Application
     {
@@ -35,7 +34,10 @@
 
         public function handle(Request $request)
         {
-            $response = Route::any($request->get('REQUEST_URI'), $request->get('REQUEST_METHOD'));
+            $collection = require self::getConfigDir()."routes.php";
+            
+            $router = new Router($collection, $request);
+            $response = $router->handle();
 
             if (!$response instanceof Response) {
                 $msg = "The controller must return a Response object";
