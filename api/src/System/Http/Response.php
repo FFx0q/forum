@@ -1,8 +1,12 @@
 <?php
     namespace System\Http;
 
-    class Response
+    use System\Http\{ResponseInterface, MessageTrait};
+
+    class Response implements ResponseInterface
     {
+        use MessageTrait;
+
         private $statusCode;
         private $statusText;
         private $body;
@@ -24,11 +28,11 @@
             502 => 'Bad Gateway',
         ];
 
-        public function __construct(int $statusCode, $body)
+        public function __construct(int $statusCode, $body = null, string $version = '1.1')
         {
             $this->setStatusCode($statusCode);
             $this->setBody($body);
-            $this->setProtocolVersion("1.1");
+            $this->setProtocolVersion($version);
         }
 
         public function prepare() : object
@@ -40,8 +44,17 @@
                 $this->setProtocolVersion("1.1");
             }
 
-            // set Content-Type to application/json
-            $request->add('Content-Type', 'application/json');
+            // Fix Content-Type
+            if (!$request->has('Content-Type')) {
+                $request->set('Content-Type', "application/json; charset=UTF-8");
+            }
+
+            // Fix Content-Length
+            if ($request->has('Transfer-Encoding')) {
+                $request->remove('Content-Length');
+            }
+
+            // set Access-Control-Allow-Origin
             $request->add('Access-Control-Allow-Origin', '*');
             
             $this->setHeaders($request->getHeaders());
@@ -59,7 +72,7 @@
                 header($name . ": ". $value, false, $this->getStatusCode());
             }
             
-            header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), false, $this->statusCode);
+            header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
 
             return $this;
         }
@@ -103,39 +116,8 @@
             return $this->statusCode;
         }
 
-        public function setBody($content) : object
+        public function getReasonPhrase()
         {
-            $this->body = $content;
-
-            return $this;
-        }
-
-        public function getBody($content)
-        {
-            return $this->body;
-        }
-
-        public function setProtocolVersion(string $version) : object
-        {
-            $this->protocolVersion = $version;
-
-            return $this;
-        }
-
-        public function getProtocolVersion() : string
-        {
-            return $this->protocolVersion;
-        }
-
-        public function setHeaders($headers) : object
-        {
-            $this->headers = $headers;
-
-            return $this;
-        }
-
-        public function getHeaders()
-        {
-            return $this->headers;
+            return $this->statusText;
         }
     }

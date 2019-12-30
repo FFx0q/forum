@@ -1,49 +1,26 @@
 <?php
     namespace System\Http;
 
-    class Request
+    use System\Http\{RequestInterface, MessageTrait};
+
+    class Request implements RequestInterface
     {
+        use MessageTrait;
+
         private $headers = [];
-        private $method;
-        private $url;
 
         public function __construct(array $headers = [])
         {
             $this->headers = $headers;
         }
 
-        public function getUrl() : string
+        public function getUri()
         {
-            return $this->url;
+            return $this->get('REQUEST_URI');
         }
 
-        public function getMethod() : string
+        public function getMethod()
         {
-            return $this->method;
-        }
-
-        public function getHeaders() : array
-        {
-            return $this->headers;
-        }
-
-        public function has(string $key)
-        {
-            return isset($this->headers[$key]);
-        }
-
-        public function get(string $key)
-        {
-            return $this->headers[$key];
-        }
-
-        public function add(string $key, $value)
-        {
-            $this->headers[$key] = $value;
-        }
-
-        public function set(string $key, $value)
-        {
-            $this->headers[$key] = $value;
+            return $this->get('REQUEST_METHOD');
         }
     }
