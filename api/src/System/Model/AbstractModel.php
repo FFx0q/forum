@@ -4,8 +4,9 @@
     use PDO;
     use PDOException;
     use System\Database\DatabaseFactory;
+    use System\Model\ModelInterface;
 
-    abstract class AbstractModel
+    abstract class AbstractModel implements ModelInterface
     {
         protected $table;
         protected $connection;
@@ -18,12 +19,12 @@
             $this->table = strtolower(end($parts));   
         }
 
-        public function getDatabase()
+        public function getDatabase() : PDO
         {
             return $this->connection->getConnection();
         }
 
-        public function find($id)
+        public function find(int $id)
         {
             try {
                 $sql = "SELECT * FROM {$this->table} WHERE id = :id";

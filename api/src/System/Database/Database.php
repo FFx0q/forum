@@ -3,12 +3,13 @@
 
     use PDO;
     use PDOException;
+    use System\Database\DatabaseInterface;
 
-    class Database
+    class Database implements DatabaseInterface
     {
         private $database;
 
-        public function getConnection()
+        public function getConnection() : PDO
         {
             if (!$this->database) {
                 try {
@@ -30,7 +31,7 @@
             return $this->database;
         }
 
-        public function close()
+        public function close() : void
         {
             $this->database = null;
         }
