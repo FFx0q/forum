@@ -4,4 +4,6 @@
     interface ControllerInterface
     {
         public function notFound();
+        public function invalidMethod();
+        public function getDatabase();
     }

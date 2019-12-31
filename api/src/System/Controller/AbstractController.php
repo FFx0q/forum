@@ -17,4 +17,17 @@
             $response = new Response(404, Response::$statusTexts[404]);
             $response->send();
         }
+<<<<<<< HEAD
+=======
+
+        public function getDatabase()
+        {
+            return DatabaseFactory::getFactory()->getConnection();
+        }
+
+        public function __destruct()
+        {
+            $this->connection->close();
+        }
+>>>>>>> create controller interface
     }
