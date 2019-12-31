@@ -2,7 +2,7 @@
     namespace System\Controller;
 
     use System\Controller\ControllerInterface;
-    use System\Database\Database;
+    use System\Database\DatabaseFactory;
     use System\Http\Response;
 
 abstract class AbstractController implements ControllerInterface
@@ -11,7 +11,7 @@ abstract class AbstractController implements ControllerInterface
                 
         public function __construct()
         {
-            $this->connection = new Database;
+            $this->connection = DatabaseFactory::getFactory();
         }
 
         public function invalidMethod()
