@@ -1,33 +1,31 @@
 <?php
-namespace System\Database;
+    namespace System\Database;
 
-class Database
-{
-    private $connection = null;
+    use PDO;
+    use PDOException;
 
-    public function __construct()
+    class Database
     {
-        try {
-            $dsn = 'mysql:host='.getenv('DB_HOST').';dbname='.getenv('DB_DATABASE').';charset=utf8';
-            $this->connection = new \PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
-            echo $e->getMessage();
+        private $database;
+
+        public function getConnection()
+        {
+            if (!$this->database) {
+                try {
+                    $this->database = new PDO(
+                        getenv('DB_TYPE').';host='.getenv('DB_HOST').';dbname='.getenv('DB_NAME').
+                        ';charset=utf-8',
+                        getenv('DB_USER'),
+                        getenv('DB_PASS')
+                    );
+                    $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                } catch (PDOException $e) {
+                    echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
+                    echo 'Error code: ' . $e->getCode();
+
+                    exit;
+                }
+            }
+            return $this->database;
         }
     }
-
-    public static function create()
-    {
-        return new Database;
-    }
-
-    public function getConnection()
-    {
-        return $this->connection;
-    }
-
-    public function close()
-    {
-        $this->connection = null;
-    }
-}
