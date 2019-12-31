@@ -3,6 +3,7 @@
     namespace Application\Controller;
 
     use Application\Model\Post;
+    
     use System\Controller\AbstractController;
     use System\Http\Response;
 

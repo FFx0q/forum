@@ -1,7 +1,8 @@
 <?php
     namespace System\Http;
 
-    use System\Http\{ResponseInterface, MessageTrait};
+    use System\Http\ResponseInterface;
+    use System\Http\MessageTrait;
 
     class Response implements ResponseInterface
     {

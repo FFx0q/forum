@@ -1,6 +1,8 @@
 <?php
     namespace System\Model;
+
     use PDO;
+
     interface ModelInterface
     {
         public function getDatabase() : PDO;

@@ -20,7 +20,6 @@
                         getenv('DB_PASS')
                     );
                     $this->database->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-                    
                 } catch (PDOException $e) {
                     echo 'Database connection can not be estabilished. Please try again later.' . '<br>';
                     echo $e->getMessage();

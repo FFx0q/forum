@@ -1,19 +1,18 @@
 <?php
     namespace Application\Controller;
 
-use Application\Model\Category;
-use Application\Model\Post;
-use Application\Model\Thread;
-use System\Http\Response;
-use System\Controller\AbstractController;
+    use Application\Model\Category;
 
-class CategoryController extends AbstractController
+    use System\Http\Response;
+    use System\Controller\AbstractController;
+
+    class CategoryController extends AbstractController
     {
         public function getCategories()
         {
             $model = new Category();
             $result = $model->getAllCategories();
-            
+                
             $response = new Response(200, json_encode($result));
             return $response;
         }
@@ -27,7 +26,7 @@ class CategoryController extends AbstractController
                 $this->notFound();
                 return;
             }
-            
+                
             $response = new Response(200, json_encode($result));
             return $response;
         }

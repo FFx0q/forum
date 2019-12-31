@@ -16,7 +16,7 @@
             $this->connection = DatabaseFactory::getFactory();
 
             $parts = explode('\\', static::class);
-            $this->table = strtolower(end($parts));   
+            $this->table = strtolower(end($parts));
         }
 
         public function getDatabase() : PDO

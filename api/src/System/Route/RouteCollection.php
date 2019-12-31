@@ -20,7 +20,7 @@
         {
             $method = strtoupper($method);
 
-            if (!in_array($method, $this->allowedMethods))  {
+            if (!in_array($method, $this->allowedMethods)) {
                 $response = new Response(405, Response::$statusTexts[405]);
                 $response->send();
             }
@@ -28,7 +28,7 @@
             $this->add($method, $params[0], $params[1]);
         }
 
-        public function group(string $baseRoute, $callback) 
+        public function group(string $baseRoute, $callback)
         {
             $this->baseRoute .= $baseRoute;
             

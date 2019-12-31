@@ -1,10 +1,12 @@
 <?php
     namespace Application\Controller;
 
+    use Application\Model\User;
+    use Application\Model\Thread;
+    use Application\Model\Post;
+    
     use System\Controller\AbstractController;
     use System\Http\Response;
-
-    use Application\Model\{User, Thread, Post};
 
     class UserController extends AbstractController
     {

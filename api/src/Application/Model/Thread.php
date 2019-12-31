@@ -1,6 +1,6 @@
 <?php
     namespace Application\Model;
-    
+
     use System\Model\AbstractModel;
 
     class Thread extends AbstractModel

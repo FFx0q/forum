@@ -33,7 +33,7 @@
                 return;
             }
         
-            return $this->dispatch($uri, $route);            
+            return $this->dispatch($uri, $route);
         }
 
         private function dispatch(string $uri, array $params)
@@ -52,7 +52,6 @@
         private function match(string $uri)
         {
             foreach ($this->routes->all() as $route => $param) {
-               
                 $pattern = "|^{$route}?$|";
                 $pattern = str_replace("{id}", "([0-9]+)", $pattern);
 

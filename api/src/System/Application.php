@@ -3,16 +3,22 @@
 
     use Dotenv\Dotenv;
     use LogicException;
-    use System\Http\{Response, Request};
-    use System\Route\{Router, RouteCollection};
+    use System\Http\Response;
+    use System\Http\Request;
+    use System\Route\Router;
+    use System\Route\RouteCollection;
 
     class Application
     {
         private static $instance = null;
         private $booted = false;
 
-        private function __construct() {}
-        private function __clone() {}
+        private function __construct()
+        {
+        }
+        private function __clone()
+        {
+        }
 
         public function getKernel()
         {
@@ -29,7 +35,7 @@
 
                 $dotenv = Dotenv::create($this->getConfigDir());
                 $dotenv->load();
-            }   
+            }
         }
 
         public function handle(Request $request)

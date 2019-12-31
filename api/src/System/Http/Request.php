@@ -1,7 +1,8 @@
 <?php
     namespace System\Http;
 
-    use System\Http\{RequestInterface, MessageTrait};
+    use System\Http\RequestInterface;
+    use System\Http\MessageTrait;
 
     class Request implements RequestInterface
     {

@@ -1,11 +1,9 @@
 <?php
-
-use Post;
-
     namespace Application\Controller;
 
     use Application\Model\Thread;
     use Application\Model\Post;
+    
     use System\Controller\AbstractController;
     use System\Http\Response;
 
