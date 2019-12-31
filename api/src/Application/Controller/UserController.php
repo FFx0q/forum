@@ -10,7 +10,7 @@
     {
         public function getUsers()
         {
-            $model = new User($this->getDatabase());
+            $model = new User();
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
@@ -19,7 +19,7 @@
 
         public function getUser(int $id = null)
         {
-            $model = new User($this->getDatabase());
+            $model = new User();
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));
@@ -28,7 +28,7 @@
 
         public function getUserThreads(int $id = null)
         {
-            $model = new Thread($this->getDatabase());
+            $model = new Thread();
             $result = $model->userThreads($id);
 
             $response = new Response(200, json_encode($result));
@@ -37,7 +37,7 @@
 
         public function getUserPosts(int $id = null)
         {
-            $model = new Post($this->getDatabase());
+            $model = new Post();
             $result = $model->userPosts($id);
 
             $response = new Response(200, json_encode($result));

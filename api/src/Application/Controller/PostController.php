@@ -10,7 +10,7 @@
     {
         public function getPosts()
         {
-            $model = new Post($this->getDatabase());
+            $model = new Post();
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
@@ -19,7 +19,7 @@
 
         public function getPost(int $id)
         {
-            $model = new Post($this->getDatabase());
+            $model = new Post();
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));

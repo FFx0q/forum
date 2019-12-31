@@ -11,7 +11,7 @@ class CategoryController extends AbstractController
     {
         public function getCategories()
         {
-            $model = new Category($this->getDatabase());
+            $model = new Category();
             $result = $model->getAllCategories();
             
             $response = new Response(200, json_encode($result));
@@ -20,7 +20,7 @@ class CategoryController extends AbstractController
 
         public function getCategory(int $id = null)
         {
-            $model = new Category($this->getDatabase());
+            $model = new Category();
             $result = $model->getCategory($id);
 
             if ($result === false) {
@@ -34,7 +34,7 @@ class CategoryController extends AbstractController
 
         public function getSubCategories(int $id = null)
         {
-            $model = new Category($this->getDatabase());
+            $model = new Category();
             $result = $model->getSubCategories($id);
 
             $response = new Response(200, json_encode($result));

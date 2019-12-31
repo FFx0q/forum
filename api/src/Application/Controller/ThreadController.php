@@ -13,7 +13,7 @@ use Post;
     {
         public function getTheards()
         {
-            $model = new Thread($this->getDatabase());
+            $model = new Thread();
             $result = $model->findAll();
 
             $response = new Response(200, json_encode($result));
@@ -22,7 +22,7 @@ use Post;
 
         public function getThread(int $id)
         {
-            $model = new Thread($this->getDatabase());
+            $model = new Thread();
             $result = $model->find($id);
 
             $response = new Response(200, json_encode($result));
@@ -31,7 +31,7 @@ use Post;
 
         public function getThreadPosts(int $id)
         {
-            $model = new Post($this->getDatabase());
+            $model = new Post();
             $result = $model->getThreadPosts($id);
 
             $response = new Response(200, json_encode($result));
