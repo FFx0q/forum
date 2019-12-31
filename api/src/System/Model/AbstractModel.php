@@ -2,25 +2,24 @@
     namespace System\Model;
 
     use PDO;
-    use System\Database\Database;
+    use System\Database\DatabaseFactory;
 
     abstract class AbstractModel
     {
         protected $table;
-        private $db;
-
-        public function __construct(Database $db)
+        protected $connection;
+                
+        public function __construct()
         {
-            $this->db = $db;
+            $this->connection = DatabaseFactory::getFactory();
 
             $parts = explode('\\', static::class);
-            $this->table = strtolower(end($parts));
-            
+            $this->table = strtolower(end($parts));   
         }
 
-        public function getDatabase() : PDO
+        public function getDatabase()
         {
-            return $this->db->getConnection();
+            return $this->connection->getConnection();
         }
 
         public function find($id)
