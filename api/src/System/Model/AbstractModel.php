@@ -2,6 +2,7 @@
     namespace System\Model;
 
     use PDO;
+    use PDOException;
     use System\Database\DatabaseFactory;
 
     abstract class AbstractModel
@@ -24,16 +25,26 @@
 
         public function find($id)
         {
-            $stmt = $this->getDatabase()->prepare("SELECT * FROM {$this->table} WHERE id = :id");
-            $stmt->execute(['id' => $id]);
+            try {
+                $sql = "SELECT * FROM {$this->table} WHERE id = :id";
+                $stmt = $this->getDatabase()->prepare($sql);
+                $stmt->execute(['id' => $id]);
 
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
         
         public function findAll()
         {
-            $stmt = $this->getDatabase()->query("SELECT * FROM {$this->table}");
+            try {
+                $sql = "SELECT * FROM {$this->table}";
+                $stmt = $this->getDatabase()->query($sql);
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }
