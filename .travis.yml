@@ -36,5 +36,5 @@ before_script:
   - npm ci
 
 # Tests and Migrate
-#script:
-
+script:
+  - echo "skip test - temp"
