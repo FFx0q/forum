@@ -11,7 +11,11 @@
         public function getCategories()
         {
             $model = new Category();
-            $result = $model->getAllCategories();
+            $result = $model->findAll();
+
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
                 
             return new Response(200, json_encode($result));
         }
@@ -19,11 +23,10 @@
         public function getCategory(int $id = null)
         {
             $model = new Category();
-            $result = $model->getCategory($id);
+            $result = $model->find($id);
 
-            if ($result === false) {
-                $this->notFound();
-                return;
+            if ($model->hasResult($result) === false) {
+               return $this->notFound();
             }
                 
             return new Response(200, json_encode($result));
@@ -32,7 +35,11 @@
         public function getSubCategories(int $id = null)
         {
             $model = new Category();
-            $result = $model->getSubCategories($id);
+            $result = $model->getSubcategories($id);
+
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
 
             return new Response(200, json_encode($result));
         }

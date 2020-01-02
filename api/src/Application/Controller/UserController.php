@@ -23,6 +23,10 @@
             $model = new User();
             $result = $model->find($id);
 
+            if ($model->hasResult($result) == false) {
+                return $this->notFound();
+            }
+
             return new Response(200, json_encode($result));
         }
 
@@ -31,6 +35,10 @@
             $model = new Thread();
             $result = $model->userThreads($id);
 
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
+
             return new Response(200, json_encode($result));
         }
 
@@ -38,6 +46,10 @@
         {
             $model = new Post();
             $result = $model->userPosts($id);
+
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
 
             return new Response(200, json_encode($result));
         }

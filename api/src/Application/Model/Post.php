@@ -5,7 +5,7 @@
 
     class Post extends AbstractModel
     {
-        public function getThreadPosts(int $id)
+        public function threadPosts(int $id)
         {
             $sql = "SELECT * FROM {$this->table} WHERE thread_id = :id";
             

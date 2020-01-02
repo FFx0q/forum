@@ -1,29 +1,22 @@
 <?php
     namespace Application\Model;
 
+    use PDOException;
     use System\Model\AbstractModel;
 
     class Category extends AbstractModel
     {
-        public function getCategory(int $id)
+        public function getSubcategories(int $id)
         {
-            return $this->find($id);
-        }
-        public function getAllCategories()
-        {
-            $sql = "SELECT * FROM {$this->table}";
-            $stmt = $this->getDatabase()->prepare($sql);
-            $stmt->execute();
+            try {
+                $sql = "SELECT * FROM {$this->table} WHERE root_category=:id";
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        }
-        public function getSubCategories(int $id)
-        {
-            $sql = "SELECT * FROM {$this->table} WHERE root_category=:id";
+                $stmt = $this->getDatabase()->prepare($sql);
+                $stmt->execute(['id' => $id]);
 
-            $stmt = $this->getDatabase()->prepare($sql);
-            $stmt->execute(['id' => $id]);
-
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
         }
     }

@@ -24,6 +24,19 @@
             return $this->connection->getConnection();
         }
 
+        public function hasResult(&$result)
+        {
+            if ($result === false) {
+                return false;
+            }
+
+            if (count($result) < 0) {
+                return false;
+            }
+            
+            return true;
+        }
+
         public function find(int $id)
         {
             try {

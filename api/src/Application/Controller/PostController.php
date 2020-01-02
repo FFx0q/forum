@@ -14,6 +14,10 @@
             $model = new Post();
             $result = $model->findAll();
 
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
+
             return new Response(200, json_encode($result));
         }
 
@@ -21,6 +25,10 @@
         {
             $model = new Post();
             $result = $model->find($id);
+
+            if ($model->hasResult($result) === false) {
+                return $this->notFound();
+            }
 
             return new Response(200, json_encode($result));
         }

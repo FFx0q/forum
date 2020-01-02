@@ -8,13 +8,11 @@
     {
         public function invalidMethod()
         {
-            $response = new Response(403, Response::$statusTexts[403]);
-            $response->send();
+            return new Response(403, Response::$statusTexts[403]);
         }
 
         public function notFound()
         {
-            $response = new Response(404, Response::$statusTexts[404]);
-            $response->send();
+            return new Response(404, Response::$statusTexts[404]);
         }
     }
