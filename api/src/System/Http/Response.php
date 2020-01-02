@@ -70,11 +70,11 @@
             }
 
             foreach ($this->getHeaders() as $name => $value) {
-                header($name . ": ". $value, false, $this->getStatusCode());
+                if (!is_array($name)) {
+                    header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
+                }
             }
             
-            header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
-
             return $this;
         }
 
