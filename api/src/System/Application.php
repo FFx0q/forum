@@ -1,16 +1,16 @@
 <?php
     namespace System;
 
+    use Exception;
     use Dotenv\Dotenv;
-    use LogicException;
     use System\Http\Response;
     use System\Http\Request;
     use System\Route\Router;
-    use System\Route\RouteCollection;
 
     class Application
     {
-        private static $instance = null;
+        private static $instance = null;  
+
         private $booted = false;
 
         private function __construct()
@@ -38,6 +38,15 @@
             }
         }
 
+        public function shutdown()
+        {
+            if ($this->booted === false) {
+                return;
+            }
+
+            $this->booted = false;
+        }
+
         public function handle(Request $request)
         {
             $collection = require self::getConfigDir()."routes.php";
@@ -52,11 +61,19 @@
                     $msg .= "\nDid you forget to add a return statement?";
                 }
 
-                throw new LogicException($msg);
+                throw new Exception($msg);
             }
 
             return $response;
         }
+
+        public function error(string $msg)
+        {
+            $response = new Response(500, $msg);
+            $response->send();
+            
+            $this->shutdown();
+        } 
 
         public static function getRootDir()
         {
