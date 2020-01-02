@@ -35,7 +35,7 @@
             return $this;
         }
 
-        public function getBody($content)
+        public function getBody()
         {
             return $this->body;
         }

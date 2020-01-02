@@ -29,37 +29,24 @@
             502 => 'Bad Gateway',
         ];
 
-        public function __construct(int $statusCode, $body = null, string $version = '1.1')
+        public function __construct(int $code = 200, $body = '')
         {
-            $this->setStatusCode($statusCode);
+            $this->setStatusCode($code);
             $this->setBody($body);
-            $this->setProtocolVersion($version);
+            $this->setProtocolVersion('1.1');
         }
 
         public function prepare() : object
         {
-            $request = new Request($_SERVER);
+            $this->set('Date', gmdate( 'D, d M Y H:i:s T' ));
+         
+            foreach (getallheaders() as $key => $value) {
+                $this->set($key, $value);
+            }
+
+            $this->set('Content-Type', 'application/json; charset=UTF-8');
+            $this->set('Access-Control-Allow-Origin', '*');
             
-            // Check HTTP Version
-            if ("HTTP/1.1" != $request->get('SERVER_PROTOCOL')) {
-                $this->setProtocolVersion("1.1");
-            }
-
-            // Fix Content-Type
-            if (!$request->has('Content-Type')) {
-                $request->set('Content-Type', "application/json; charset=UTF-8");
-            }
-
-            // Fix Content-Length
-            if ($request->has('Transfer-Encoding')) {
-                $request->remove('Content-Length');
-            }
-
-            // set Access-Control-Allow-Origin
-            $request->add('Access-Control-Allow-Origin', '*');
-            
-            $this->setHeaders($request->getHeaders());
-
             return $this;
         }
 
@@ -68,10 +55,12 @@
             if (headers_sent()) {
                 return $this;
             }
+            
+            header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
 
             foreach ($this->getHeaders() as $name => $value) {
                 if (!is_array($name)) {
-                    header(sprintf("HTTP/%s %s %s", $this->protocolVersion, $this->statusCode, $this->statusText), true, $this->statusCode);
+                    header($name.': '.$value, 0, $this->statusCode);
                 }
             }
             

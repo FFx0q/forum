@@ -14,8 +14,7 @@
             $model = new Thread();
             $result = $model->findAll();
 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
 
         public function getThread(int $id)
@@ -23,8 +22,7 @@
             $model = new Thread();
             $result = $model->find($id);
 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
 
         public function getThreadPosts(int $id)
@@ -32,7 +30,6 @@
             $model = new Post();
             $result = $model->getThreadPosts($id);
 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
     }

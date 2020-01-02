@@ -13,8 +13,7 @@
             $model = new Category();
             $result = $model->getAllCategories();
                 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
 
         public function getCategory(int $id = null)
@@ -27,8 +26,7 @@
                 return;
             }
                 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
 
         public function getSubCategories(int $id = null)
@@ -36,7 +34,6 @@
             $model = new Category();
             $result = $model->getSubCategories($id);
 
-            $response = new Response(200, json_encode($result));
-            return $response;
+            return new Response(200, json_encode($result));
         }
     }
