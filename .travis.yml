@@ -1,0 +1,25 @@
+language: php
+php:
+  - 7.3
+  - 7.4
+
+os: linux
+branches:
+  only:
+    - master
+    - /^release-\d+\.\d+\.\d+\
+
+git:
+  depth: 1
+  quiet: true
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS society;
+
+install:
+  - cd api
+  - composer self-update
+  - travis_retry composer install --no-interaction --prefer-source

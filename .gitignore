@@ -1,5 +1,2 @@
-/vendor/
-/cache/
 /.vscode
-public/css/*.css.map
-config/.env
+/.idea
