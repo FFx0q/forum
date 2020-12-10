@@ -1,30 +1,27 @@
 <?php
-    use System\Route\RouteCollection;
+    use Slim\App;
+    use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
-    $collection = new RouteCollection();
+    use Society\Application\Actions\User\{
+        ListUserAction,
+        ViewUserAction,
+        DeleteUserAction,
+        CreateUserAction
+    };
 
-    $collection->group("/category", function () use ($collection) {
-        $collection->get("/", "CategoryController#getCategories");
-        $collection->get("/{id}", "CategoryController#getCategory");
-        $collection->get("/{id}/subcategories", "CategoryController#getSubCategories");
-    });
+    use Society\Application\Actions\Post\{
+        ListPostAction
+    };
 
-    $collection->group("/thread", function () use ($collection) {
-        $collection->get("/", "ThreadController#getThreads");
-        $collection->get("/{id}", "ThreadController#getThread");
-        $collection->get("/{id}/posts", "ThreadController#getThreadPosts");
-    });
+    return function (App $app) {
+        $app->group('/user', function (Group $group) {
+            $group->get('', ListUserAction::class);
+            $group->get('/{username}', ViewUserAction::class);
+            $group->post('/', CreateUserAction::class);
+            $group->delete('/{id}', DeleteUserAction::class);
+        });
 
-    $collection->group("/post", function () use ($collection) {
-        $collection->get("/", "PostController#getPosts");
-        $collection->get("/{id}", "PostController#getPost");
-    });
-
-    $collection->group("/user", function () use ($collection) {
-        $collection->get("/", "UserController#getUsers");
-        $collection->get("/{id}", "UserController#getUser");
-        $collection->get("/{id}/threads", "UserController#getUserThreads");
-        $collection->get("/{id}/posts", "UserController#getUserPosts");
-    });
-
-    return $collection;
+        $app->group('/post', function(Group $group) {
+            $group->get('', ListPostAction::class);
+        });
+    };
