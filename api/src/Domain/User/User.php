@@ -6,17 +6,17 @@
     class User
     {
         public UserId $id;
-        public string $username;
+        public string $login;
         public string $password;
         public string $email;
         public ?DateTime $createdAt;
 
-        public function __construct(UserId $id, $username, $password, $email, DateTime $createdAt = null)
+        public function __construct(UserId $id, $login, $password, $email, DateTime $createdAt = null)
         {
-          $this->id = $id;
-          $this->username = $username;
-          $this->password = $password;
-          $this->email = $email;
-          $this->createdAt = $createdAt ?: new DateTime();
+            $this->id = $id;
+            $this->login = $login;
+            $this->password = $password;
+            $this->email = $email;
+            $this->createdAt = $createdAt ?: new DateTime();
         }
     }

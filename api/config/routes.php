@@ -1,27 +1,33 @@
 <?php
     use Slim\App;
-    use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+    use Society\Application\Actions\PreflightAction;
+
+    use Society\Application\Actions\Auth\{
+        LoginAuthAction,
+        RegisterAuthAction
+    };
 
     use Society\Application\Actions\User\{
         ListUserAction,
         ViewUserAction,
         DeleteUserAction,
-        CreateUserAction
     };
 
     use Society\Application\Actions\Post\{
-        ListPostAction
+        ListPostAction,
+        CreatePostAction
     };
 
     return function (App $app) {
-        $app->group('/user', function (Group $group) {
-            $group->get('', ListUserAction::class);
-            $group->get('/{username}', ViewUserAction::class);
-            $group->post('/', CreateUserAction::class);
-            $group->delete('/{id}', DeleteUserAction::class);
-        });
+        $app->post('/auth/register', RegisterAuthAction::class);
+        $app->post('/auth/login', LoginAuthAction::class);
+        $app->options('/auth/login', PreflightAction::class);
+        
+        $app->get('/user', ListUserAction::class);
+        $app->get('/user/{id}', ViewUserAction::class);
+        $app->options('/user', PreflightAction::class);
 
-        $app->group('/post', function(Group $group) {
-            $group->get('', ListPostAction::class);
-        });
+        $app->get('/post', ListPostAction::class);
+        $app->post('/post', CreatePostAction::class);
+        $app->options('/post', PreflightAction::class);
     };

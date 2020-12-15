@@ -2,8 +2,8 @@
     namespace Society\Application\Actions\User;
 
     use Society\Application\Actions\Action;
-use Society\Domain\Post\PostRepository;
-use Society\Domain\User\UserRepository;
+    use Society\Domain\Post\PostRepository;
+    use Society\Domain\User\UserRepository;
 
     abstract class UserAction extends Action
     {

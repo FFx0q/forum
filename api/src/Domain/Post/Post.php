@@ -13,9 +13,12 @@
         public ?DateTime $updatedAt;
 
         public function __construct(
-            PostId $id, UserId $author, PostBody $body, DateTime $createdAt = null, DateTime $updatedAt = null
-        )
-        {
+            PostId $id,
+            UserId $author,
+            PostBody $body,
+            DateTime $createdAt = null,
+            DateTime $updatedAt = null
+        ) {
             $this->id = $id;
             $this->author = $author;
             $this->body = $body;

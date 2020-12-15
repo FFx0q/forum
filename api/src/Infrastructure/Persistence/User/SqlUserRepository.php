@@ -3,18 +3,18 @@
 
     use DateTime;
     use PDO;
-    use Society\Application\Core\Database;
     use Society\Domain\User\User;
     use Society\Domain\User\UserId;
     use Society\Domain\User\UserRepository;
 
     class SqlUserRepository implements UserRepository
     {
+        const DATE_FORMAT = 'Y-m-d H:i:s';
         private PDO $pdo;
 
-        public function __construct()
+        public function __construct(PDO $pdo)
         {
-            $this->pdo = Database::getFactory()->getConnection();
+            $this->pdo = $pdo;
         }
 
         public function all(): array
@@ -23,15 +23,15 @@
 
             return array_map(function ($row) {
                 return $this->build($row);
-            }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            }, $stmt->fetchAll());
         }
 
-        public function ofUsername(string $username)
+        public function ofLogin(string $login)
         {
-            $stmt = $this->execute('SELECT * FROM User WHERE username = :username', [
-                'username' => $username
+            $stmt = $this->execute('SELECT * FROM User WHERE login = :login', [
+                'login' => $login
             ]);
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
 
             if ($row === false) {
                 return;
@@ -42,11 +42,11 @@
 
         public function ofId(UserId $id): User
         {
-            $stmt = $this->execute('SELECT * FROM User WHERE id = :id',[
+            $stmt = $this->execute('SELECT * FROM User WHERE id = :id', [
                 'id' => $id->id()
             ]);
 
-            return $this->build($stmt->fetch(PDO::FETCH_ASSOC));
+            return $this->build($stmt->fetch());
         }
 
         public function remove(User $u)
@@ -58,25 +58,30 @@
 
         public function save(User $u)
         {
-            $sql = 'INSERT INTO User VALUES  (?,?,?,?,?)';
-            $stmt = $this->pdo->prepare($sql);
+            $sql = 'INSERT INTO User VALUES (:id, :login ,:password ,:email ,:createdAt)';
 
-            return $stmt->execute([$u->id, $u->username, $u->password, $u->email, $u->createdAt]);
+            return $this->execute($sql, [
+                'id' => $u->id,
+                'login' => $u->login,
+                'password' => $u->password,
+                'email' => $u->email,
+                'createdAt' => $u->createdAt->format(SELF::DATE_FORMAT)
+            ]);
         }
 
         public function update(User $u)
         {
-            $sql = 'UPDATE User SET username=?, password=?, email=?, createdAt=? WHERE  id=?';
+            $sql = 'UPDATE User SET login=?, password=?, email=?, createdAt=? WHERE id=?';
             $this->execute($sql, [
-                $u->username, $u->password, $u->email, $u->createdAt, $u->id->id()
+                $u->login, $u->password, $u->email, $u->createdAt, $u->id->id()
             ]);
         }
 
-        private function build($row)
+        private function build($row): User
         {
             return new User(
                 new UserId($row['id']),
-                $row['username'],
+                $row['login'],
                 $row['password'],
                 $row['email'],
                 new DateTime($row['createdAt'])

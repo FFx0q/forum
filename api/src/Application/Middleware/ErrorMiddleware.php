@@ -1,9 +1,11 @@
 <?php
-    namespace Society\Application\Handlers;
+    namespace Society\Application\Middleware;
 
+    use Throwable;
     use Psr\Http\Message\ResponseInterface as Response;
     use Slim\Handlers\ErrorHandler;
-    use Society\Application\Actions\{ActionError, ActionPayload};   
+    use Society\Application\Actions\ActionError;
+    use Society\Application\Actions\ActionPayload;
     use Slim\Exception\HttpBadRequestException;
     use Slim\Exception\HttpException;
     use Slim\Exception\HttpForbiddenException;
@@ -12,7 +14,7 @@
     use Slim\Exception\HttpNotImplementedException;
     use Slim\Exception\HttpUnauthorizedException;
 
-    class HttpErrorHandler extends ErrorHandler
+    class ErrorMiddleware extends ErrorHandler
     {
         protected function respond(): Response
         {
@@ -26,7 +28,7 @@
             if ($exception instanceof HttpException) {
                 $statusCode = $exception->getCode();
                 $error->setDescription($exception->getMessage());
-    
+
                 if ($exception instanceof HttpNotFoundException) {
                     $error->setType(ActionError::RESOURCE_NOT_FOUND);
                 } elseif ($exception instanceof HttpMethodNotAllowedException) {
@@ -41,18 +43,17 @@
                     $error->setType(ActionError::NOT_IMPLEMENTED);
                 }
             }
-    
-            if (!($exception instanceof HttpException) && $this->displayErrorDetails)
-            {
+
+            if (!($exception instanceof HttpException) && $exception instanceof Throwable && $this->displayErrorDetails) {
                 $error->setDescription($exception->getMessage());
             }
 
             $payload = new ActionPayload($statusCode, null, $error);
             $encodedPayload = json_encode($payload, JSON_PRETTY_PRINT);
-    
+
             $response = $this->responseFactory->createResponse($statusCode);
             $response->getBody()->write($encodedPayload);
-    
+
             return $response->withHeader('Content-Type', 'application/json');
         }
     }

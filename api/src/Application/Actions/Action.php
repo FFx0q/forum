@@ -10,7 +10,9 @@
         protected Response $response;
         protected array $args;
     
-        public function __construct() {}
+        public function __construct()
+        {
+        }
 
         public function __invoke(Request $request, Response $response, $args): Response
         {
@@ -23,12 +25,11 @@
 
         abstract protected function action(): Response;
         
-        protected function getFormData ()
+        protected function getFormData()
         {
             $input = json_decode(file_get_contents('php://input'));
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-
             }
 
             return $input;
@@ -37,7 +38,6 @@
         protected function resolveArg(string $name)
         {
             if (!isset($this->args[$name])) {
-                
             }
     
             return $this->args[$name];
@@ -59,5 +59,4 @@
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($payload->getStatusCode());
         }
-
     }

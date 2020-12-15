@@ -7,4 +7,5 @@
     {
         public function all(): array;
         public function ofAuthor(UserId $id): array;
+        public function save(Post $post);
     }
