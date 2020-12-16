@@ -8,8 +8,8 @@
     {
         protected function action(): Response
         {
-            $users = array_map(function(User $user) {
-               return [
+            $users = array_map(function (User $user) {
+                return [
                    'id' => $user->id->id(),
                    'login' => $user->login,
                    'email' => $user->email,

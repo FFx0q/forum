@@ -12,11 +12,11 @@
                     'level' => Logger::DEBUG,
                 ],
                 'db' => [
-                    'type' => '',
-                    'host' => '',
-                    'user' => '',
-                    'pass' => '',
-                    'name' => '',
+                    'type' => 'mysql',
+                    'host' => '127.0.0.1',
+                    'user' => 'root',
+                    'pass' => 'bP75meku',
+                    'name' => 'society',
                 ]
             ]
         ]);
