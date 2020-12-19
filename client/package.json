@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel public/index.html",
     "build": "parcel public/index.html",
-    "format": "eslint --fix"
+    "format": "eslint --fix src/**"
   },
   "repository": {
     "type": "git",

@@ -13,7 +13,7 @@ export default ({ posts }) => (
                             <Avatar src={''} />
                         }
                         title={post.author.login}
-                        subheader={new Date(post.createdAt.date).toLocaleString()}
+                        subheader={post.createdAt}
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">

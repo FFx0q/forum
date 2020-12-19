@@ -2,9 +2,10 @@
     namespace Society\Domain\Post;
 
     use DateTime;
+    use JsonSerializable;
     use Society\Domain\User\UserId;
 
-    class Post
+    class Post implements JsonSerializable
     {
         public PostId $id;
         public UserId $author;
@@ -24,5 +25,16 @@
             $this->body = $body;
             $this->createdAt = $createdAt ?: new DateTime;
             $this->updatedAt = $updatedAt ?: new DateTime;
+        }
+
+        public function jsonSerialize(): array
+        {
+            return [
+                'id' => $this->id->id(),
+                'author' => $this->author->id(),
+                'body' => $this->body->content(),
+                'createdAt' => $this->createdAt,
+                'updatedAt' => $this->updatedAt
+            ];
         }
     }

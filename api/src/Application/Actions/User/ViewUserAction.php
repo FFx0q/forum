@@ -16,11 +16,6 @@
                 throw new UserNotFoundException("User was not found");
             }
 
-            return $this->respondWithData([
-                'id' => $user->id->id(),
-                'login' => $user->login,
-                'email' => $user->email,
-                'createdAt' => $user->createdAt
-            ], 200);
+            return $this->respondWithData($user, 200);
         }
     }

@@ -13,13 +13,10 @@
                 $user = $this->userRepository->ofId(new UserId($post->author->id()));
                 return [
                     'id' => $post->id->id(),
-                    'author' => [
-                        'id' => $user->id->id(),
-                        'login' => $user->login
-                    ],
+                    'author' => $user,
                     'content' => $post->body->content(),
-                    'updatedAt' => $post->updatedAt,
-                    'createdAt' => $post->createdAt
+                    'updatedAt' => $post->updatedAt->format('Y-m-d H:i:s'),
+                    'createdAt' => $post->createdAt->format('Y-m-d H:i:s')
                 ];
             }, $this->postRepository->all());
 
