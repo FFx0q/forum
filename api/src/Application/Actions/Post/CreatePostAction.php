@@ -13,7 +13,7 @@ use Society\Domain\Post\PostId;
         {
             $body = $this->getFormData();
 
-            $post = new Post(new PostId(), new UserId($body->userId), new PostBody($body->content));
+            $post = new Post(new PostId(), new UserId($body->author), new PostBody($body->body));
             $this->postRepository->save($post);
 
             return $this->respondWithData($post, 201);
