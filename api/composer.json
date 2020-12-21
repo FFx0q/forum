@@ -9,12 +9,11 @@
     ],
     "require": {
         "php-di/php-di": "^6.3",
-        "symfony/dotenv": "^5.2",
-        "laminas/laminas-diactoros": "^2.5",
-        "laminas/laminas-httphandlerrunner": "^1.3",
         "slim/slim": "4.*",
-        "monolog/monolog": "^2.1",
-        "ramsey/uuid": "^4.1"
+        "slim/psr7": "^1.3",
+        "monolog/monolog": "^2.2.0",
+        "ramsey/uuid": "^4.1",
+        "firebase/php-jwt": "^5.2"
     },
     "autoload": {
         "psr-4": {
@@ -22,8 +21,11 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "touch config/.env"
+        "format": [
+            "vendor/bin/php-cs-fixer fix  --stop-on-violation src/ --rules=@PSR2"
         ]
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.17"
     }
 }

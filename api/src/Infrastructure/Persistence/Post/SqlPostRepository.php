@@ -2,7 +2,7 @@
     namespace Society\Infrastructure\Persistence\Post;
 
     use PDO;
-    use Society\Application\Core\Database;
+    use DateTime;
     use Society\Domain\Post\Post;
     use Society\Domain\Post\PostBody;
     use Society\Domain\Post\PostId;
@@ -11,31 +11,44 @@
 
     class SqlPostRepository implements PostRepository
     {
+        const DATE_FORMAT = 'Y-m-d H:i:s';
         private PDO $pdo;
 
-        public function __construct()
+        public function __construct(PDO $pdo)
         {
-            $this->pdo = Database::getFactory()->getConnection();
+            $this->pdo = $pdo;
         }
 
         public function all(): array
         {
-            $stmt = $this->execute('SELECT * FROM Post', []);
+            $stmt = $this->execute('SELECT * FROM Post ORDER BY createdAt DESC', []);
 
-            return array_map(function($row) {
+            return array_map(function ($row) {
                 return $this->build($row);
-            }, $stmt->fetchALl(PDO::FETCH_ASSOC));
+            }, $stmt->fetchALl());
         }
 
         public function ofAuthor(UserId $id): array
         {
-            $stmt = $this->execute('SELECT * FROM Post WHERE author=:author', [
+            $stmt = $this->execute('SELECT * FROM Post WHERE author=:author ORDER BY createdAt DESC', [
                 'author' => $id->id()
             ]);
 
-            return array_map(function($row) {
+            return array_map(function ($row) {
                 return $this->build($row);
-            }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            }, $stmt->fetchAll());
+        }
+
+        public function save(Post $post)
+        {
+            $sql = 'INSERT INTO Post VALUES(:id, :author, :body, :createdAt, :updatedAt)';
+            return $this->execute($sql, [
+                'id' => $post->id->id(),
+                'author' => $post->author->id(),
+                'body' => $post->body->content(),
+                'createdAt' => $post->createdAt->format(self::DATE_FORMAT),
+                'updatedAt' => $post->updatedAt->format(self::DATE_FORMAT)
+            ]);
         }
 
         private function build($row): Post
@@ -44,8 +57,8 @@
                 new PostId($row['id']),
                 new UserId($row['author']),
                 new PostBody($row['content']),
-                $row['createdAt'],
-                $row['updatedAt']
+                new DateTime($row['createdAt']),
+                new DateTime($row['updatedAt'])
             );
         }
 

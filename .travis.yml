@@ -17,7 +17,7 @@ services:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS society;
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS society;'
 
 install:
   - cd api

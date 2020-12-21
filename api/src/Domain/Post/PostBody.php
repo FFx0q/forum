@@ -1,7 +1,6 @@
 <?php
     namespace Society\Domain\Post;
 
-
     use Rhumsaa\Uuid\Console\Exception;
 
     class PostBody
@@ -26,5 +25,4 @@
         {
             return $this->content;
         }
-
     }

@@ -1,27 +1,40 @@
 <?php
     use Slim\App;
-    use Slim\Interfaces\RouteCollectorProxyInterface as Group;
+    use Slim\Routing\RouteCollectorProxy as Group;
 
+    use Society\Application\Actions\Auth\TokenAuthAction;
     use Society\Application\Actions\User\{
+        CreateUserAction,
         ListUserAction,
         ViewUserAction,
-        DeleteUserAction,
-        CreateUserAction
+        DeleteUserAction
     };
 
     use Society\Application\Actions\Post\{
-        ListPostAction
+        ListPostAction,
+        CreatePostAction
     };
+    use Society\Application\Actions\PreflightAction;
 
     return function (App $app) {
-        $app->group('/user', function (Group $group) {
-            $group->get('', ListUserAction::class);
-            $group->get('/{username}', ViewUserAction::class);
-            $group->post('/', CreateUserAction::class);
-            $group->delete('/{id}', DeleteUserAction::class);
-        });
+        $app->group('/api/v1', function(Group $group) {
+            $group->group('/auth', function (Group $group) {
+                $group->post('', TokenAuthAction::class);
+                $group->options('', PreflightAction::class);
+            });
+            
+            $group->group('/users', function (Group $group) {
+                $group->get('', ListUserAction::class);
+                $group->post('', CreateUserAction::class);
+                $group->get('/{login}', ViewUserAction::class);
+                $group->delete('/{id}', DeleteUserAction::class);
+                $group->options('', PreflightAction::class);
+            });
 
-        $app->group('/post', function(Group $group) {
-            $group->get('', ListPostAction::class);
+            $group->group('/posts', function(Group $group) {
+                $group->get('', ListPostAction::class);
+                $group->post('', CreatePostAction::class);
+                $group->options('', PreflightAction::class);
+            });
         });
     };
