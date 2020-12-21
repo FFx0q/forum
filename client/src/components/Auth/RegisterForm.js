@@ -1,71 +1,56 @@
-import React, { Component } from "react";
-import { TextField, Button, Grid } from "@material-ui/core";
+import React, { useState } from "react";
 import config from "../../config.json";
 
-export default class RegisterForm extends Component {
-  constructor(props) {
-    super(props);
+export const RegisterForm = () => {
+  const [isError, setIsError] = useState(false);
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    this.state = {
-      login: "",
-      password: "",
-    };
+  const request = {
+    method: "POST",
+    body: JSON.stringify({ login, email, password }),
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(e) {
-    fetch(`${config.api_url}/users`, {
-      method: "POST",
-      body: JSON.stringify(this.state),
-    }).catch((e) => console.error(e));
-    e.preventDefault();
-  }
-
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  render() {
-    return (
-      <form method="POST" onSubmit={this.handleSubmit}>
-        <div style={{ padding: 16 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                name={"login"}
-                label={"login"}
-                onChange={this.handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                name={"password"}
-                type={"password"}
-                label={"password"}
-                onChange={this.handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                name={"email"}
-                type={"email"}
-                label={"email"}
-                onChange={this.handleChange}
-              />
-            </Grid>
-            <Grid item>
-              <Button type={"submit"}>Register</Button>
-            </Grid>
-          </Grid>
-        </div>
-      </form>
+  const register = async () => {
+    await fetch(`${config.api_url}/users`, request).catch((e) =>
+      setIsError(true)
     );
-  }
-}
+  };
+
+  return (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <div style={({ display: "flex" }, { flexDirection: "column" })}>
+        <input
+          required
+          type={"text"}
+          name={"login"}
+          placeholder={"login"}
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
+        />
+        <input
+          required
+          type={"email"}
+          name={"email"}
+          placeholder={"email"}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          required
+          type={"password"}
+          name={"password"}
+          placeholder={"password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit" onClick={register}>
+          Register
+        </button>
+        {isError && <span>Error</span>}
+      </div>
+    </form>
+  );
+};

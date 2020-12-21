@@ -1,12 +1,12 @@
 import React from "react";
-import { PostListContainer } from "../components/Post";
+import { ProfileContainer } from "../components/Profile";
 import { MainMenu } from "../components/Layout";
 
-export const HomePage = () => {
+export const ProfilePage = () => {
   return (
     <>
       <MainMenu />
-      <PostListContainer />
+      <ProfileContainer />
     </>
   );
 };

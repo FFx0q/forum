@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-import config from "../../config.json";
-import PostList from "./PostList";
-import PostForm from "./PostForm";
+import React from "react";
+import { PostList } from "./PostList";
+import { useRequest } from "../../hooks";
 
-export default () => {
-  const [data, setData] = useState(null);
-  const fetchData = () =>
-    fetch(`${config.api_url}/posts`).then((r) => r.json());
+export const PostListContainer = () => {
+  const { data, loading, error } = useRequest(`/posts`);
 
-  useEffect(() => {
-    fetchData().then((data) => setData(data["data"]));
-  }, []);
+  if (loading || !data) {
+    return <h1>Loading...</h1>;
+  }
 
-  return (
-    <Grid container>
-      <Grid item xs={12}>
-        <PostForm />
-      </Grid>
-      <Grid item xs={12}>
-        <PostList posts={data} />
-      </Grid>
-    </Grid>
-  );
+  if (error) {
+    return <span>{error.message}</span>;
+  }
+
+  return <PostList {...data} />;
 };

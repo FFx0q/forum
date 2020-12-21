@@ -9,13 +9,21 @@
     {
         protected function action(): Response
         {
-            $userId = $this->resolveArg('id');
-            $user = $this->userRepository->ofId(new UserId($userId));
+            $login = $this->resolveArg('login');
+            $user = $this->userRepository->ofLogin($login);
 
             if (!$user) {
                 throw new UserNotFoundException("User was not found");
             }
+            $posts = $this->postRepository->ofAuthor($user->id);
+            $result = [
+                'id' => $user->id->id(),
+                'login' => $user->login,
+                'email' => $user->email,
+                'createdAt' => $user->createdAt->format('Y-m-d H:i:s'),
+                'posts' => $posts
+            ];
 
-            return $this->respondWithData($user, 200);
+            return $this->respondWithData($result, 200);
         }
     }

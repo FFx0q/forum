@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Button, TextField, Card, CardHeader, Avatar } from "@material-ui/core";
 import config from "../../config.json";
+import { Link, Redirect } from "react-router-dom";
 
-export default () => {
+export const PostForm = () => {
+  const { login } = JSON.parse(localStorage.getItem("user"))["user"];
   const [body, setBody] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const post = () => {
-    if (body.length === 0) {
+  const post = (e) => {
+    if (body.length === 0 || body.length >= 280) {
       setIsError(true);
       return;
     }
@@ -21,30 +22,29 @@ export default () => {
   };
 
   return (
-    <form>
-      <Card>
-        <CardHeader
-          avatar={<Avatar src={""} />}
-          title={
-            <TextField
-              style={{ width: 450 }}
-              multiline
-              name={"body"}
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
-            />
-          }
-          subheader={
-            <Button
-              onClick={post}
-              variant="contained"
-              style={{ marginTop: 16 }}
-            >
-              Post
-            </Button>
-          }
+    <form onSubmit={post}>
+      <div>
+        <Link
+          className={"profile"}
+          to={`/${login}`}
+          style={{ marginRight: "15px" }}
+        >
+          <img
+            className={"avatarSmall"}
+            src={
+              "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+            }
+            alt={login}
+          />
+        </Link>
+        <textarea
+          name={"body"}
+          value={body}
+          placeholder={"Post something.."}
+          onChange={(e) => setBody(e.target.value)}
         />
-      </Card>
+        <input type={"submit"} value={"Post"} />
+      </div>
       {isError && <span>Failed to add post!</span>}
     </form>
   );

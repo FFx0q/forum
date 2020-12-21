@@ -4,10 +4,10 @@
 
     use Society\Application\Actions\Auth\TokenAuthAction;
     use Society\Application\Actions\User\{
-    CreateUserAction,
-    ListUserAction,
+        CreateUserAction,
+        ListUserAction,
         ViewUserAction,
-        DeleteUserAction,
+        DeleteUserAction
     };
 
     use Society\Application\Actions\Post\{
@@ -26,7 +26,7 @@
             $group->group('/users', function (Group $group) {
                 $group->get('', ListUserAction::class);
                 $group->post('', CreateUserAction::class);
-                $group->get('/{id}', ViewUserAction::class);
+                $group->get('/{login}', ViewUserAction::class);
                 $group->delete('/{id}', DeleteUserAction::class);
                 $group->options('', PreflightAction::class);
             });

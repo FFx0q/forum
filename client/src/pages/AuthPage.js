@@ -1,24 +1,17 @@
 import React from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
 import { LoginForm, RegisterForm } from "../components/Auth";
-import { Header } from "../components/Layout/Header";
 
-export default () => {
+export const AuthPage = () => {
   return (
-    <Container>
-      <Header />
-      <div style={{ padding: 32, margin: "auto", maxWidth: 960 }}>
-        <Grid container alignItems="flex-start" spacing={2}>
-          <Grid item xs={6}>
-            <Typography variant={"h4"}>Already have an account?</Typography>
-            <LoginForm />
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant={"h4"}>Create an account</Typography>
-            <RegisterForm />
-          </Grid>
-        </Grid>
+    <div className={"grid"}>
+      <div className={"column"}>
+        <h2>Already have an account?</h2>
+        <LoginForm />
       </div>
-    </Container>
+      <div className={"column"}>
+        <h2>Create an account</h2>
+        <RegisterForm />
+      </div>
+    </div>
   );
 };

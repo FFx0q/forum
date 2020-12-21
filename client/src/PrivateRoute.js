@@ -1,9 +1,9 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { useAuth } from "./context/auth";
-import AuthPage from "./pages/AuthPage";
+import { AuthPage } from "./pages";
 
-export default ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
   const { authToken } = useAuth();
 
   return (

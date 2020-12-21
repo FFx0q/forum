@@ -33,8 +33,8 @@
                 'id' => $this->id->id(),
                 'author' => $this->author->id(),
                 'body' => $this->body->content(),
-                'createdAt' => $this->createdAt,
-                'updatedAt' => $this->updatedAt
+                'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
+                'updatedAt' => $this->updatedAt->format('Y-m-d H:i:s')
             ];
         }
     }

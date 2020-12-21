@@ -30,7 +30,7 @@
 
         public function ofAuthor(UserId $id): array
         {
-            $stmt = $this->execute('SELECT * FROM Post WHERE author=:author', [
+            $stmt = $this->execute('SELECT * FROM Post WHERE author=:author ORDER BY createdAt DESC', [
                 'author' => $id->id()
             ]);
 

@@ -1,2 +1,3 @@
-export { default as HomePage } from "./HomePage";
-export { default as AuthPage } from "./AuthPage";
+export { HomePage } from "./HomePage";
+export { AuthPage } from "./AuthPage";
+export { ProfilePage } from "./ProfilePage";
