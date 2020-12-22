@@ -5,13 +5,19 @@ const useRequest = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const { token } = JSON.parse(localStorage.getItem("user"));
+  
   useEffect(() => {
     let ignore = false;
     const fetchData = async () => {
       setLoading(true);
 
-      const data = await fetch(`${config.api_url}${url}`);
+      const data = await fetch(`${config.api_url}${url}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       const json = await data.json();
 
       if (!ignore) setData(json);

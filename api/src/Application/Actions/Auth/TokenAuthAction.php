@@ -2,38 +2,42 @@
     namespace Society\Application\Actions\Auth;
 
     use Psr\Http\Message\ResponseInterface as Response;
-    use \Firebase\JWT\JWT;
-    use Society\Application\Actions\Auth\AuthAction;
-    use Society\Domain\User\UserNotFoundException;
+    use Firebase\JWT\JWT;
 
     class TokenAuthAction extends AuthAction
     {
-        const KEY = 'DEV';
+        const KEY = 'society';
         protected function action(): Response
         {
             $body = $this->getFormData();
             $user = $this->userRepository->ofLogin($body->login);
 
-            if (!$user) {
-                throw new UserNotFoundException();
-            }
-            if (!password_verify($body->password, $user->password)) {
-                throw new \Exception('password doesn\'t match');
+            if (!$user || !password_verify($body->password, $user->password)) {
+                return $this->respondWithData(['message' => 'Login Failed.'], 401);
             }
             
-            $payload = [
-                'uid' => $user->id->id(),
-                'login' => $user->login
+            $issuedAt   = time();
+            $notBefore  = $issuedAt + 10;             
+            $expire     = $notBefore + 60; 
+
+            $token = [
+                'iat' => $issuedAt,
+                'jti' => base64_encode(random_bytes(32)),
+                'nbf' => $notBefore,
+                'exp' => $expire,
+                'data' => [
+                    'id' => $user->id->id(),
+                    'login' => $user->login
+                ]
             ];
 
-            $jwt = JWT::encode($payload, SELF::KEY);
+            $jwt = JWT::encode($token, SELF::KEY, 'HS256');
 
             return $this->respondWithData([
-                'user' => [
-                    'token' => $jwt,
-                    'uid' => $payload['uid'],
-                    'login' => $payload['login']
-                ]
+                'uid' => $token['data']['id'],
+                'login' => $token['data']['login'],
+                'token' => $jwt
             ], 200);
         }
+
     }

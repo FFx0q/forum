@@ -3,7 +3,7 @@ import config from "../../config.json";
 import { Link, Redirect } from "react-router-dom";
 
 export const PostForm = () => {
-  const { login } = JSON.parse(localStorage.getItem("user"))["user"];
+  const { login, token } = JSON.parse(localStorage.getItem("user"));
   const [body, setBody] = useState("");
   const [isError, setIsError] = useState(false);
 
@@ -14,9 +14,12 @@ export const PostForm = () => {
     }
     fetch(`${config.api_url}/posts`, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         body,
-        author: JSON.parse(localStorage.getItem("user"))["user"]["uid"],
+        author: JSON.parse(localStorage.getItem("user"))["uid"],
       }),
     }).catch((e) => setIsError(true));
   };

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { HomeRounded, PersonRounded } from "@material-ui/icons";
 
 export const MainMenu = () => {
-  const { login } = JSON.parse(localStorage.getItem("user"))["user"];
+  const { login } = JSON.parse(localStorage.getItem("user"));
 
   return (
     <nav className={"mainMenu"}>

@@ -7,10 +7,12 @@ import { HomePage, ProfilePage } from "./pages";
 export const App = () => {
   const existsToken = JSON.parse(localStorage.getItem("user"));
   const [authToken, setAuthToken] = useState(existsToken);
+  
   const setToken = (data) => {
     localStorage.setItem("user", JSON.stringify(data));
     setAuthToken(data);
   };
+  
   return (
     <AuthContext.Provider value={{ authToken, setAuthToken: setToken }}>
       <BrowserRouter>

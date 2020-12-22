@@ -24,7 +24,7 @@ export const LoginForm = () => {
       setAuthToken(json.data);
       setLoggedIn(true);
     } else {
-      setIsTrue(true);
+      setIsError(true);
     }
   };
 
