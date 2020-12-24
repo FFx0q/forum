@@ -1,2 +1,2 @@
-export { PostListContainer } from "./PostListContainer";
-export { PostList } from "./PostList";
+export { default as Post } from "./Post";
+export { default as PostForm } from "./Form";

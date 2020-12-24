@@ -4,21 +4,17 @@
 
     use Society\Application\Middleware\AuthMiddleware;
     use Society\Application\Actions\Auth\TokenAuthAction;
-    use Society\Application\Actions\User\{
-        CreateUserAction,
-        ListUserAction,
-        ViewUserAction,
-        DeleteUserAction
-    };
+    use Society\Application\Actions\User\CreateUserAction;
+use Society\Application\Actions\User\ListUserAction;
+use Society\Application\Actions\User\ViewUserAction;
+use Society\Application\Actions\User\DeleteUserAction;
 
-    use Society\Application\Actions\Post\{
-        ListPostAction,
-        CreatePostAction
-    };
+    use Society\Application\Actions\Post\ListPostAction;
+use Society\Application\Actions\Post\CreatePostAction;
     use Society\Application\Actions\PreflightAction;
 
     return function (App $app) {
-        $app->group('/api/v1', function(Group $group) {
+        $app->group('/api/v1', function (Group $group) {
             $group->post('/auth', TokenAuthAction::class);
             $group->options('/auth', PreflightAction::class);
             
@@ -30,11 +26,10 @@
                 $group->options('/{login}', PreflightAction::class);
             });
 
-            $group->group('/posts', function(Group $group) {
-                $group->get('', ListPostAction::class)->add(AuthMiddleware::class);;
-                $group->post('', CreatePostAction::class)->add(AuthMiddleware::class);;
+            $group->group('/posts', function (Group $group) {
+                $group->get('', ListPostAction::class)->add(AuthMiddleware::class);
+                $group->post('', CreatePostAction::class)->add(AuthMiddleware::class);
                 $group->options('', PreflightAction::class);
             });
-
         });
     };

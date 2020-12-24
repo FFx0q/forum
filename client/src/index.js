@@ -1,7 +1,17 @@
-import "regenerator-runtime/runtime";
 import React from "react";
-import { render } from "react-dom";
-import { App } from "./app";
-import "./theme/index.scss";
+import ReactDOM from "react-dom";
 
-render(<App />, document.querySelector("#root"));
+import App from "./components/app";
+import "../style/index.scss";
+
+import { Provider } from "react-redux";
+import createStore from "./store";
+
+const store = createStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector("#root")
+);

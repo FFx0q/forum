@@ -1,1 +1,1 @@
-export { ProfileContainer } from "./ProfileContainer";
+export { ProfilePosts } from "./ProfilePosts";

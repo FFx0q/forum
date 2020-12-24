@@ -17,8 +17,8 @@
             }
             
             $issuedAt   = time();
-            $notBefore  = $issuedAt + 10;             
-            $expire     = $notBefore + 60; 
+            $notBefore  = $issuedAt + 10;
+            $expire     = $notBefore + 60;
 
             $token = [
                 'iat' => $issuedAt,
@@ -39,5 +39,4 @@
                 'token' => $jwt
             ], 200);
         }
-
     }
