@@ -1,4 +1,6 @@
-import { authHeader } from "../helpers";
+import { push } from "connected-react-router";
+import { postService } from "../services";
+
 import {
   FETCH_POSTS_PENDING,
   FETCH_POSTS_SUCCESS,
@@ -8,31 +10,23 @@ import {
   SAVE_POST_FAILURE,
 } from "./types";
 
-const { Authorization } = authHeader();
-const headers = {
-  "Content-Type": "application/json",
-  Accept: "application/json",
-  Authorization,
-};
-
 export const fetchPosts = () => (dispatch) => {
   dispatch({ type: FETCH_POSTS_PENDING });
 
-  fetch("http://localhost:8080/api/v1/posts", { headers })
-    .then((res) => res.json())
-    .then((res) => dispatch({ type: FETCH_POSTS_SUCCESS, posts: res.data }))
+  postService
+    .gellAll()
+    .then((posts) => dispatch({ type: FETCH_POSTS_SUCCESS, posts }))
     .catch((error) => dispatch({ type: FETCH_POSTS_FAILURE, error }));
 };
 
-export const savePost = (data) => (dispatch) => {
+export const savePost = (post) => (dispatch) => {
   dispatch({ type: SAVE_POST_PENDING });
 
-  fetch("http://localhost:8080/api/v1/posts", {
-    method: "POST",
-    headers,
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((res) => dispatch({ type: SAVE_POST_SUCCESS, posts: res.data }))
+  postService
+    .add(post)
+    .then((post) => {
+      dispatch({ type: SAVE_POST_SUCCESS, post });
+      dispatch(push("/"));
+    })
     .catch((error) => dispatch({ type: SAVE_POST_FAILURE, error }));
 };

@@ -3,12 +3,10 @@ import { Route } from "react-router";
 import LoginContainer from "../container/AuthContainer";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-  const user = localStorage.getItem("user");
-
   return (
-    <Route
-      {...rest}
-      render={(props) => (user ? <Component {...props} /> : <LoginContainer />)}
-    />
+    <Route {...rest} render={(props) => (
+        localStorage.getItem("user")
+        ? <Component {...props} />
+        : <LoginContainer /> )} />
   );
 };

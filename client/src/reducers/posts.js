@@ -38,12 +38,13 @@ const postReducer = (state = initialState, action) => {
       };
 
     case SAVE_POST_SUCCESS:
+      console.log(state.posts)
       return {
         ...state,
         loading: true,
         posts: {
           ...state.posts,
-          [action.posts.id]: action.posts,
+          [action.post.id]: action.post,
         },
       };
     default:

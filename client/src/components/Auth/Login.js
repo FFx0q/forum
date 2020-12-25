@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { authActions } from "../../actions";
-import { push } from "connected-react-router";
 
 class Login extends React.Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class Login extends React.Component {
 
     if (login && password) {
       this.props.dispatch(authActions.login({ login, password }));
-      this.props.dispatch(push("/"));
     }
   }
 

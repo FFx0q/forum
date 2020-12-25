@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { savePost } from "../../actions/post";
-import { push } from "connected-react-router";
 
 class PostForm extends React.Component {
   constructor(props) {
@@ -26,7 +25,6 @@ class PostForm extends React.Component {
     e.preventDefault();
 
     this.props.dispatch(savePost(this.state));
-    this.props.dispatch(push("/"));
   }
 
   render() {
@@ -62,6 +60,7 @@ class PostForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    posts: state.posts.posts,
     error: state.posts.error,
   };
 };

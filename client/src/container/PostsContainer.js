@@ -21,7 +21,7 @@ class PostsContainer extends React.Component {
         <MainMenu />
         <section className={"mainSection"}>
           <PostForm />
-          {loading ? (
+          {!loading ? (
             <Loader />
           ) : (
             <>
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.posts,
     error: state.posts.error,
-    pending: state.posts.pending,
+    loading: state.posts.loading,
   };
 };
 

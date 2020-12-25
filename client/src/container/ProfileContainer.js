@@ -7,16 +7,30 @@ import { ProfilePosts} from "../components/Profile";
 class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      login: ""
+    }
   }
 
   componentDidMount() {
     const { login } = this.props.match.params;
+
+    this.setState({ login });
     this.props.dispatch(fetchUser(login));
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { login } = this.props.match.params;
+
+    if (prevState.login !== login) {
+      this.setState({ login });
+      this.props.dispatch(fetchUser(login));
+    }
   }
 
   render() {
     const { error, loading, users } = this.props;
-    const { posts } = users;
 
     return (
       <>
@@ -25,6 +39,7 @@ class ProfileContainer extends React.Component {
           {loading ? (
             <Loader />
           ) : (
+            <>
             <div className={"profileHeader"}>
               <img
                 className={"avatarBig"}
@@ -38,14 +53,15 @@ class ProfileContainer extends React.Component {
                   <h1>{users.login}</h1>
                   <div className={"stats"}>
               <span>
-                Posts: <span>{users.posts?.length}</span>
+                Posts: <span>{users.posts?.length }</span>
               </span>
                   </div>
                 </div>
               </div>
             </div>
+            <ProfilePosts {...users} />
+            </>
           )}
-          <ProfilePosts {...users} />
           {error && <div>{error}</div>}
         </section>
       </>
@@ -57,7 +73,7 @@ const mapStateToProps = (state) => {
   return {
     users: state.user.users,
     error: state.user.error,
-    pending: state.user.pending,
+    loading: state.user.loading,
   };
 };
 

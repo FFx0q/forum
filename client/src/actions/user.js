@@ -17,10 +17,10 @@ export const fetchUser = (login) => (dispatch) => {
       Authorization,
     },
   })
-    .then(res => res.json())
-    .then(res => dispatch({ type: FETCH_USER_SUCCESS, user: res.data }))
-    .catch(error => dispatch({ type: FETCH_USER_FAILURE, error}));
-}
+    .then((res) => res.json())
+    .then((res) => dispatch({ type: FETCH_USER_SUCCESS, user: res.data }))
+    .catch((error) => dispatch({ type: FETCH_USER_FAILURE, error }));
+};
 
 export const saveUser = (data) => (dispatch) => {
   dispatch({ type: SAVE_USER_PENDING });
