@@ -29,38 +29,40 @@ class Login extends React.Component {
   }
 
   render() {
+    const { error } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <div style={({ display: "flex" }, { flexDirection: "column" })}>
           <input
             required
-            type={"text"}
-            name={"login"}
-            placeholder={"login"}
+            type="text"
+            name="login"
+            placeholder="login"
             value={this.state.login}
             onChange={this.handleChange}
           />
           <input
             required
-            type={"password"}
-            name={"password"}
-            placeholder={"password"}
+            type="password"
+            name="password"
+            placeholder="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
 
-          <input type={"submit"} value={"login"} />
+          <input type="submit" value="login" />
         </div>
+        {error && <span>Invalid username or password</span>}
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.auth.user,
-    loggedIn: state.auth.loggedIn,
-  };
-};
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  user: state.auth.user,
+  loggedIn: state.auth.loggedIn,
+});
 
 export default connect(mapStateToProps)(Login);

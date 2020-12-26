@@ -9,6 +9,10 @@ export const login = (userInfo) => {
   return fetch("http://localhost:8080/api/v1/auth", headers)
     .then((res) => res.json())
     .then((res) => {
+      if (res.statusCode !== 200) {
+        return {};
+      }
+
       localStorage.setItem("user", JSON.stringify(res.data));
       return res.data;
     });

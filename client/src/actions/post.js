@@ -19,11 +19,11 @@ export const fetchPosts = () => (dispatch) => {
     .catch((error) => dispatch({ type: FETCH_POSTS_FAILURE, error }));
 };
 
-export const savePost = (post) => (dispatch) => {
+export const savePost = (data) => (dispatch) => {
   dispatch({ type: SAVE_POST_PENDING });
 
   postService
-    .add(post)
+    .add(data)
     .then((post) => {
       dispatch({ type: SAVE_POST_SUCCESS, post });
       dispatch(push("/"));

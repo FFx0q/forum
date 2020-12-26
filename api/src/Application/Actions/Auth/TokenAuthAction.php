@@ -3,6 +3,7 @@
 
     use Psr\Http\Message\ResponseInterface as Response;
     use Firebase\JWT\JWT;
+    use Slim\Exception\HttpUnauthorizedException;
 
     class TokenAuthAction extends AuthAction
     {
@@ -13,7 +14,7 @@
             $user = $this->userRepository->ofLogin($body->login);
 
             if (!$user || !password_verify($body->password, $user->password)) {
-                return $this->respondWithData(['message' => 'Login Failed.'], 401);
+                throw new HttpUnauthorizedException($this->request);
             }
             
             $issuedAt   = time();

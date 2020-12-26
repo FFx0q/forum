@@ -33,36 +33,32 @@ class PostForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <div>
           <Link
-            className={"profile"}
+            className="profile"
             to={`/${this.state.login}`}
             style={{ marginRight: "15px" }}
           >
             <img
-              className={"avatarSmall"}
-              src={
-                "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
-              }
+              className="avatarSmall"
+              src="https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
               alt={`${this.state.login}`}
             />
           </Link>
           <textarea
-            name={"body"}
+            name="body"
             value={this.state.body}
-            placeholder={"Post something.."}
+            placeholder="Post something.."
             onChange={this.handleChange}
           />
-          <input type={"submit"} value={"Post"} />
+          <input type="submit" value="Post" />
         </div>
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    posts: state.posts.posts,
-    error: state.posts.error,
-  };
-};
+const mapStateToProps = (state) => ({
+  posts: state.posts.posts,
+  error: state.posts.error,
+});
 
 export default connect(mapStateToProps)(PostForm);

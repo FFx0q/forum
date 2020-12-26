@@ -14,7 +14,8 @@
         "monolog/monolog": "^2.2.0",
         "ramsey/uuid": "^4.1",
         "firebase/php-jwt": "^5.2",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

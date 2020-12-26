@@ -3,7 +3,7 @@
 
     use Psr\Http\Message\ResponseInterface as Response;
     use Society\Domain\User\UserId;
-    use Society\Domain\User\UserNotFoundException;
+    use Society\Domain\User\UserException;
 
     class DeleteUserAction extends UserAction
     {
@@ -13,7 +13,7 @@
             $user = $this->userRepository->ofId(new UserId($userId));
 
             if (!$user) {
-                throw new UserNotFoundException("User with id {$userId} is not found");
+                throw new UserException("User with id {$userId} is not found");
             }
             
             $this->userRepository->remove($user);

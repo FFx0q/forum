@@ -35,40 +35,38 @@ class Register extends React.Component {
         <div style={({ display: "flex" }, { flexDirection: "column" })}>
           <input
             required
-            type={"text"}
-            name={"login"}
-            placeholder={"login"}
+            type="text"
+            name="login"
+            placeholder="login"
             value={this.state.login}
             onChange={this.handleChange}
           />
           <input
             required
-            type={"email"}
-            name={"email"}
-            placeholder={"email"}
+            type="email"
+            name="email"
+            placeholder="email"
             value={this.state.email}
             onChange={this.handleChange}
           />
           <input
             required
-            type={"password"}
-            name={"password"}
-            placeholder={"password"}
+            type="password"
+            name="password"
+            placeholder="password"
             value={this.state.password}
             onChange={this.handleChange}
           />
 
-          <input type={"submit"} value={"Register"} />
+          <input type="submit" value="Register" />
         </div>
       </form>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 
 export default connect(mapStateToProps)(Register);

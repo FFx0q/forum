@@ -19,20 +19,20 @@ class MainMenu extends React.Component {
 
   render() {
     return (
-      <nav className={"mainMenu"}>
-        <div className={"logo"}>
+      <nav className="mainMenu">
+        <div className="logo">
           <h2>Society</h2>
         </div>
-        <Link to={"/"}>
-          <HomeRounded fontSize={"large"} />
+        <Link to="/">
+          <HomeRounded fontSize="large" />
           <span>Home</span>
         </Link>
         <Link to={`/${this.state.login}`}>
-          <PersonRounded fontSize={"large"} />
+          <PersonRounded fontSize="large" />
           <span>Profile</span>
         </Link>
       </nav>
-    )
+    );
   }
 }
 

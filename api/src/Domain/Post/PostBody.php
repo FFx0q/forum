@@ -1,8 +1,6 @@
 <?php
     namespace Society\Domain\Post;
 
-    use Rhumsaa\Uuid\Console\Exception;
-
     class PostBody
     {
         private string $content;
@@ -15,7 +13,7 @@
         private function setContent(string $content)
         {
             if (empty($content)) {
-                throw new \DomainException('body is empty');
+                throw new PostException("Body is empty");
             }
 
             $this->content = $content;

@@ -7,24 +7,22 @@ export const ProfilePosts = (users) => {
   return (
     <>
       {posts?.map((post) => (
-        <article key={post.id} className={"post"}>
-          <Link className={"profile"} to={`/${users.login}`}>
+        <article key={post.id} className="post">
+          <Link className="profile" to={`/${users.login}`}>
             <img
-              className={"avatarSmall"}
-              src={
-                "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
-              }
+              className="avatarSmall"
+              src="https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
               alt={users.login}
             />
           </Link>
           <div>
-            <div className={"author"}>
-              <Link className={"name"} to={`/${users.login}`}>
+            <div className="author">
+              <Link className="name" to={`/${users.login}`}>
                 {users.login}
               </Link>
-              <span className={"date"}>{post.createdAt}</span>
+              <span className="date">{post.createdAt}</span>
             </div>
-            <div className={"text"}>
+            <div className="text">
               <p>{post.body}</p>
             </div>
           </div>
@@ -32,4 +30,4 @@ export const ProfilePosts = (users) => {
       ))}
     </>
   );
-}
+};

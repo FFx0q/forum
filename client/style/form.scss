@@ -6,17 +6,17 @@ form {
     border: none;
     padding: 10px;
   }
-  
+
   input {
     border: none;
     padding: 10px 15px;
     margin: 20px 0px;
     font-size: 20px;
-    font-weight:300;
+    font-weight: 300;
 
     &:focus {
       outline: none;
-      border-bottom:1px solid #ddd;
+      border-bottom: 1px solid #ddd;
     }
   }
 

@@ -38,7 +38,7 @@ const postReducer = (state = initialState, action) => {
       };
 
     case SAVE_POST_SUCCESS:
-      console.log(state.posts)
+      console.log(state.posts);
       return {
         ...state,
         loading: true,

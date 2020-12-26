@@ -18,7 +18,14 @@ export const fetchUser = (login) => (dispatch) => {
     },
   })
     .then((res) => res.json())
-    .then((res) => dispatch({ type: FETCH_USER_SUCCESS, user: res.data }))
+    .then((res) => {
+      if (res.statusCode !== 200) {
+        const error = new Error(res.error.description);
+        dispatch({ type: FETCH_USER_FAILURE, error });
+      }
+
+      dispatch({ type: FETCH_USER_SUCCESS, user: res.data });
+    })
     .catch((error) => dispatch({ type: FETCH_USER_FAILURE, error }));
 };
 

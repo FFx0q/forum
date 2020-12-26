@@ -5,10 +5,6 @@ import { Loader, MainMenu } from "../components/Layout";
 import { Post, PostForm } from "../components/Post";
 
 class PostsContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchPosts());
   }
@@ -19,7 +15,7 @@ class PostsContainer extends React.Component {
     return (
       <>
         <MainMenu />
-        <section className={"mainSection"}>
+        <section className="mainSection">
           <PostForm />
           {!loading ? (
             <Loader />
@@ -37,12 +33,10 @@ class PostsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    posts: state.posts.posts,
-    error: state.posts.error,
-    loading: state.posts.loading,
-  };
-};
+const mapStateToProps = (state) => ({
+  posts: state.posts.posts,
+  error: state.posts.error,
+  loading: state.posts.loading,
+});
 
 export default connect(mapStateToProps)(PostsContainer);
