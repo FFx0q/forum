@@ -3,6 +3,6 @@
 
     use Exception;
 
-    class UserNotFoundException extends Exception
+    class UserException extends Exception
     {
     }

@@ -3,7 +3,7 @@
 
     use Psr\Http\Message\ResponseInterface as Response;
     use Society\Domain\User\UserId;
-    use Society\Domain\User\UserNotFoundException;
+    use Society\Domain\User\UserException;
 
     class ViewUserAction extends UserAction
     {
@@ -13,7 +13,7 @@
             $user = $this->userRepository->ofLogin($login);
 
             if (!$user) {
-                throw new UserNotFoundException("User was not found");
+                throw new UserException("User was not found");
             }
             $posts = $this->postRepository->ofAuthor($user->id);
             $result = [
