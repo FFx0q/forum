@@ -1,19 +1,15 @@
-CREATE DATABASE IF NOT EXISTS `society`;
-
-use `society`;
-
-CREATE TABLE `User` (
-	id VARCHAR(36) PRIMARY KEY NOT NULL,
+CREATE TABLE Users (
+	id UUID PRIMARY KEY NOT NULL,
 	login VARCHAR(48) UNIQUE NOT NULL,
-	password BINARY(60),
+	password varchar(60),
     email VARCHAR(255),
-	createdAt DATETIME
-) ENGINE=InnoDB;
+    created_at TIMESTAMP
+);
 
-create TABLE `Post` (
-    id VARCHAR(36) PRIMARY KEY NOT NULL,
-    author VARCHAR(36) NOT NULL,
-    content TEXT,
-    createdAt DATETIME,
-    updatedAt DATETIME
-) ENGINE=InnoDB;
+CREATE TABLE Posts (
+    id UUID PRIMARY KEY NOT NULL,
+    author UUID NOT NULL,
+    body TEXT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
+);

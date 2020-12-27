@@ -11,6 +11,7 @@
 
     class SqlPostRepository implements PostRepository
     {
+        const QUERY = "SELECT id, author, body, created_at, updated_at FROM Posts";
         const DATE_FORMAT = 'Y-m-d H:i:s';
         private PDO $pdo;
 
@@ -21,7 +22,7 @@
 
         public function all(): array
         {
-            $stmt = $this->execute('SELECT * FROM Post ORDER BY createdAt DESC', []);
+            $stmt = $this->execute(self::QUERY . ' ORDER BY created_at DESC', []);
 
             return array_map(function ($row) {
                 return $this->build($row);
@@ -30,7 +31,7 @@
 
         public function ofAuthor(UserId $id): array
         {
-            $stmt = $this->execute('SELECT * FROM Post WHERE author=:author ORDER BY createdAt DESC', [
+            $stmt = $this->execute(self::QUERY . ' WHERE author=:author ORDER BY created_at DESC', [
                 'author' => $id->id()
             ]);
 
@@ -41,7 +42,7 @@
 
         public function save(Post $post)
         {
-            $sql = 'INSERT INTO Post VALUES(:id, :author, :body, :createdAt, :updatedAt)';
+            $sql = 'INSERT INTO Posts VALUES(:id, :author, :body, :createdAt, :updatedAt)';
             return $this->execute($sql, [
                 'id' => $post->id->id(),
                 'author' => $post->author->id(),
@@ -56,9 +57,9 @@
             return new Post(
                 new PostId($row['id']),
                 new UserId($row['author']),
-                new PostBody($row['content']),
-                new DateTime($row['createdAt']),
-                new DateTime($row['updatedAt'])
+                new PostBody($row['body']),
+                new DateTime($row['created_at']),
+                new DateTime($row['updated_at'])
             );
         }
 

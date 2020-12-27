@@ -26,7 +26,7 @@
             PDO::class => function (ContainerInterface $c) {
                 $db = $c->get('settings')['db'];
                 $dsn = sprintf(
-                    '%s:host=%s;dbname=%s;charset=utf8',
+                    '%s:host=%s;dbname=%s',
                     $db['type'],
                     $db['host'],
                     $db['name']

@@ -12,10 +12,10 @@
                     'level' => Logger::DEBUG,
                 ],
                 'db' => [
-                    'type' => 'mysql',
+                    'type' => 'pgsql',
                     'host' => '127.0.0.1',
-                    'user' => 'root',
-                    'pass' => 'bP75meku',
+                    'user' => 'society',
+                    'pass' => 'society',
                     'name' => 'society',
                 ]
             ]
