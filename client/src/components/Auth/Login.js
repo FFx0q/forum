@@ -61,8 +61,6 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => ({
   error: state.auth.error,
-  user: state.auth.user,
-  loggedIn: state.auth.loggedIn,
 });
 
 export default connect(mapStateToProps)(Login);

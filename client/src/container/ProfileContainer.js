@@ -20,7 +20,7 @@ class ProfileContainer extends React.Component {
     this.props.dispatch(fetchUser(login));
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps, prevState) {
     const { login } = this.props.match.params;
 
     if (prevState.login !== login) {
@@ -55,7 +55,8 @@ class ProfileContainer extends React.Component {
                     <h1>{users.login}</h1>
                     <div className="stats">
                       <span>
-                        Posts: <span>{users.posts?.length}</span>
+                        Posts:
+                        <span>{users.posts?.length}</span>
                       </span>
                     </div>
                   </div>

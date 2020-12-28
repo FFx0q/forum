@@ -23,3 +23,7 @@ export const login = (userInfo) => (dispatch) => {
     })
     .catch((error) => dispatch({ type: USERS_LOGIN_FAILURE, error }));
 };
+
+export const logout = () => {
+  localStorage.removeItem("user");
+};

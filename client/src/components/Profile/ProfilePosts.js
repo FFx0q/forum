@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const ProfilePosts = (users) => {
+const ProfilePosts = (users) => {
   const { posts } = users;
 
   return (
@@ -31,3 +31,5 @@ export const ProfilePosts = (users) => {
     </>
   );
 };
+
+export default ProfilePosts;

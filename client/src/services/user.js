@@ -1,5 +1,3 @@
-import { authHeader } from "../helpers";
-
 export const login = (userInfo) => {
   const headers = {
     method: "POST",
@@ -17,3 +15,5 @@ export const login = (userInfo) => {
       return res.data;
     });
 };
+
+export const logout = () => {};

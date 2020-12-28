@@ -17,5 +17,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: {},
+  rules: {
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/destructuring-assignment": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/no-did-update-set-state": 0,
+    "react/jsx-curly-newline": 0,
+    "import/prefer-default-export": "off",
+  },
 };

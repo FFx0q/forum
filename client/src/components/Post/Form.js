@@ -28,7 +28,6 @@ class PostForm extends React.Component {
   }
 
   render() {
-    const { login } = JSON.parse(localStorage.getItem("user"));
     return (
       <form onSubmit={this.handleSubmit}>
         <div>

@@ -1,1 +1,1 @@
-export { ProfilePosts } from "./ProfilePosts";
+export { default as ProfilePosts } from "./ProfilePosts";
