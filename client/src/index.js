@@ -15,3 +15,5 @@ ReactDOM.render(
   </Provider>,
   document.querySelector("#root")
 );
+
+module.hot.accept();
