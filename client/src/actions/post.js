@@ -2,31 +2,29 @@ import { push } from "connected-react-router";
 import { postService } from "../services";
 
 import {
-  FETCH_POSTS_PENDING,
-  FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_FAILURE,
-  SAVE_POST_PENDING,
-  SAVE_POST_SUCCESS,
-  SAVE_POST_FAILURE,
+  POST_PENDING,
+  POST_FAILURE,
+  FETCH_POSTS,
+  SAVE_POST
 } from "./types";
 
 export const fetchPosts = () => (dispatch) => {
-  dispatch({ type: FETCH_POSTS_PENDING });
+  dispatch({ type: POST_PENDING });
 
   postService
     .gellAll()
-    .then((posts) => dispatch({ type: FETCH_POSTS_SUCCESS, posts }))
-    .catch((error) => dispatch({ type: FETCH_POSTS_FAILURE, error }));
+    .then((posts) => dispatch({ type: FETCH_POSTS, posts }))
+    .catch((error) => dispatch({ type: POST_FAILURE, error }));
 };
 
 export const savePost = (data) => (dispatch) => {
-  dispatch({ type: SAVE_POST_PENDING });
+  dispatch({ type: POST_PENDING });
 
   postService
     .add(data)
     .then((post) => {
-      dispatch({ type: SAVE_POST_SUCCESS, post });
+      dispatch({ type: SAVE_POST, post });
       dispatch(push("/"));
     })
-    .catch((error) => dispatch({ type: SAVE_POST_FAILURE, error }));
+    .catch((error) => dispatch({ type: POST_FAILURE, error }));
 };

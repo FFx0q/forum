@@ -1,5 +1,6 @@
 import React from "react";
-import { followerService } from "../../services";
+import { connect } from "react-redux";
+import { addFollower, removeFollower } from "../../actions/user";
 
 class FollowButton extends React.Component {
   constructor(props) {
@@ -13,14 +14,14 @@ class FollowButton extends React.Component {
     const { uid } = JSON.parse(localStorage.getItem("user"));
     const fid = e.target.value;
 
-    followerService.add({ uid, fid }).catch((error) => console.error(error));
+    this.props.dispatch(addFollower({ uid, fid }))
   };
 
   unfollow = (e) => {
     const { uid } = JSON.parse(localStorage.getItem("user"));
     const fid = e.target.value;
 
-    followerService.remove({ uid, fid }).catch((error) => console.error(error));
+    this.props.dispatch(removeFollower({ uid, fid }))
   };
 
   render() {
@@ -31,7 +32,7 @@ class FollowButton extends React.Component {
 
     return (
       <>
-        {!followers?.some((e) => user.uid === e.id) ? (
+        {!followers?.some((e) => user.uid === e) ? (
           <button
             type="submit"
             onClick={this.follow}
@@ -53,4 +54,11 @@ class FollowButton extends React.Component {
   }
 }
 
-export default FollowButton;
+
+const mapStateToProps = (state) => ({
+  users: state.user.users,
+  error: state.user.error,
+  loading: state.user.loading,
+});
+
+export default connect(mapStateToProps)(FollowButton);

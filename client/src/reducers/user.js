@@ -1,10 +1,10 @@
 import {
-  SAVE_USER_PENDING,
-  SAVE_USER_SUCCESS,
-  SAVE_USER_FAILURE,
-  FETCH_USER_PENDING,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE,
+  FETCH_USER,
+  SAVE_USER,
+  USER_PENDING,
+  USER_FAILURE,
+  ADD_USER_FOLLOWER,
+  REMOVE_USER_FOLLOWER
 } from "../actions/types";
 
 const initialState = {
@@ -15,25 +15,32 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER_PENDING:
-    case SAVE_USER_PENDING:
+    case USER_PENDING:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_USER_FAILURE:
-    case SAVE_USER_FAILURE:
+    case USER_FAILURE:
       return {
         ...state,
         error: action.error,
       };
-    case FETCH_USER_SUCCESS:
-    case SAVE_USER_SUCCESS:
+    case FETCH_USER:
+    case SAVE_USER:
       return {
         ...state,
         loading: false,
         users: action.user,
       };
+    case ADD_USER_FOLLOWER: {
+      const user = state.users;
+      user.followers.push(action.follower.uid);
+      return {
+        ...state,
+        loading: false,
+        users: user,
+      }
+    }
     default:
       return state;
   }

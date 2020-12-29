@@ -2,26 +2,26 @@ import { push } from "connected-react-router";
 import { userService } from "../services";
 
 import {
-  USERS_LOGIN_PENDING,
-  USERS_LOGIN_SUCCESS,
-  USERS_LOGIN_FAILURE,
+  AUTH_FAILURE,
+  AUTH_PENDING,
+  AUTH_LOGIN
 } from "./types";
 
 export const login = (userInfo) => (dispatch) => {
-  dispatch({ type: USERS_LOGIN_PENDING });
+  dispatch({ type: AUTH_PENDING });
 
   userService
     .login(userInfo)
     .then((user) => {
       if (Object.keys(user).length === 0) {
         const error = new Error(user.description);
-        dispatch({ type: USERS_LOGIN_FAILURE, error });
+        dispatch({ type: AUTH_FAILURE, error });
       } else {
-        dispatch({ type: USERS_LOGIN_SUCCESS, user });
+        dispatch({ type: AUTH_LOGIN, user });
         dispatch(push("/"));
       }
     })
-    .catch((error) => dispatch({ type: USERS_LOGIN_FAILURE, error }));
+    .catch((error) => dispatch({ type: AUTH_FAILURE, error }));
 };
 
 export const logout = () => {

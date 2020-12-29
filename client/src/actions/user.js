@@ -1,16 +1,17 @@
 import { authHeader } from "../helpers";
+import { followerService } from "../services";
 import {
-  SAVE_USER_PENDING,
-  SAVE_POST_PENDING,
-  SAVE_USER_FAILURE,
-  FETCH_USER_PENDING,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE,
+  FETCH_USER,
+  SAVE_USER,
+  USER_PENDING,
+  USER_FAILURE,
+  ADD_USER_FOLLOWER,
+  REMOVE_USER_FOLLOWER
 } from "./types";
 
 const { Authorization } = authHeader();
 export const fetchUser = (login) => (dispatch) => {
-  dispatch({ type: FETCH_USER_PENDING });
+  dispatch({ type: USER_PENDING });
 
   fetch(`http://localhost:8080/api/v1/users/${login}`, {
     headers: {
@@ -21,22 +22,40 @@ export const fetchUser = (login) => (dispatch) => {
     .then((res) => {
       if (res.statusCode !== 200) {
         const error = new Error(res.error.description);
-        dispatch({ type: FETCH_USER_FAILURE, error });
+        dispatch({ type: USER_FAILURE, error });
       }
 
-      dispatch({ type: FETCH_USER_SUCCESS, user: res.data });
+      dispatch({ type: FETCH_USER, user: res.data });
     })
-    .catch((error) => dispatch({ type: FETCH_USER_FAILURE, error }));
+    .catch((error) => dispatch({ type: USER_FAILURE, error }));
 };
 
 export const saveUser = (data) => (dispatch) => {
-  dispatch({ type: SAVE_USER_PENDING });
+  dispatch({ type: USER_PENDING });
 
   fetch("http://localhost:8080/api/v1/users", {
     method: "POST",
     body: JSON.stringify(data),
   })
     .then((res) => res.json())
-    .then((res) => dispatch({ type: SAVE_POST_PENDING, user: res.data }))
-    .catch((error) => dispatch({ type: SAVE_USER_FAILURE, error }));
+    .then((res) => dispatch({ type: SAVE_USER, user: res.data }))
+    .catch((error) => dispatch({ type: USER_FAILURE, error }));
 };
+
+export const addFollower = (data) => (dispatch) => {
+  dispatch({ type: USER_PENDING });
+
+  followerService
+    .add(data)
+    .then((follower) => dispatch({ type: ADD_USER_FOLLOWER, follower }))
+    .catch((error) => dispatch({ type: USER_FAILURE, error }));
+}
+
+export const removeFollower = (data) => (dispatch) => {
+  dispatch({ type: USER_PENDING });
+
+  followerService
+    .remove(data)
+    .then((follower) => dispatch({ type: REMOVE_USER_FOLLOWER, follower }))
+    .catch((error) => dispatch({ type: USER_FAILURE, error }));
+}

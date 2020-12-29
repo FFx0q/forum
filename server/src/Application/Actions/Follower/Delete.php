@@ -14,6 +14,6 @@
             $follow = new Follower(new UserId($uid), new UserId($fid));
             $this->followerRepository->remove($follow);
 
-            return $this->respondWithData("Removed", 204);
+            return $this->respondWithData(null, 204);
         }
     }

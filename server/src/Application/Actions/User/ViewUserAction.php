@@ -23,10 +23,10 @@
                 'createdAt' => $user->createdAt->format('Y-m-d H:i:s'),
                 'posts' => $posts,
                 'followers' => array_map(function ($follow) {
-                    return $this->userRepository->ofId($follow->uid);
+                    return $follow->uid->id();
                 }, $this->followerRepository->getFollowers($user->id)),
                 'following' =>  array_map(function ($follow) {
-                    return $this->userRepository->ofId($follow->uid);
+                    return $follow->fid->id();
                 }, $this->followerRepository->getFollows($user->id)),
             ];
 
