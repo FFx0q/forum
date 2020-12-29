@@ -4,6 +4,13 @@
   display: flex;
 
   .info {
-    margin-left: 50%;
+    margin-left: 25%;
+  }
+
+  .stats {
+    display: flex;
+    > span {
+      margin: 0 10px 0 0;
+    }
   }
 }

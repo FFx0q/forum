@@ -28,7 +28,8 @@ const postReducer = (state = initialState, action) => {
         error: action.error,
       };
     case FETCH_POSTS_SUCCESS: {
-      const posts = action.posts.forEach((post) => {
+      const posts = [];
+      action.posts.forEach((post) => {
         posts[post.id] = post;
       });
 

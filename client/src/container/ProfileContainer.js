@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../actions/user";
 import { Loader, MainMenu } from "../components/Layout";
-import { ProfilePosts } from "../components/Profile";
+import {
+  FollowButton,
+  ProfilePosts,
+  ProfileStats,
+} from "../components/Profile";
 
 class ProfileContainer extends React.Component {
   constructor(props) {
@@ -30,11 +34,25 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+    const { uid } = JSON.parse(localStorage.getItem("user"));
     const { error, loading, users } = this.props;
 
     if (error) {
       return <div>{error.message}</div>;
     }
+
+    const stats = {
+      posts: users.posts?.length,
+      followers: users.followers?.length,
+      following: users.following?.length,
+    };
+
+    const followButtonProps = {
+      currentUser: uid === users?.id,
+      user: JSON.parse(localStorage.getItem("user")),
+      follower: users,
+      followers: users.followers,
+    };
 
     return (
       <>
@@ -54,11 +72,9 @@ class ProfileContainer extends React.Component {
                   <div className="info">
                     <h1>{users.login}</h1>
                     <div className="stats">
-                      <span>
-                        Posts:
-                        <span>{users.posts?.length}</span>
-                      </span>
+                      <ProfileStats {...stats} />
                     </div>
+                    <FollowButton {...followButtonProps} />
                   </div>
                 </div>
               </div>

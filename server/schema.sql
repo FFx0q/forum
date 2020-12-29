@@ -13,3 +13,8 @@ CREATE TABLE Posts (
     created_at TIMESTAMP,
     updated_at TIMESTAMP
 );
+
+CREATE TABLE Followers (
+    uid UUID,
+    fid UUID
+);

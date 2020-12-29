@@ -25,13 +25,14 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ESLintPlugin(),
+        //new ESLintPlugin(),
         new HTMLWebpackPlugin({
             template: resolve(__dirname, "./public/index.html"),
             filename: "index.html"
         }),
     ],
     devServer: {
+        historyApiFallback: true,
         contentBase: resolve(__dirname, './dist'),
         hot: true,
         port: 1234,
