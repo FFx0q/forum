@@ -1,10 +1,8 @@
 import {
-  FETCH_POSTS_PENDING,
-  FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_FAILURE,
-  SAVE_POST_PENDING,
-  SAVE_POST_SUCCESS,
-  SAVE_POST_FAILURE,
+  POST_PENDING,
+  POST_FAILURE,
+  FETCH_POSTS,
+  SAVE_POST
 } from "../actions/types";
 
 const initialState = {
@@ -15,20 +13,19 @@ const initialState = {
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SAVE_POST_PENDING:
-    case FETCH_POSTS_PENDING:
+    case POST_PENDING:
       return {
         ...state,
         loading: true,
       };
-    case SAVE_POST_FAILURE:
-    case FETCH_POSTS_FAILURE:
+    case POST_FAILURE:
       return {
         ...state,
         error: action.error,
       };
-    case FETCH_POSTS_SUCCESS: {
-      const posts = action.posts.forEach((post) => {
+    case FETCH_POSTS: {
+      const posts = [];
+      action.posts.forEach((post) => {
         posts[post.id] = post;
       });
 
@@ -38,7 +35,7 @@ const postReducer = (state = initialState, action) => {
         posts,
       };
     }
-    case SAVE_POST_SUCCESS:
+    case SAVE_POST:
       return {
         ...state,
         loading: true,
